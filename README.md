@@ -50,3 +50,8 @@ Login(로그인), SignUp(회원가입), UserProfileUpdate(회원정보수정), F
 </br>
 * 사이트 참조
 https://gitmoji.dev/
+</br></br>
+
+### 깃 푸쉬 (Commit) && 깃 브랜치 머지 (Merge) 규칙 🚀
+1. 자신이 작성한 파일을 적당히 커밋한 후에 반드시 "develop-[본인이니셜]" 로 먼저 푸쉬한다.
+2. 본인의 브랜치로 먼저 푸쉬하고 그 다음에 develop 브랜치로 pull requeset를 날리면 된다.
