@@ -122,7 +122,7 @@
       </div>
     </div>  
     <div class="row border-top border-5">
-      <div class="text-dark fw-bold fs-5 pt-4">결제정보</div>
+      <div class="text-dark fw-bold fs-5 pt-4">결제 정보</div>
     </div>
     <label for="exampleInputEmail1" class="form-label mt-4 text-dark pb-1">적립금 (보유 적립금 0원)</label>     
     <div class="row form-group border-bottom border-2 pb-4">
@@ -150,6 +150,9 @@
         <div class="col-md-6 text-dark fw-bolder align-self-center">결제 금액</div>
         <div class="col-md-6 text-primary text-end fs-5 fw-bolder">49,400원</div>
       </div>
+    </div>
+    <div class="row border-top border-5">
+      <div class="text-dark fw-bold fs-5 pt-4">결제 방법</div>
     </div>
   </div>
 </template>
