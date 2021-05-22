@@ -2,16 +2,16 @@
   <main>
     <div class="container">
       <div class="row pt-5 pb-5">
-        <div class="col-md-6 col-xs-6">
-          <span class="fs-3 fw-bold text-dark">장바구니 </span>
-          <span class="fs-3 fw-bold text-dark">(3)</span>
-        </div>
-        <div class="col-md-6 col-xs-6 text-end align-self-center">
-          <span class="fw-bold text-dark">장바구니</span>
-          <span> > 주문/결제 > 완료</span>
-        </div>
+          <div class="col-md-6 col-xs-6">
+            <span class="fs-3 fw-bold text-dark">장바구니 </span>
+            <span class="fs-3 fw-bold text-dark">(3)</span>
+          </div>
+          <div class="col-md-6 col-xs-6 text-end align-self-center">
+            <span class="fw-bold text-dark">장바구니</span>
+            <span> > 주문/결제 > 완료</span>
+          </div>
       </div>
-      <div class="row pt-5 pb-3 border-bottom border-dark">
+      <div class="row pt-5 pb-3 border-bottom border-2">
           <div class="form-check col-md-1 align-self-center">
             <input class="form-check-input mx-auto" type="checkbox" id="flexCheckDefault">
           </div>
@@ -20,53 +20,53 @@
           <span class="col-md-2 fs-5 text-center text-dark">가격</span>
           <span class="col-md-2 fs-5 text-center text-dark">배송비</span>
       </div>
-      <div class="row border-bottom" style="height:190px;">
-        <div class="form-check col-md-1 align-self-center">
-            <input class="form-check-input mx-auto" type="checkbox" id="flexCheckDefault">
-        </div>
-        <a class="col-md-2 align-self-center" style="cursor:pointer;"><img src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg" style="width: 130px; height: 130px;"></a>
-        <span class="col-md-3 align-self-center" style="text-align: left;">국산 햇양파 10kg</span>
-        <span class="col-md-2 align-self-center">
-          <div class="input-group justify-content-center">           
-              <span class="input-group-text" style="cursor:pointer;">-</span>          
-              <input type="text" v-model="total" style="width:30px;text-align:center;outline:2px solid #e2e2e2;">           
-              <span class="input-group-text" style="cursor:pointer;">+</span>          
+      <div class="row border-bottom border-2" style="height:190px;">
+          <div class="form-check col-md-1 align-self-center">
+              <input class="form-check-input mx-auto" type="checkbox" id="flexCheckDefault">
           </div>
-        </span>
-        <span class="col-md-2 align-self-center text-center text-dark fs-5">21,900원</span>
-        <span class="col-md-2 align-self-center text-center text-dark fs-5">2,500원</span>
+          <a class="col-md-2 align-self-center" style="cursor:pointer;"><img src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg" style="width: 130px; height: 130px;"></a>
+          <span class="col-md-3 align-self-center" style="text-align: left;">국산 햇양파 10kg</span>
+          <span class="col-md-2 align-self-center">
+            <div class="input-group justify-content-center">           
+                <span class="input-group-text" style="cursor:pointer;">-</span>          
+                <input type="text" v-model="total" style="width:30px;text-align:center;outline:2px solid #e2e2e2;">           
+                <span class="input-group-text" style="cursor:pointer;">+</span>          
+            </div>
+          </span>
+          <span class="col-md-2 align-self-center text-center text-dark fs-5">21,900원</span>
+          <span class="col-md-2 align-self-center text-center text-dark fs-5">2,500원</span>
       </div>
-      <div class="row border-bottom" style="height:190px;">
-        <div class="form-check col-md-1 align-self-center">
-            <input class="form-check-input mx-auto" type="checkbox" id="flexCheckDefault">
-        </div>
-        <a class="col-md-2 align-self-center" style="cursor:pointer;"><img src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1616298830323.jpg" style="width: 130px; height: 130px;"></a>
-        <span class="col-md-3 align-self-center" style="text-align: left;">참외 2.5kg</span>
-        <span class="col-md-2 align-self-center">
-          <div class="input-group justify-content-center">           
-              <span class="input-group-text" style="cursor:pointer;">-</span>          
-              <input type="text" v-model="total" style="width:30px;text-align:center;outline:2px solid #e2e2e2;">           
-              <span class="input-group-text" style="cursor:pointer;">+</span>          
+      <div class="row border-bottom border-2" style="height:190px;">
+          <div class="form-check col-md-1 align-self-center">
+              <input class="form-check-input mx-auto" type="checkbox" id="flexCheckDefault">
           </div>
-        </span>
-        <span class="col-md-2 align-self-center text-center text-dark fs-5">11,900원</span>
-        <span class="col-md-2 align-self-center text-center text-dark fs-5">2,500원</span>
+          <a class="col-md-2 align-self-center" style="cursor:pointer;"><img src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1616298830323.jpg" style="width: 130px; height: 130px;"></a>
+          <span class="col-md-3 align-self-center" style="text-align: left;">참외 2.5kg</span>
+          <span class="col-md-2 align-self-center">
+            <div class="input-group justify-content-center">           
+                <span class="input-group-text" style="cursor:pointer;">-</span>          
+                <input type="text" v-model="total" style="width:30px;text-align:center;outline:2px solid #e2e2e2;">           
+                <span class="input-group-text" style="cursor:pointer;">+</span>          
+            </div>
+          </span>
+          <span class="col-md-2 align-self-center text-center text-dark fs-5">11,900원</span>
+          <span class="col-md-2 align-self-center text-center text-dark fs-5">2,500원</span>
       </div>
-      <div class="row border-bottom" style="height:190px;">
-        <div class="form-check col-md-1 align-self-center">
-            <input class="form-check-input mx-auto" type="checkbox" id="flexCheckDefault">
-        </div>
-        <a class="col-md-2 align-self-center" style="cursor:pointer;"><img src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1616300536631.jpg" style="width: 130px; height: 130px;"></a>
-        <span class="col-md-3 align-self-center " style="text-align: left;">당일 수확 못난이 파프리카 3kg 3색 혼합</span>
-        <span class="col-md-2 align-self-center">
-          <div class="input-group justify-content-center">           
-              <span class="input-group-text" style="cursor:pointer;">-</span>          
-              <input type="text" v-model="total" style="width:30px;text-align:center;outline:2px solid #e2e2e2;">           
-              <span class="input-group-text" style="cursor:pointer;">+</span>          
+      <div class="row border-bottom border-2" style="height:190px;">
+          <div class="form-check col-md-1 align-self-center">
+              <input class="form-check-input mx-auto" type="checkbox" id="flexCheckDefault">
           </div>
-        </span>
-        <span class="col-md-2 align-self-center text-center text-dark fs-5">6,900원</span>
-        <span class="col-md-2 align-self-center text-center text-dark fs-5">2,500원</span>
+          <a class="col-md-2 align-self-center" style="cursor:pointer;"><img src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1616300536631.jpg" style="width: 130px; height: 130px;"></a>
+          <span class="col-md-3 align-self-center " style="text-align: left;">당일 수확 못난이 파프리카 3kg 3색 혼합</span>
+          <span class="col-md-2 align-self-center">
+            <div class="input-group justify-content-center">           
+                <span class="input-group-text" style="cursor:pointer;">-</span>          
+                <input type="text" v-model="total" style="width:30px;text-align:center;outline:2px solid #e2e2e2;">           
+                <span class="input-group-text" style="cursor:pointer;">+</span>          
+            </div>
+          </span>
+          <span class="col-md-2 align-self-center text-center text-dark fs-5">6,900원</span>
+          <span class="col-md-2 align-self-center text-center text-dark fs-5">2,500원</span>
       </div>
       <div class="row pb-3 pt-3">
         <div class="form-check col-md-1 pt-3">
@@ -90,7 +90,7 @@
       </div> 
       <div class="row pb-5">
         <span class="col-md-9 text-end text-dark fs-5 fw-bolder">합계</span>
-        <span class="col-md-3 text-end text-dark fs-5 fw-bolder">48,400원</span>   
+        <span class="col-md-3 text-end text-dark fs-5 fw-bolder">49,400원</span>   
       </div>  
       <div class="row pb-5">
         <span class="col-md-6">
