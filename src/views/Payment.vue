@@ -34,7 +34,7 @@
     </div>
     <div class="row border-top pb-4 pt-4">
         <span class="col-md-6 text-dark align-self-center fw-bolder">상품 합계</span>
-        <span class="col-md-6 text-end fs-5 fw-bolder text-primary align-self-center">48,400원</span>  
+        <span class="col-md-6 text-end fs-5 fw-bolder text-primary align-self-center">41,900원</span>  
     </div>
     <div class="row border-top border-5">
         <div class="text-dark fw-bold fs-5 pt-4 pb-4">주문자</div>
@@ -66,10 +66,10 @@
         </div>
     </div>     
     <div class="form-group pb-1">
-        <label for="exampleInputEmail1" class="form-label mt-4 text-dark">이름</label>
+        <label for="exampleInputEmail1" class="form-label mt-1 text-dark">이름</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>        
-    <label for="exampleInputEmail1" class="form-label mt-4 text-dark">연락처</label>
+    <label for="exampleInputEmail1" class="form-label mt-3 text-dark">연락처</label>
     <div class="row" style="padding-right: 10px; padding-left: 10px;">
         <input type="email" class="form-control" style="width: 30%;" id="exampleInputEmail1" aria-describedby="emailHelp">
         <div class="align-self-center" style="width:5%;">-</div>
@@ -81,7 +81,7 @@
         <label for="exampleInputEmail1" class="form-label mt-4 text-dark">배송지명</label>
         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     </div>
-    <label for="exampleInputEmail1" class="form-label mt-4 text-dark">우편번호</label>
+    <label for="exampleInputEmail1" class="form-label mt-4 pb-1 text-dark">우편번호</label>
     <div class="row form-group">
       <div class="col-md-9">
         <input type="text" class="form-control" id="inputDefault">      
@@ -101,7 +101,7 @@
           </div>
         </div>
     </div>
-    <div class="row pt-3 pb-3 border-bottom" style="padding-left:12px;">
+    <div class="row pt-3 pb-2" style="padding-left:12px;">
         <div class="form-check col-md-6">
           <input class="form-check-input" type="checkbox" id="flexCheckDefault">
           <label class="form-check-label" for="flexCheckDefault">
@@ -115,12 +115,42 @@
           </label>
         </div>      
     </div>
-    <div class="row pb-5 pt-2">
+    <div class="row pb-4 pt-2">
       <div class="form-group">       
-        <label class="col-form-label text-dark" for="inputDefault">배송 시 요청 사항</label>       
+        <label class="col-form-label text-dark pb-2" for="inputDefault">배송 시 요청 사항</label>       
         <input type="text" class="form-control" id="inputDefault">
       </div>
-    </div>       
+    </div>  
+    <div class="row border-top border-5">
+      <div class="text-dark fw-bold fs-5 pt-4">결제정보</div>
+    </div>
+    <label for="exampleInputEmail1" class="form-label mt-4 text-dark pb-1">적립금 (보유 적립금 0원)</label>     
+    <div class="row form-group border-bottom border-2 pb-4">
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="inputDefault">      
+      </div>   
+      <div class="col-md-3 d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-primary">전액사용</button>
+      </div>
+    </div>
+    <div>
+      <div class="row pt-3">
+        <div class="col-md-6 text-dark">상품 합계</div>
+        <div class="col-md-6 text-dark text-end fw-bolder">41,900원</div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-md-6 text-dark">배송비</div>
+        <div class="col-md-6 text-dark text-end fw-bolder">7,500원</div>
+      </div>
+      <div class="row pt-3 pb-3 border-bottom border-2">
+        <div class="col-md-6 text-dark">총 할인 금액</div>
+        <div class="col-md-6 text-dark text-end fw-bolder">0원</div>
+      </div>
+      <div class="row pt-3">
+        <div class="col-md-6 text-dark fw-bolder align-self-center">결제 금액</div>
+        <div class="col-md-6 text-primary text-end fs-5 fw-bolder">49,400원</div>
+      </div>
+    </div>
   </div>
 </template>
 

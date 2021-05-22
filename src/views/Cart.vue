@@ -90,7 +90,7 @@
       </div> 
       <div class="row pb-5">
         <span class="col-md-9 text-end text-dark fs-5 fw-bolder">합계</span>
-        <span class="col-md-3 text-end text-dark fs-5 fw-bolder">48,400원</span>   
+        <span class="col-md-3 text-end text-dark fs-5 fw-bolder">49,400원</span>   
       </div>  
       <div class="row pb-5">
         <span class="col-md-6">
