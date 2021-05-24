@@ -10,6 +10,7 @@ import Product from '../views/Product'
 import Shipping from '../views/Shipping'
 import SignUp from '../views/SignUp'
 import UserProfileUpdate from '../views/UserProfileUpdate'
+import PaymentDetail from '../views/PaymentDetail'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const routes = [
     path: '/profileupdate',
     name: 'UserProfileUpdate',
     component: UserProfileUpdate
+  },
+  {
+    path: '/paymentdetail',
+    name: 'PaymentDetail',
+    component: PaymentDetail
   },
 ]
 

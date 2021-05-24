@@ -17,7 +17,7 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link active" href="#"
                 >Home
                 <span class="visually-hidden">(current)</span>
@@ -49,6 +49,38 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
               </div>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/cart">Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cancel">Cancel</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/notice">Notice</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/payment">Payment</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/paymentdetail">paymentdetail</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/product">product</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/shipping">shipping</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/userprofileupdate"
+                >userprofileupdate</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
             </li>
           </ul>
           <form class="d-flex">
