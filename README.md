@@ -9,6 +9,11 @@ npm install
 ```
 npm run serve
 ```
+
+### ✨ chokidar error 발생시 업데이트 ✨
+```
+npm update --force
+```
 </br></br></br>
 # 개발설명서 🎨
 
