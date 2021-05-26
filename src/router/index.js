@@ -11,6 +11,7 @@ import Shipping from '../views/Shipping'
 import SignUp from '../views/SignUp'
 import UserProfileUpdate from '../views/UserProfileUpdate'
 import PaymentDetail from '../views/PaymentDetail'
+import AddProduct from '../views/AddProduct'
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,11 @@ const routes = [
     path: '/paymentdetail',
     name: 'PaymentDetail',
     component: PaymentDetail
+  },
+  {
+    path: '/addproduct',
+    name: 'AddProduct',
+    component: AddProduct
   },
 ]
 
