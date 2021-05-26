@@ -46,12 +46,12 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <!-- Content -->
               <h6 class="text-uppercase fw-bold mb-4">
-                <i class="fas fa-gem me-3"></i>Company name
+                <i class="fas fa-gem me-3"></i>(주)푸드리퍼브
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer
-                content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit.
+                잘 자란 농산물들의 제 가치를 찾아, 음식물 폐기는 줄이고 친환경
+                땅을 늘림으로써 소비자의 건강한 식탁과 미래를 위한 환경이
+                지속가능하게 합니다.
               </p>
             </div>
             <!-- Grid column -->
@@ -59,18 +59,18 @@
             <!-- Grid column -->
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Products</h6>
+              <h6 class="text-uppercase fw-bold mb-4">제품군</h6>
               <p>
-                <a href="#!" class="text-reset">Angular</a>
+                <a href="#!" class="text-reset">못난이 양파</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">React</a>
+                <a href="#!" class="text-reset">못난이 사과</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Vue</a>
+                <a href="#!" class="text-reset">못난이 배</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Laravel</a>
+                <a href="#!" class="text-reset">못난이 감자</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -78,18 +78,18 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+              <h6 class="text-uppercase fw-bold mb-4">운영 채널</h6>
               <p>
-                <a href="#!" class="text-reset">Pricing</a>
+                <a href="#!" class="text-reset">인스타그램</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Settings</a>
+                <a href="#!" class="text-reset">페이스북</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Orders</a>
+                <a href="#!" class="text-reset">앱스토어</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">Help</a>
+                <a href="#!" class="text-reset">네이버</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -97,14 +97,17 @@
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-              <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+              <h6 class="text-uppercase fw-bold mb-4">문의</h6>
+              <p>
+                <i class="fas fa-home me-3"></i> 경기도 화성시 만년로 915번길
+                39-2323
+              </p>
               <p>
                 <i class="fas fa-envelope me-3"></i>
-                info@example.com
+                contact@foodrefurb.com
               </p>
-              <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-              <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+              <p><i class="fas fa-phone me-3"></i> + 031 2323 5152</p>
+              <p><i class="fas fa-print me-3"></i> + 070 2315 2554</p>
             </div>
             <!-- Grid column -->
           </div>
@@ -120,7 +123,7 @@
       >
         © 2021 Copyright:
         <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
-          >www.foodfurb.com</a
+          >www.foodrefurb.com</a
         >
       </div>
       <!-- Copyright -->
