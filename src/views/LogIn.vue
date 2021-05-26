@@ -1,10 +1,54 @@
 <template>
-  <div id="login">
-    <!-- 이곳을 자유롭게 만들어주세요. -->
-    <p>로그인 페이지</p>
-    <p>test</p>
-    <p>test</p>
-    <!-- 로그인 페이지 입니다. -->
+  <div
+    class="row d-flex justify-content-center align-content-center"
+    style="height: 700px"
+  >
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">로그인</h4>
+
+          <hr />
+
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label mt-4"
+              >아이디 입력:</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+            />
+            <!-- <small id="emailHelp" class="form-text text-muted"
+              >We'll never share your email with anyone else.</small
+            > -->
+          </div>
+
+          <div class="form-group mb-4">
+            <label for="exampleInputPassword1" class="form-label mt-4"
+              >비밀번호 입력:</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">로그인</button>
+
+          <hr />
+
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">회원가입</button>
+            <router-link to="/">아이디 | 비밀번호 찾기</router-link>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
