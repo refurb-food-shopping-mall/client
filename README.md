@@ -52,6 +52,10 @@ Login(로그인), SignUp(회원가입), UserProfileUpdate(회원정보수정), F
 🔧 => 구성 파일 수정삭제(eslint or vue.config.js)</br>
 🔨 => 개발 스크립트 수정시(package.json)</br>
 🚀 => 프로젝트 배포</br>
+✏️ => 오타 수정</br>
+💬 => 단순 텍스트 입력, 추가</br>
+
+
 </br>
 * 사이트 참조
 https://gitmoji.dev/
