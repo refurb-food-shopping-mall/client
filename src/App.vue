@@ -28,10 +28,7 @@ body {
 #navbar {
   position: sticky;
   top: 0;
-}
-#footer {
-  /* position: sticky;
-  bottom: 0; */
+  z-index: 1000;
 }
 #app {
   min-height: 100%;
