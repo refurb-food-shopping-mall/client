@@ -23,14 +23,18 @@ body {
   height: 100%;
 }
 .inner_app {
-  flex: 1 0 auto;
+  flex: 1;
 }
 #navbar {
   position: sticky;
   top: 0;
 }
+#footer {
+  /* position: sticky;
+  bottom: 0; */
+}
 #app {
-  height: 100%;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
 }
