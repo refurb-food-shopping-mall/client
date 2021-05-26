@@ -80,6 +80,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/addproduct">Addproduct</a>
+            </li>
           </ul>
           <form class="d-flex">
             <input
