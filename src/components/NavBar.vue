@@ -72,9 +72,7 @@
               <a class="nav-link" href="/shipping">shipping</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/userprofileupdate"
-                >userprofileupdate</a
-              >
+              <a class="nav-link" href="/profileupdate">userprofileupdate</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/signup">signup</a>
