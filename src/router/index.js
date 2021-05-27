@@ -12,6 +12,7 @@ import SignUp from '../views/SignUp'
 import UserProfileUpdate from '../views/UserProfileUpdate'
 import PaymentDetail from '../views/PaymentDetail'
 import AddProduct from '../views/AddProduct'
+import WriteReview from '../views/WriteReview'
 
 Vue.use(VueRouter)
 
@@ -75,6 +76,11 @@ const routes = [
     path: '/addproduct',
     name: 'AddProduct',
     component: AddProduct
+  },
+  {
+    path: '/writereview',
+    name: 'WriteReview',
+    component: WriteReview
   },
 ]
 
