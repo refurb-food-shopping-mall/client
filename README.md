@@ -27,7 +27,7 @@ npm update --force
 ### 페이지 분담 🎈
 
 Shipping(배송), PaymentDetail(결제상세) => 유영 </br>
-Cart(장바구니), Payment(결제) => 동호 </br>
+Cart(장바구니), Payment(결제), WriteReview(리뷰작성) => 동호 </br>
 Product(제품상세) Home(홈)=> 성우 </br>
 ~~Login(로그인)~~, ~~SignUp(회원가입)~~, ~~UserProfileUpdate(회원정보수정)~~, ~~Footer(푸터)~~, ~~NavBar~~(네비게이션바), ~~관리자 상품 등록 페이지~~   => 상혁 </br>
 </br></br>
