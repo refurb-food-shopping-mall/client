@@ -28,9 +28,9 @@
             상품 평점
         </div>
         <div class="row">
-            <div class="col-12">
-                <star-rating v-model="rating"></star-rating>              
-            </div>          
+            <div class="mb-4">
+                <star-rating />
+            </div>
         </div>
         <div class="text-dark fs-5 border-top border-3 pt-3">
             상품 리뷰
@@ -89,7 +89,12 @@
 </template>
 
 <script>
-export default {};
+import StarRating from 'vue-star-rating'
+export default {
+    components: {
+        StarRating
+    }
+};
 </script>
 
 <style scoped>
