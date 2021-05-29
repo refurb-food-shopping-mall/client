@@ -98,7 +98,7 @@
             </li>
           </ul>
 
-          <form class="d-flex">
+          <!-- <form class="d-flex">
             <input
               class="form-control me-sm-2"
               type="text"
@@ -107,7 +107,17 @@
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">
               search
             </button>
-          </form>
+          </form> -->
+          <div class="px-2 mx-2 btn">
+            <font-awesome-icon icon="search" />
+          </div>
+          <div class="px-2 btn">
+            <font-awesome-icon icon="shopping-cart" />
+          </div>
+          <div class="px-2 mx-2 btn btn-warning">
+            <font-awesome-icon icon="user" />
+            <span class="mx-2" style="font-weight: bold"> 로그인 </span>
+          </div>
         </div>
       </div>
     </nav>

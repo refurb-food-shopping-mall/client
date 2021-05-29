@@ -4,6 +4,13 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import 'bootswatch/dist/minty/bootstrap.min.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserSecret, faShoppingCart, faUser, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faUserSecret, faShoppingCart, faUser, faSearch)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
