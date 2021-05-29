@@ -57,9 +57,6 @@
               <router-link class="nav-link" to="/cancel">Cancel</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/notice">Notice</router-link>
-            </li>
-            <li class="nav-item">
               <router-link class="nav-link" to="/payment">Payment</router-link>
             </li>
             <li class="nav-item">
@@ -111,13 +108,13 @@
           <div class="px-2 mx-2 btn">
             <font-awesome-icon icon="search" />
           </div>
-          <div class="px-2 btn">
+          <router-link to="/cart" class="px-2 btn">
             <font-awesome-icon icon="shopping-cart" />
-          </div>
-          <div class="px-2 mx-2 btn btn-warning">
+          </router-link>
+          <router-link to="/login" class="px-2 mx-2 btn btn-warning">
             <font-awesome-icon icon="user" />
             <span class="mx-2" style="font-weight: bold"> 로그인 </span>
-          </div>
+          </router-link>
         </div>
       </div>
     </nav>

@@ -43,7 +43,9 @@
           <hr />
 
           <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary">회원가입</button>
+            <router-link to="/signup"
+              ><button type="submit" class="btn btn-primary">회원가입</button>
+            </router-link>
             <router-link to="/">아이디 | 비밀번호 찾기</router-link>
           </div>
         </div>

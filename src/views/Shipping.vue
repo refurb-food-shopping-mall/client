@@ -9,7 +9,7 @@
             id="profile"
             src="https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
           />
-          <div style="text-align:center">name <span>님</span></div>
+          <div style="text-align: center">name <span>님</span></div>
         </div>
         <!-- lalalalalalalalalalalalalalalalalalalalala -->
         <div
@@ -23,7 +23,7 @@
           </div>
           <div class="row mt-3">
             <div class="col-4">
-              <div class="row ">
+              <div class="row">
                 <div class="col-8 d-flex justify-content-end">
                   <img
                     class="img-fluid"
@@ -38,7 +38,7 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="row ">
+              <div class="row">
                 <div class="col-8 d-flex justify-content-end">
                   <img
                     class="img-fluid"
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="col-4">
-              <div class="row ">
+              <div class="row">
                 <div class="col-8 d-flex justify-content-end">
                   <img
                     class="img-fluid"
@@ -70,7 +70,7 @@
           </div>
           <!-- cal pc start -->
           <div class="row justify-content-center mt-2">
-            <div class="col-3 d-flex justify-content-end ">
+            <div class="col-3 d-flex justify-content-end">
               <form
                 class="d-none d-lg-block"
                 name="해당 폼의 이름"
@@ -80,9 +80,7 @@
                 <input type="date" name="userBirthday" value="2021-04-28" />
               </form>
             </div>
-            <div class="col-1 fs-4 text-center d-none d-lg-block">
-              ~
-            </div>
+            <div class="col-1 fs-4 text-center d-none d-lg-block">~</div>
             <div class="col-3">
               <form
                 class="d-none d-lg-block"
@@ -95,7 +93,7 @@
             </div>
             <div class="col-2 d-none d-lg-block">
               <button
-                style="height:30px"
+                style="height: 30px"
                 type="button"
                 class="btn btn-outline-primary d-flex align-items-center"
               >
@@ -107,7 +105,7 @@
         </div>
       </div>
       <!-- cal mobile start -->
-      <div class="row ">
+      <div class="row">
         <div class="col-5 mt-3">
           <form
             class="d-lg-none"
@@ -140,7 +138,7 @@
       <div id="line" class="row">
         <div
           class="col-12 mt-4 mb-5"
-          style="border-bottom:1px solid rgb(214, 214, 214);"
+          style="border-bottom: 1px solid rgb(214, 214, 214)"
         ></div>
       </div>
       <!-- lalalalalalalalalalalalalalalalalalalalala -->
@@ -148,9 +146,12 @@
         <!-- LIST pc start -->
         <div class="col-lg-3 d-flex justify-content-center d-none d-lg-block">
           <div class="list-group col-9 text-center">
-            <a href="#" class="list-group-item list-group-item-action"
-              >회원정보 수정</a
-            >
+            <router-link
+              to="profileupdate"
+              href="#"
+              class="list-group-item list-group-item-action"
+              >회원정보 수정
+            </router-link>
             <a href="#" class="list-group-item list-group-item-action"
               >배송지 관리</a
             >
@@ -160,7 +161,7 @@
           </div>
         </div>
         <!-- LIST pc end -->
-        <div id="row2_items" class="col-lg-9 ">
+        <div id="row2_items" class="col-lg-9">
           <div class="row d-flex align-items-center">
             <div class="col-3">
               <img
@@ -176,22 +177,22 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary">
-                  배송조회
-                </button>
+                <button type="button" class="btn btn-primary">배송조회</button>
               </div>
               <div class="mt-3"></div>
               <div>
-                <button type="button" class="btn btn-primary">
-                  결제상세
-                </button>
+                <router-link to="/paymentdetail">
+                  <button type="button" class="btn btn-primary">
+                    결제상세
+                  </button>
+                </router-link>
               </div>
             </div>
           </div>
           <div id="line" class="row">
             <div
               class="col-12 mt-4 mb-4"
-              style="border-bottom:1px solid mediumaquamarine;"
+              style="border-bottom: 1px solid mediumaquamarine"
             ></div>
           </div>
           <!-- Add a new item here. -->
@@ -210,22 +211,22 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary">
-                  배송조회
-                </button>
+                <button type="button" class="btn btn-primary">배송조회</button>
               </div>
               <div class="mt-3"></div>
               <div>
-                <button type="button" class="btn btn-primary">
-                  결제상세
-                </button>
+                <router-link to="/paymentdetail">
+                  <button type="button" class="btn btn-primary">
+                    결제상세
+                  </button>
+                </router-link>
               </div>
             </div>
           </div>
           <div id="line" class="row">
             <div
               class="col-12 mt-4 mb-4"
-              style="border-bottom:1px solid mediumaquamarine;"
+              style="border-bottom: 1px solid mediumaquamarine"
             ></div>
           </div>
           <!-- Add a new item here. -->
@@ -257,9 +258,11 @@
               <!-- mobile -->
               <div class="mt-3"></div>
               <div>
-                <button type="button" class="btn btn-primary">
-                  리뷰쓰기
-                </button>
+                <router-link to="/writereview">
+                  <button type="button" class="btn btn-primary">
+                    리뷰쓰기
+                  </button>
+                </router-link>
               </div>
             </div>
           </div>
