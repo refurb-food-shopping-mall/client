@@ -13,12 +13,13 @@
 
       <div id="rightside" class="col-12 col-md-9 ">
         <!-- 주문 상세정보 s -->
+        <br id="m" class="d-lg-none" />
         <div class="row fs-4"><strong>주문 상세정보</strong></div>
         <!-- pc start -->
         <div id="line" class="row d-none d-lg-block">
           <div
-            class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid red;"
+            class="col-12 mt-2 mb-2"
+            style="border-bottom:2px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row text-center ">
@@ -30,31 +31,37 @@
         </div>
         <div id="line" class="row d-none d-lg-block">
           <div
-            class="col-lg-12 mt-2 mb-3"
-            style="border-bottom:1px solid red;"
+            class="col-lg-12 mt-2 mb-5"
+            style="border-bottom:1px solid rgb(214, 214, 214);"
           ></div>
         </div>
-        <div class="row text-center">
-          <div class="col-2 d-none d-lg-block">20553121050</div>
+        <div class="row ">
+          <div class="col-2 d-none d-lg-block text-center">20553121050</div>
           <div class="col-4">
             <div class="row">
-              <div class="col-3">
+              <div class="col-3 text-center">
                 <img
-                  class="img-fluid d-none d-lg-block"
-                  src="https://image.flaticon.com/icons/png/128/2921/2921855.png"
+                  class="rounded d-none d-lg-block"
+                  width="65"
+                  height="65"
+                  src="https://media.istockphoto.com/photos/golden-onions-on-rustic-wooden-background-picture-id480134211?k=6&m=480134211&s=612x612&w=0&h=FlEwOJ9bc_h6o4DKJssyE4Yhw10cUpYlWlkPR_y90pw="
                 />
               </div>
-              <div class="col-9 d-none d-lg-block">무안 양파 5kg/10kg/15kg</div>
+              <div class="col-9 d-none d-lg-block text-center">
+                무안 양파 5kg/10kg/15kg
+              </div>
             </div>
           </div>
-          <div class="col-2 d-none d-lg-block">5,000원(X kg)</div>
-          <div class="col-2 d-none d-lg-block">2,500원</div>
-          <div class="col-2 d-none d-lg-block">배송중</div>
+          <div class="col-2 d-none d-lg-block text-center">5,000원(X kg)</div>
+          <div class="col-2 d-none d-lg-block text-center">2,500원</div>
+          <div class="col-2 d-none d-lg-block text-secondary text-center">
+            배송중
+          </div>
         </div>
         <div id="line" class="row d-none d-lg-block">
           <div
-            class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid red;"
+            class="col-12 mt-4 mb-3"
+            style="border-bottom:1px solid rgb(214, 214, 214);"
           ></div>
         </div>
         <!-- pc end -->
@@ -62,7 +69,7 @@
         <div id="line" class="row d-lg-none">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid blue;"
+            style="border-bottom:2px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row text-center">
@@ -72,7 +79,7 @@
         <div id="line" class="row d-lg-none">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid blue;"
+            style="border-bottom:1px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row text-center">
@@ -81,8 +88,10 @@
             <div class="row">
               <div class="col-3 d-lg-none">
                 <img
-                  class="img-fluid"
-                  src="https://image.flaticon.com/icons/png/128/2921/2921855.png"
+                  width="65"
+                  height="65"
+                  class="rounded"
+                  src="https://media.istockphoto.com/photos/golden-onions-on-rustic-wooden-background-picture-id480134211?k=6&m=480134211&s=612x612&w=0&h=FlEwOJ9bc_h6o4DKJssyE4Yhw10cUpYlWlkPR_y90pw="
                 />
               </div>
               <div class="col-9 d-lg-none">무안 양파 5kg/10kg/15kg</div>
@@ -93,7 +102,7 @@
         <div id="line" class="row d-lg-none">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid blue;"
+            style="border-bottom:1px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row text-center">
@@ -104,26 +113,29 @@
         <div id="line" class="row d-lg-none">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid blue;"
+            style="border-bottom:1px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row text-center">
           <div class="col-4 d-lg-none">5,000원(X kg)</div>
           <div class="col-4 d-lg-none">2,500원</div>
-          <div class="col-4 d-lg-none">배송중</div>
+          <div class="col-4 d-lg-none text-secondary">배송중</div>
         </div>
         <!-- mobile end -->
         <!-- 주문 상세정보 e -->
         <br id="m" class="d-lg-none" />
         <br id="m" class="d-lg-none" />
         <br id="m" class="d-lg-none" />
+        <br id="p" class="d-none d-lg-block" />
+        <br id="p" class="d-none d-lg-block" />
+        <br id="p" class="d-none d-lg-block" />
         <!-- 주문/결제 금액 정보 s -->
         <div class="row fs-4"><strong>주문/결제 금액 정보</strong></div>
         <!-- pc start -->
         <div id="line" class="row d-none d-lg-block">
           <div
-            class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid red;"
+            class="col-12 mt-2 mb-2"
+            style="border-bottom:2px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row text-center">
@@ -133,8 +145,8 @@
         </div>
         <div id="line" class="row d-none d-lg-block">
           <div
-            class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid red;"
+            class="col-12 mt-2 mb-4"
+            style="border-bottom:1px solid rgb(214, 214, 214);"
           ></div>
         </div>
         <div class="row text-center">
@@ -154,14 +166,20 @@
               <div class="d-none d-lg-block">7,500원</div>
             </div>
           </div>
-          <div class="col-4 d-none d-lg-block">7,500원</div>
+          <div class="col-4 d-none d-lg-block text-secondary">7,500원</div>
+        </div>
+        <div id="line" class="row d-none d-lg-block">
+          <div
+            class="col-12 mt-4 mb-2"
+            style="border-bottom:1px solid rgb(214,214,214);"
+          ></div>
         </div>
         <!-- pc end -->
         <!-- mobile start -->
         <div id="line" class="row d-lg-none">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid blue;"
+            style="border-bottom:2px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row text-center">
@@ -171,7 +189,7 @@
         <div id="line" class="row d-lg-none">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid blue;"
+            style="border-bottom:1px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row">
@@ -198,13 +216,19 @@
         </div>
         <!-- mobile end -->
         <!-- 주문/결제 금액 정보 e -->
+        <br id="m" class="d-lg-none" />
+        <br id="m" class="d-lg-none" />
+        <br id="m" class="d-lg-none" />
+        <br id="p" class="d-none d-lg-block" />
+        <br id="p" class="d-none d-lg-block" />
+        <br id="p" class="d-none d-lg-block" />
         <!-- 배송지 정보 s -->
         <div class="row fs-4"><strong>배송지 정보</strong></div>
         <!-- pc start -->
         <div id="line" class="row d-none d-lg-block">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid red;"
+            style="border-bottom:2px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row">
@@ -225,12 +249,18 @@
           <div class="col-2 text-center d-none d-lg-block">배송메모</div>
           <div class="col-10 d-none d-lg-block">X</div>
         </div>
+        <div id="line" class="row d-none d-lg-block">
+          <div
+            class="col-12 mt-4 mb-2"
+            style="border-bottom:1px solid rgb(214,214,214);"
+          ></div>
+        </div>
         <!-- pc end -->
         <!-- mobile start -->
         <div id="line" class="row d-lg-none">
           <div
             class="col-12 mt-2 mb-3"
-            style="border-bottom:1px solid blue;"
+            style="border-bottom:2px solid mediumaquamarine;"
           ></div>
         </div>
         <div class="row">
@@ -265,7 +295,7 @@ export default {};
 <style scoped>
 #shortcut {
   background-color: mediumaquamarine;
-  border-color: palevioletred;
+  border-color: palevioletmediumaquamarine;
   background-color: rgb(214, 214, 214);
   text-align: center;
   /* border border-primary */
