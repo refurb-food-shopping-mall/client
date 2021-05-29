@@ -100,7 +100,9 @@
             delectus asperiores soluta voluptates consequuntur id quo a natus
             qui.
           </p>
-          <a class="btn btn-primary" href="#!">구경하기 🎈</a>
+          <router-link class="btn btn-primary" to="/product"
+            >구경하기 🎈</router-link
+          >
         </div>
       </div>
       <!-- Call to Action-->
@@ -129,7 +131,9 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-sm">사러 가기</a>
+              <router-link to="/product" class="btn btn-primary btn-sm"
+                >사러 가기</router-link
+              >
             </div>
           </div>
         </div>
@@ -149,7 +153,9 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-sm">사러 가기</a>
+              <router-link to="/product" class="btn btn-primary btn-sm"
+                >사러 가기</router-link
+              >
             </div>
           </div>
         </div>
@@ -169,7 +175,9 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-sm">사러 가기</a>
+              <router-link to="/product" class="btn btn-primary btn-sm"
+                >사러 가기</router-link
+              >
             </div>
           </div>
         </div>
@@ -191,7 +199,9 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-sm">사러 가기</a>
+              <router-link to="/product" class="btn btn-primary btn-sm"
+                >사러 가기</router-link
+              >
             </div>
           </div>
         </div>
@@ -211,7 +221,9 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-sm">사러 가기</a>
+              <router-link to="/product" class="btn btn-primary btn-sm"
+                >사러 가기</router-link
+              >
             </div>
           </div>
         </div>
@@ -231,7 +243,9 @@
               </p>
             </div>
             <div class="card-footer">
-              <a href="#" class="btn btn-primary btn-sm">사러 가기</a>
+              <router-link to="/product" class="btn btn-primary btn-sm"
+                >사러 가기</router-link
+              >
             </div>
           </div>
         </div>

@@ -4,7 +4,6 @@ import Home from '../views/Home'
 import Cancel from '../views/Cancel'
 import Cart from '../views/Cart'
 import LogIn from '../views/LogIn'
-import Notice from '../views/Notice'
 import Payment from '../views/Payment'
 import Product from '../views/Product'
 import Shipping from '../views/Shipping'
@@ -36,11 +35,6 @@ const routes = [
     path: '/login',
     name: 'LogIn',
     component: LogIn
-  },
-  {
-    path: '/notice',
-    name: 'Notice',
-    component: Notice
   },
   {
     path: '/payment',

@@ -85,7 +85,9 @@
 
           <div class="d-flex justify-content-end">
             <div class="mx-3 pt-1">계정이 있으신가요?</div>
-            <button type="submit" class="btn btn-primary">로그인하기</button>
+            <router-link to="/login">
+              <button type="submit" class="btn btn-primary">로그인하기</button>
+            </router-link>
           </div>
         </div>
       </div>
