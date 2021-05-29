@@ -2,7 +2,7 @@
   <div id="navbar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <router-link class="navbar-brand" to="/">Home</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -51,39 +51,53 @@
               </div>
             </li> -->
             <li class="nav-item">
-              <a class="nav-link" href="/cart">Cart</a>
+              <router-link class="nav-link" to="/cart">Cart</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/cancel">Cancel</a>
+              <router-link class="nav-link" to="/cancel">Cancel</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/notice">Notice</a>
+              <router-link class="nav-link" to="/notice">Notice</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/payment">Payment</a>
+              <router-link class="nav-link" to="/payment">Payment</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/paymentdetail">paymentdetail</a>
+              <router-link class="nav-link" to="/paymentdetail"
+                >paymentdetail</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/product">product</a>
+              <router-link class="nav-link" to="/product">product</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/shipping">shipping</a>
+              <router-link class="nav-link" to="/shipping"
+                >shipping</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/profileupdate">userprofileupdate</a>
+              <router-link class="nav-link" to="/profileupdate"
+                >userprofileupdate</router-link
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/signup">signup</a>
+              <router-link class="nav-link" to="/signup">signup</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <router-link class="nav-link" to="/login">Login</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/addproduct">Addproduct</a>
+              <router-link class="nav-link" to="/addproduct"
+                >Addproduct</router-link
+              >
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/writereview"
+                >Review</router-link
+              >
             </li>
           </ul>
+
           <form class="d-flex">
             <input
               class="form-control me-sm-2"
@@ -91,7 +105,7 @@
               placeholder="Search"
             />
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-              Search
+              search
             </button>
           </form>
         </div>
