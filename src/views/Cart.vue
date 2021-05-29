@@ -26,11 +26,12 @@
 
       <div class="row border-bottom border-2 pt-3 pb-3">
         <div class="col-2 col-md-2 col-lg-2 col-xl-1">
-          <a class="align-self-center" style="cursor: pointer"
-            ><img
+          <a class="align-self-center" style="cursor: pointer">
+            <img
               src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg"
               class="img-fluid"
-          /></a>
+            />
+          </a>
         </div>
 
         <div
