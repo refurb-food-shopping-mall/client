@@ -14,7 +14,7 @@
         </div>
         <div class="row pb-4">
             <div class="col-3 d-flex justify-content-center">
-                <img src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg" class="img-fluid">
+                <img src="@/assets/onion2.jpg" class="img-fluid">
             </div>
             <div class="col-9">
                 <div class="text-dark">국산 햇양파 10kg</div>

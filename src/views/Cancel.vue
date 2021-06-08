@@ -36,7 +36,7 @@
             <div class="col-2 col-md-2 col-lg-2 col-xl-1 p-0">
               <a class="align-self-center" style="cursor: pointer"
                 ><img
-                  src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg"
+                  src="@/assets/onion2.jpg"
                   class="img-fluid"
               /></a>
             </div>
