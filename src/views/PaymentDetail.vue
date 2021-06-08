@@ -44,7 +44,7 @@
                   class="rounded d-none d-lg-block"
                   width="65"
                   height="65"
-                  src="https://media.istockphoto.com/photos/golden-onions-on-rustic-wooden-background-picture-id480134211?k=6&m=480134211&s=612x612&w=0&h=FlEwOJ9bc_h6o4DKJssyE4Yhw10cUpYlWlkPR_y90pw="
+                  src="@/assets/onion2.jpg"
                 />
               </div>
               <div class="col-9 d-none d-lg-block text-center">
@@ -91,7 +91,7 @@
                   width="65"
                   height="65"
                   class="rounded"
-                  src="https://media.istockphoto.com/photos/golden-onions-on-rustic-wooden-background-picture-id480134211?k=6&m=480134211&s=612x612&w=0&h=FlEwOJ9bc_h6o4DKJssyE4Yhw10cUpYlWlkPR_y90pw="
+                  src="@/assets/onion2.jpg"
                 />
               </div>
               <div class="col-9 d-lg-none">무안 양파 5kg/10kg/15kg</div>
