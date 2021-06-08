@@ -37,21 +37,21 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <img
-                  src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg"
+                  src="@/assets/onion2.jpg"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
               <div class="carousel-item">
                 <img
-                  src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg"
+                  src="@/assets/onion2.jpg"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
               <div class="carousel-item">
                 <img
-                  src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg"
+                  src="@/assets/onion2.jpg"
                   class="d-block w-100"
                   alt="..."
                 />

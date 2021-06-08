@@ -10,7 +10,7 @@
       <div class="col-3 col-md-2">
         <a class="align-self-center" style="cursor: pointer"
           ><img
-            src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1620794006376.jpg"
+            src="@/assets/onion2.jpg"
             class="img-fluid"
         /></a>
       </div>
@@ -27,7 +27,7 @@
       <div class="col-3 col-md-2">
         <a class="align-self-center" style="cursor: pointer"
           ><img
-            src="https://contents.sixshop.com/uploadedFiles/48764/product/image_1616298830323.jpg"
+            src="@/assets/melon.jpg"
             class="img-fluid"
         /></a>
       </div>
