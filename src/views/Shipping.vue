@@ -166,7 +166,7 @@
             <div class="col-3">
               <img
                 class="img-fluid"
-                src="https://media.istockphoto.com/photos/golden-onions-on-rustic-wooden-background-picture-id480134211?k=6&m=480134211&s=612x612&w=0&h=FlEwOJ9bc_h6o4DKJssyE4Yhw10cUpYlWlkPR_y90pw="
+                src="@/assets/onion2.jpg"
               />
             </div>
             <div class="col-6">
@@ -200,7 +200,7 @@
             <div class="col-3">
               <img
                 class="img-fluid"
-                src="https://media.istockphoto.com/photos/golden-onions-on-rustic-wooden-background-picture-id480134211?k=6&m=480134211&s=612x612&w=0&h=FlEwOJ9bc_h6o4DKJssyE4Yhw10cUpYlWlkPR_y90pw="
+                src="@/assets/onion2.jpg"
               />
             </div>
             <div class="col-6">
@@ -234,7 +234,7 @@
             <div class="col-3">
               <img
                 class="img-fluid"
-                src="https://media.istockphoto.com/photos/golden-onions-on-rustic-wooden-background-picture-id480134211?k=6&m=480134211&s=612x612&w=0&h=FlEwOJ9bc_h6o4DKJssyE4Yhw10cUpYlWlkPR_y90pw="
+                src="@/assets/onion2.jpg"
               />
             </div>
             <div class="col-6">
