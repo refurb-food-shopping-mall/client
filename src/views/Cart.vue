@@ -372,8 +372,22 @@ export default {
   data() {
     return {
       total: 1,
+      data1: {}
     };
   },
+  created(){
+    this.hello();
+    //this.hi();
+  },
+  methods: {
+    async hello(){   
+      this.data1 = await this.$api("/api/ProductList",{});
+      console.log(this.data1);
+    },
+    hi(){
+      this.$api("/api/AddProduct", {param: [1, 1, "당근", 2500, 1000, 500, 10]})
+    }
+  }
 };
 </script>
 
