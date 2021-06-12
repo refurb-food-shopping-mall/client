@@ -109,7 +109,9 @@ export default {
         .then((res) => {
           setTimeout(() => {
             this.loading = false;
-            localStorage.token = res.data.token;
+            this.$store.commit("SET_USER_INFO", res.data.userData);
+            this.$store.commit("SET_TOKEN", res.data.tokenData);
+            // localStorage.token = res.data.token;
             this.$router.push("/");
           }, 1000);
         })
