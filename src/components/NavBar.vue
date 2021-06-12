@@ -50,7 +50,7 @@
                 <a class="dropdown-item" href="#">Separated link</a>
               </div>
             </li> -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link class="nav-link" to="/cart">Cart</router-link>
             </li>
             <li class="nav-item">
@@ -92,7 +92,7 @@
               <router-link class="nav-link" to="/writereview"
                 >Review</router-link
               >
-            </li>
+            </li> -->
           </ul>
 
           <!-- <form class="d-flex">
@@ -105,13 +105,35 @@
               search
             </button>
           </form> -->
-          <div class="px-2 mx-2 btn">
+          <div class="px-2 mx-1 btn">
             <font-awesome-icon icon="search" />
           </div>
-          <router-link to="/cart" class="px-2 btn">
+          <router-link to="/cart" class="px-2 mx-1 btn">
             <font-awesome-icon icon="shopping-cart" />
           </router-link>
-          <router-link to="/login" class="px-2 mx-2 btn btn-warning">
+
+          <button
+            v-if="$store.getters.loggedIn"
+            type="button"
+            class="btn btn-light mx-1"
+          >
+            {{ $store.state.userInfo.userName }} 님
+          </button>
+
+          <button
+            @click.prevent="userLogout"
+            v-if="$store.getters.loggedIn"
+            type="button"
+            class="btn btn-primary"
+          >
+            <span>Logout</span>
+          </button>
+
+          <router-link
+            v-if="!$store.getters.loggedIn"
+            to="/login"
+            class="px-2 mx-1 btn btn-secondary"
+          >
             <font-awesome-icon icon="user" />
             <span class="mx-2" style="font-weight: bold"> 로그인 </span>
           </router-link>
@@ -122,7 +144,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    userLogout() {
+      this.$store.commit("SET_USER_INFO", {
+        userName: "",
+        userPhoneNumber: "",
+        userEmail: "",
+        userPointMoney: null,
+      });
+      this.$store.commit("SET_TOKEN", "");
+    },
+  },
+};
 </script>
 
 <style>
