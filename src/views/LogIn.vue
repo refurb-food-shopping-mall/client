@@ -102,6 +102,8 @@ export default {
   },
   methods: {
     submitLoginForm() {
+      // TODO validation needed
+
       this.errorMessage = "";
       this.loading = true;
       this.$axios
