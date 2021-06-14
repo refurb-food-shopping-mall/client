@@ -176,8 +176,8 @@ export default {
         .then((res) => {
           setTimeout(() => {
             this.loading = false;
-            this.$store.commit("SET_USER_INFO", res.data.userData);
-            this.$store.commit("SET_TOKEN", res.data.tokenData);
+            this.$store.commit("user/SET_USER_INFO", res.data.userData);
+            this.$store.commit("auth/SET_TOKEN", res.data.tokenData);
             this.$router.push("/");
           }, 1000);
         })

@@ -113,16 +113,16 @@
           </router-link>
 
           <button
-            v-if="$store.getters.loggedIn"
+            v-if="$store.getters['auth/loggedIn']"
             type="button"
             class="btn btn-light mx-1"
           >
-            {{ $store.state.userInfo.userName }} 님
+            {{ $store.state.user.userName }} 님
           </button>
 
           <button
             @click.prevent="userLogout"
-            v-if="$store.getters.loggedIn"
+            v-if="$store.getters['auth/loggedIn']"
             type="button"
             class="btn btn-primary"
           >
@@ -130,7 +130,7 @@
           </button>
 
           <router-link
-            v-if="!$store.getters.loggedIn"
+            v-if="!$store.getters['auth/loggedIn']"
             to="/login"
             class="px-2 mx-1 btn btn-secondary"
           >
@@ -145,15 +145,19 @@
 
 <script>
 export default {
+  mounted() {
+    console.log(this.$store)
+  },
   methods: {
     userLogout() {
-      this.$store.commit("SET_USER_INFO", {
+      this.$store.commit("user/SET_USER_INFO", {
         userName: "",
         userPhoneNumber: "",
         userEmail: "",
         userPointMoney: null,
       });
-      this.$store.commit("SET_TOKEN", "");
+      this.$store.commit("auth/SET_TOKEN", "");
+      sessionStorage.clear()
     },
   },
 };
