@@ -8,7 +8,8 @@ import user from './modules/user'
 Vue.use(Vuex)
 
 const vuexSession = new VuexPersistence({
-  storage: window.sessionStorage
+  storage: window.sessionStorage,
+  modules: ['auth, user'] // only save auth, user module
 })
 
 export default new Vuex.Store({
