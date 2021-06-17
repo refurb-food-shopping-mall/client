@@ -23,23 +23,6 @@
         </div>
       </div>
     </div>
-    <div class="row pb-4">
-      <div class="col-3 col-md-2">
-        <a class="align-self-center" style="cursor: pointer"
-          ><img
-            src="@/assets/melon.jpg"
-            class="img-fluid"
-        /></a>
-      </div>
-      <div class="col-9 col-md-10">
-        <div class="text-dark pb-3">참외 2.5kg</div>
-        <div>
-          <span class="text-dark">2개</span>
-          <span class="text-dark"> / </span>
-          <span class="text-dark">20,000원</span>
-        </div>
-      </div>
-    </div>
     <div class="row border-top pb-4 pt-4">
       <span class="col-6 text-dark align-self-center fw-bolder">상품 합계</span>
       <span class="col-6 text-end fs-5 fw-bolder text-primary align-self-center"
@@ -48,9 +31,9 @@
     </div>
     <div class="row border-top border-5">
       <div class="text-dark fw-bold fs-5 pt-4 pb-4">주문자</div>
-      <div class="text-dark pb-1">최동호</div>
-      <div class="text-dark pb-1">010-1234-5678</div>
-      <div class="text-dark pb-1">zaqxsw9705@naver.com</div>
+      <div class="text-dark pb-1">{{this.user.user_name}}</div>
+      <div class="text-dark pb-1">{{this.user.phone_number}}</div>
+      <div class="text-dark pb-1">{{this.user.user_email}}</div>
     </div>
     <div class="row pt-4 pb-4">
       <button type="button" class="btn btn-outline-primary">수정하기</button>
@@ -169,7 +152,7 @@
       <div class="text-dark fw-bold fs-5 pt-4">결제 정보</div>
     </div>
     <label for="exampleInputEmail1" class="form-label mt-4 text-dark pb-1"
-      >적립금 (보유 적립금 0원)</label
+      >적립금 (보유 적립금 {{this.user.user_point_money}}원)</label
     >
     <div class="row form-group border-bottom border-2 pb-4">
       <div class="col-9 col-md-10">
@@ -257,7 +240,53 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return {
+      user: {},
+      productdetail: {}
+    }    
+  },
+  created(){
+    this.GetUserProfile();
+    this.GetProductDetail();
+  },
+  methods: {
+      //유저정보를 가져오는 함수
+      async GetUserProfile(){
+          await this.$axios({
+              url: `${this.$domain}/auth/user`,
+              method: 'get',         
+              headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+          })
+          .then((res) => {
+            this.user = res.data.user;
+            //console.log(this.user);
+          })
+          .catch((err) => {
+            console.log(err);
+          }) 
+      },
+      //상품정보와 썸네일이미지를 가져오는 함수
+      async GetProductDetail(){
+          await this.$axios({
+            url: `${this.$domain}/product`,
+            method: 'post',
+            data: {
+              productarray: [{product_id : 5, prodcut_count : 2}, {product_id : 6, prodcut_count : 3}]
+            }
+          })
+          .then((res) => {
+            //console.log(res.data);
+            this.productdetail = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
+
+  }
+};
 </script>
 
 <style scoped>
