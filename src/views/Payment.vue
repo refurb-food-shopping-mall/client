@@ -6,7 +6,7 @@
     <div class="row">
       <div class="fw-bold fs-5 text-dark pt-4 pb-4">주문 상품</div>
     </div>
-    <div class="row pb-4">
+    <div class="row pb-4" :key="i" v-for="(product, i) in productdetail">
       <div class="col-3 col-md-2">
         <a class="align-self-center" style="cursor: pointer"
           ><img
@@ -15,18 +15,18 @@
         /></a>
       </div>
       <div class="col-9 col-md-10">
-        <div class="text-dark pb-3">국산 햇양파 10kg</div>
+        <div class="text-dark pb-3">{{product.product_name}}</div>
         <div>
-          <span class="text-dark">1개</span>
+          <span class="text-dark">{{product.product_count}}개</span>
           <span class="text-dark"> / </span>
-          <span class="text-dark">21,900원</span>
+          <span class="text-dark">{{product.product_price * product.product_count}}원</span>
         </div>
       </div>
     </div>
     <div class="row border-top pb-4 pt-4">
       <span class="col-6 text-dark align-self-center fw-bolder">상품 합계</span>
       <span class="col-6 text-end fs-5 fw-bolder text-primary align-self-center"
-        >41,900원</span
+        >{{this.totalprice}}</span
       >
     </div>
     <div class="row border-top border-5">
@@ -156,28 +156,31 @@
     >
     <div class="row form-group border-bottom border-2 pb-4">
       <div class="col-9 col-md-10">
-        <input type="text" class="form-control" id="inputDefault" />
+        <input type="number" class="form-control" id="inputDefault" v-model="usedpoint"/>
+      </div>
+      <div v-if="usedpoint > this.user.user_point_money">
+        {{AlertMaxPoint()}}
       </div>
       <div class="col-3 col-md-2 d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-primary">전액사용</button>
+        <button type="button" class="btn btn-outline-primary" @click="UseMaxPoint()">전액사용</button>
       </div>
     </div>
     <div>
       <div class="row pt-3">
         <div class="col-6 text-dark">상품 합계</div>
-        <div class="col-6 text-dark text-end fw-bolder">41,900원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{this.totalprice}}원</div>
       </div>
       <div class="row pt-3">
         <div class="col-6 text-dark">배송비</div>
-        <div class="col-6 text-dark text-end fw-bolder">7,500원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{this.totaldeliveryprice}}원</div>
       </div>
       <div class="row pt-3 pb-3 border-bottom border-2">
         <div class="col-6 text-dark">총 할인 금액</div>
-        <div class="col-6 text-dark text-end fw-bolder">0원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{usedpoint}}원</div>
       </div>
       <div class="row pt-3 pb-3">
         <div class="col-6 text-dark fw-bolder align-self-center">결제 금액</div>
-        <div class="col-6 text-primary text-end fs-5 fw-bolder">49,400원</div>
+        <div class="col-6 text-primary text-end fs-5 fw-bolder">{{this.totalprice + this.totaldeliveryprice - this.usedpoint}}</div>
       </div>
     </div>
     <div class="row border-top border-5">
@@ -244,12 +247,15 @@ export default {
   data(){
     return {
       user: {},
-      productdetail: {}
+      productdetail: {},
+      totalprice : 0,
+      totaldeliveryprice : 0,
+      usedpoint : 0
     }    
   },
   created(){
     this.GetUserProfile();
-    this.GetProductDetail();
+    this.GetTotalPriceProductInfo();
   },
   methods: {
       //유저정보를 가져오는 함수
@@ -270,7 +276,7 @@ export default {
       //상품정보와 썸네일이미지를 가져오는 함수
       async GetProductDetail(){
           await this.$axios({
-            url: `${this.$domain}/product`,
+            url: `${this.$domain}/product/thumnail`,
             method: 'post',
             data: {
               productarray: [{product_id : 5, prodcut_count : 2}, {product_id : 6, prodcut_count : 3}]
@@ -283,6 +289,27 @@ export default {
           .catch((err) => {
             console.log(err);
           })
+      },
+      //상품 합계 금액을 가져오는 함수
+      TotalPrice(){
+        for(let i = 0 ; i < this.productdetail.length ; i++){
+          this.totalprice = this.totalprice + this.productdetail[i].product_price * this.productdetail[i].product_count;
+          this.totaldeliveryprice = this.totaldeliveryprice + this.productdetail[i].delivery_price;
+        }
+      },
+      //GetProductDetail이후에 GetProductDetail함수를 실행하기위해 동기적처리를 해주는 함수
+      async GetTotalPriceProductInfo(){
+        await this.GetProductDetail();
+        this.TotalPrice();
+      },
+      //보유 포인트 이상의 포인트를 사용하려할 때 호출할 함수
+      AlertMaxPoint(){
+        alert('보유 포인트 이상 사용은 불가능 합니다.');
+        this.usedpoint = this.user.user_point_money;
+      },
+      //포인트 전액 사용버튼 클릭시 호출할 함수
+      UseMaxPoint(){
+      this.usedpoint = this.user.user_point_money
       }
 
   }
