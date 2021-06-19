@@ -24,7 +24,7 @@
         >
       </div>
 
-      <div class="row border-bottom border-2 pt-3 pb-3">
+      <div class="row border-bottom border-2 pt-3 pb-3" id="productinfo" :key="i" v-for="(product, i) in productdetail">
         <div class="col-2 col-xxl-1">
           <a class="align-self-center" style="cursor: pointer">
             <img
@@ -41,7 +41,7 @@
             class="align-self-center pb-3 text-dark"
             style="text-align: left"
           >
-            국산 햇양파 10kg
+            {{product.product_name}}
           </div>
           <div style="cursor: pointer">삭제하기</div>
         </div>
@@ -55,8 +55,8 @@
               <input
                 type="text"
                 class="form-control text-center"
-                style="max-width: 37px; max-height: 30px"
-                v-model="total"
+                style="max-width: 37px; max-height: 30px; pointer-events: none;"
+                :value="product.product_count"
               />
               <span
                 class="input-group-text text-center"
@@ -67,11 +67,11 @@
         </div>
         <span
           class="col-md-2 align-self-center text-center text-dark d-none d-md-block"
-          >21,900원</span
+          >{{product.product_price * product.product_count}}</span
         >
         <span
           class="col-md-2 align-self-center text-center text-dark d-none d-md-block"
-          >2,500원</span
+          >{{product.delivery_price}}</span
         >
 
         <div class="col-8 align-self-center d-md-none">
@@ -80,7 +80,7 @@
             class="align-self-center pb-1 text-dark"
             style="text-align: left"
           >
-            국산 햇양파 10kg
+           {{product.product_name}}
           </div>
           <div class="d-md-none ">
             <div class="input-group">
@@ -92,8 +92,8 @@
               <input
                 type="text"
                 class="form-control text-center"
-                style="max-width: 35px; max-height: 30px"
-                v-model="total"
+                style="max-width: 35px; max-height: 30px; pointer-events: none;"
+                :value="product.product_count"
               />
               <span
                 class="input-group-text text-center"
@@ -127,19 +127,19 @@
           상품합계
         </div>
         <div class="col-md-3 text-end d-none d-md-block text-dark">
-          41,900원
+          {{this.totalprice}}
         </div>
         <div class="mb-1 col-md-9 text-end d-none d-md-block text-dark">
           배송비
         </div>
-        <div class="col-md-3 text-end d-none d-md-block text-dark">7,500원</div>
+        <div class="col-md-3 text-end d-none d-md-block text-dark">{{this.totaldeliveryprice}}</div>
         <div class="d-flex justify-content-end">
           <hr class="d-none d-md-block" style="width: 50%; height: 2px" />
         </div>
         <div class="mb-4 col-6 d-md-none text-dark">상품합계</div>
-        <div class="col-6 text-end d-md-none text-dark">41,900원</div>
+        <div class="col-6 text-end d-md-none text-dark">{{this.totalprice}}</div>
         <div class="mb-1 col-6 d-md-none text-dark">배송비</div>
-        <div class="col-6 text-end d-md-none text-dark">7,500원</div>
+        <div class="col-6 text-end d-md-none text-dark">{{this.totaldeliveryprice}}</div>
         <hr class="d-md-none mt-4" style="height: 2px" />
       </div>
       <div class="row pb-5">
@@ -147,11 +147,11 @@
           >합계</span
         >
         <span class="col-md-3 text-end text-dark fw-bolder d-none d-md-block"
-          >49,400원</span
+          >{{this.totalprice + this.totaldeliveryprice}}</span
         >
         <span class="col-6 text-dark fw-bolder d-md-none">합계</span>
         <span class="col-6 text-end text-dark fw-bolder d-md-none"
-          >49,400원</span
+          >{{this.totalprice + this.totaldeliveryprice}}</span
         >
       </div>
       <div class="row pb-5">
@@ -216,6 +216,9 @@ export default {
         await this.GetProductDetail();
         this.TotalPrice();
       },
+      // OffDisply(){
+      //   $('#productinfo').hide();
+      // }
   }
 };
 </script>
