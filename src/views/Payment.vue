@@ -297,7 +297,7 @@ export default {
           this.totaldeliveryprice = this.totaldeliveryprice + this.productdetail[i].delivery_price;
         }
       },
-      //GetProductDetail이후에 GetProductDetail함수를 실행하기위해 동기적처리를 해주는 함수
+      //GetProductDetail이후에 TotalPrice함수를 실행하기위해 동기적처리를 해주는 함수
       async GetTotalPriceProductInfo(){
         await this.GetProductDetail();
         this.TotalPrice();
