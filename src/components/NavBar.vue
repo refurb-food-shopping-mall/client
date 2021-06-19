@@ -112,6 +112,10 @@
             <font-awesome-icon icon="shopping-cart" />
           </router-link>
 
+          <span style="color: red"
+            >({{ $store.state.cart.cartSumOfQuantity }})</span
+          >
+
           <button
             v-if="$store.getters['auth/loggedIn']"
             type="button"
@@ -146,7 +150,7 @@
 <script>
 export default {
   mounted() {
-    console.log(this.$store)
+    console.log(this.$store);
   },
   methods: {
     userLogout() {
@@ -157,7 +161,8 @@ export default {
         userPointMoney: null,
       });
       this.$store.commit("auth/SET_TOKEN", "");
-      sessionStorage.clear()
+      this.$store.commit("cart/CLEAR_CART");
+      sessionStorage.clear();
     },
   },
 };

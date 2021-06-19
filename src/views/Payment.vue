@@ -235,7 +235,7 @@
     <router-link to="/paymentdetail">
       <div class="row pt-3">
         <button type="button" class="btn btn-primary btn-lg pb-3 pt-3">
-          49,400원 결제하기
+          {{this.totalprice + this.totaldeliveryprice - this.usedpoint}} 결제하기
         </button>
       </div>
     </router-link>
@@ -274,22 +274,22 @@ export default {
           }) 
       },
       //상품정보와 썸네일이미지를 가져오는 함수
-      async GetProductDetail(){
-          await this.$axios({
-            url: `${this.$domain}/product/thumnail`,
-            method: 'post',
-            data: {
-              productarray: [{product_id : 5, prodcut_count : 2}, {product_id : 6, prodcut_count : 3}]
-            }
-          })
-          .then((res) => {
-            //console.log(res.data);
-            this.productdetail = res.data;
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      },
+        async GetProductDetail(){
+            await this.$axios({
+              url: `${this.$domain}/product/thumnail`,
+              method: 'post',
+              data: {
+                productarray: [{product_id : 5, prodcut_count : 2}, {product_id : 6, prodcut_count : 3}]
+              }
+            })
+            .then((res) => {
+              //console.log(res.data);
+              this.productdetail = res.data;
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        },
       //상품 합계 금액을 가져오는 함수
       TotalPrice(){
         for(let i = 0 ; i < this.productdetail.length ; i++){
