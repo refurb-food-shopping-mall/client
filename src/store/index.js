@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 const vuexSession = new VuexPersistence({
   storage: window.sessionStorage,
-  modules: ['auth, user'] // only save auth, user module
+  // modules: ['auth, user'] // only save auth, user module
 })
 
 export default new Vuex.Store({
