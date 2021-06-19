@@ -4,6 +4,7 @@ import VuexPersistence from 'vuex-persist'
 
 import auth from './modules/auth'
 import user from './modules/user'
+import cart from './modules/cart'
 
 Vue.use(Vuex)
 
@@ -25,5 +26,6 @@ export default new Vuex.Store({
   modules: {
     auth,
     user,
+    cart
   }
 })

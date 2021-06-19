@@ -99,25 +99,31 @@
                 <label
                   for="exampleSelect1"
                   class="form-label d-flex justify-content-end mt-4"
-                  >수량 선택</label
+                  >수량(kg) 선택</label
                 >
-                <select class="form-select" id="exampleSelect1">
-                  <option>1kg</option>
-                  <option>2kg</option>
-                  <option>3kg</option>
-                  <option>4kg</option>
-                  <option>5kg</option>
+                <select
+                  v-model="selectedQty"
+                  class="form-select"
+                  id="exampleSelect1"
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
                 </select>
               </div>
               <p class="card-text" style="text-align: right">배송 예정일</p>
             </div>
           </div>
           <div class="d-flex align-items-center">
-            <router-link to="/cart" class="px-1">
-              <button type="button" class="btn btn-primary mt-3">
-                장바구니
-              </button>
-            </router-link>
+            <button
+              @click="addProductToCart({ productIdx, selectedQty })"
+              type="button"
+              class="btn btn-primary mt-3"
+            >
+              장바구니 담기
+            </button>
             <router-link to="/payment" class="px-1">
               <button type="button" class="btn btn-danger mt-3">
                 구매하기
@@ -273,7 +279,19 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+      productIdx: 7, // exampleIdx
+      selectedQty: 1,
+    };
+  },
+  methods: {
+    ...mapActions("cart", ["addProductToCart"]),
+  },
+};
 </script>
 
 <style scoped>
