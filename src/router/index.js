@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import $store from '../store'
+
 import Home from '../views/Home'
 import Cancel from '../views/Cancel'
 import Cart from '../views/Cart'
@@ -15,6 +18,22 @@ import WriteReview from '../views/WriteReview'
 
 Vue.use(VueRouter)
 
+const ifAlreadyLoggedInRedirectHome = (to, from, next) => {
+  if ($store.getters['auth/loggedIn']) {
+    next('/');
+  } else {
+    next();
+  }
+};
+
+const isLoggedIn = (to, from, next) => {
+  if ($store.getters['auth/loggedIn']) {
+    next();
+  } else {
+    next('/login');
+  }
+};
+
 const routes = [
   {
     path: '/',
@@ -24,7 +43,8 @@ const routes = [
   {
     path: '/cancel',
     name: 'Cancel',
-    component: Cancel
+    component: Cancel,
+    beforeEnter: isLoggedIn
   },
   {
     path: '/cart',
@@ -34,12 +54,14 @@ const routes = [
   {
     path: '/login',
     name: 'LogIn',
-    component: LogIn
+    component: LogIn,
+    beforeEnter: ifAlreadyLoggedInRedirectHome
   },
   {
     path: '/payment',
     name: 'Payment',
-    component: Payment
+    component: Payment,
+    beforeEnter: isLoggedIn
   },
   {
     path: '/product',
@@ -49,22 +71,26 @@ const routes = [
   {
     path: '/shipping',
     name: 'Shipping',
-    component: Shipping
+    component: Shipping,
+    beforeEnter: isLoggedIn
   },
   {
     path: '/signup',
     name: 'SignUp',
-    component: SignUp
+    component: SignUp,
+    beforeEnter: ifAlreadyLoggedInRedirectHome
   },
   {
     path: '/profileupdate',
     name: 'UserProfileUpdate',
-    component: UserProfileUpdate
+    component: UserProfileUpdate,
+    beforeEnter: isLoggedIn
   },
   {
     path: '/paymentdetail',
     name: 'PaymentDetail',
-    component: PaymentDetail
+    component: PaymentDetail,
+    beforeEnter: isLoggedIn
   },
   {
     path: '/addproduct',
@@ -74,7 +100,8 @@ const routes = [
   {
     path: '/writereview',
     name: 'WriteReview',
-    component: WriteReview
+    component: WriteReview,
+    beforeEnter: isLoggedIn
   },
 ]
 
