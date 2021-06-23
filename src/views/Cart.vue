@@ -56,7 +56,7 @@
                 type="text"
                 class="form-control text-center"
                 style="max-width: 37px; max-height: 30px; pointer-events: none;"
-                :value="product.product_count"
+                :value="$store.state.cart.cart[i].productQty"
               />
               <span
                 class="input-group-text text-center"
@@ -67,7 +67,7 @@
         </div>
         <span
           class="col-md-2 align-self-center text-center text-dark d-none d-md-block"
-          >{{product.product_price * product.product_count}}</span
+          >{{product.product_price}}</span
         >
         <span
           class="col-md-2 align-self-center text-center text-dark d-none d-md-block"
@@ -92,8 +92,8 @@
               <input
                 type="text"
                 class="form-control text-center"
-                style="max-width: 35px; max-height: 30px; pointer-events: none;"
-                :value="product.product_count"
+                style="max-width: 35px; max-height: 30px; pointer-events: none;"               
+                :value="$store.state.cart.cart[i].productQty"
               />
               <span
                 class="input-group-text text-center"
@@ -104,9 +104,9 @@
           </div>
           <div class="row pt-1">
             <div class="col-6 text-dark">가격</div>
-            <div class="col-6 text-dark text-center">21,900원</div>
+            <div class="col-6 text-dark text-center">{{product.product_price}}원</div>
             <div class="col-6 text-dark">배송비</div>
-            <div class="col-6 text-dark text-center">2,500원</div>
+            <div class="col-6 text-dark text-center">{{product.delivery_price}}원</div>
           </div>
         </div>
         <div class="col-2 d-md-none">
@@ -178,12 +178,14 @@
 export default {
   data() {
     return {
-      productdetail: {},
       totalprice : 0,
       totaldeliveryprice : 0,
-    };
+      pidarray : [],
+      productdetail : []
+    }
   },
   created(){
+    //console.log(this.$store.state.cart.cart);
     this.GetTotalPriceProductInfo();
   },
   methods: {
@@ -193,7 +195,7 @@ export default {
             url: `${this.$domain}/product/thumnail`,
             method: 'post',
             data: {
-              productarray: [{product_id : 5, prodcut_count : 2}, {product_id : 6, prodcut_count : 3}]
+              productarray : this.pidarray
             }
           })
           .then((res) => {
@@ -207,18 +209,22 @@ export default {
       //상품 합계 금액을 가져오는 함수
       TotalPrice(){
         for(let i = 0 ; i < this.productdetail.length ; i++){
-          this.totalprice = this.totalprice + this.productdetail[i].product_price * this.productdetail[i].product_count;
+          this.totalprice = this.totalprice + this.productdetail[i].product_price * this.$store.state.cart.cart[i].productQty;
           this.totaldeliveryprice = this.totaldeliveryprice + this.productdetail[i].delivery_price;
         }
+      },    
+      //vuex의 배열로부터 productIdx만 분리하여 따로 배열에 넣어주는 함수 
+      DivideProductid(){
+        for(let i = 0 ; i < this.$store.state.cart.cart.length ; i++){
+          this.pidarray.push(this.$store.state.cart.cart[i].productIdx);
+        }
       },
-      //GetProductDetail이후에 TotalPrice함수를 실행하기위해 동기적처리를 해주는 함수
+      //DiviedPid, GetProductDetail 함수를 동기적으로 실행시켜주는 함수
       async GetTotalPriceProductInfo(){
+        await this.DivideProductid();
         await this.GetProductDetail();
         this.TotalPrice();
       },
-      // OffDisply(){
-      //   $('#productinfo').hide();
-      // }
   }
 };
 </script>
