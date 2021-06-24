@@ -29,6 +29,12 @@ export default {
     CLEAR_CART(state) {
       state.cart = []
       state.cartSumOfQuantity = 0
+    },
+    CARCULATE_COUNT(state, payload) {
+      state.cart[payload.i].productQty = state.cart[payload.i].productQty + payload.num
+      if(state.cart[payload.i].productQty < 1){
+        state.cart[payload.i].productQty = 1; 
+      }
     }
   },
   actions: {
