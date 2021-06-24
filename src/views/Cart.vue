@@ -43,7 +43,10 @@
           >
             {{product.product_name}}
           </div>
-          <div style="cursor: pointer">삭제하기</div>
+          <div 
+            style="cursor: pointer"
+            @click="deleteproduct(i)"
+          >삭제하기</div>
         </div>
         <div class="col-md-3 col-lg-2 align-self-center d-none d-md-block">
           <div class="input-group d-flex justify-content-center">
@@ -119,6 +122,7 @@
               src="@/assets/cross.png"
               class="img-fluid"
               style="max-width: 19px; max-height: 19px; cursor: pointer"
+              @click="deleteproduct(i)"
             />
           </div>
         </div>
@@ -189,7 +193,7 @@ export default {
     }
   },
   created(){
-    //console.log(this.$store.state.cart.cart);
+    //this.producttest();
     this.GetTotalPriceProductInfo();
   },
   methods: {
@@ -222,6 +226,7 @@ export default {
         for(let i = 0 ; i < this.$store.state.cart.cart.length ; i++){
           this.pidarray.push(this.$store.state.cart.cart[i].productIdx);
         }
+        console.log(this.pidarray);
       },
       //DiviedPid, GetProductDetail 함수를 동기적으로 실행시켜주는 함수
       async GetTotalPriceProductInfo(){
@@ -245,7 +250,19 @@ export default {
         else if(previousnum == 1 && num == 1){
           this.totalprice = this.totalprice + this.productdetail[i].product_price * num;
         }
-      }
+      },
+      //삭제버튼을 클릭했을 떄 실행될 함수
+      deleteproduct(i){
+        this.$store.commit('cart/DELETE_PRODUCT', i);
+        this.productdetail.splice(i, 1);
+        this.totalprice = 0;
+        this.totaldeliveryprice = 0;
+        this.TotalPrice();
+      },
+      // producttest(){
+      //   this.$store.commit('cart/PUSH_NEW_PRODUCT_TO_CART', {productIdx : 6, selectedQty : 3});
+      //   this.$store.commit('cart/PUSH_NEW_PRODUCT_TO_CART', {productIdx : 5, selectedQty : 2});
+      // }
   }
 };
 </script>

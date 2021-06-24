@@ -35,6 +35,9 @@ export default {
       if(state.cart[payload.i].productQty < 1){
         state.cart[payload.i].productQty = 1; 
       }
+    },
+    DELETE_PRODUCT(state, i){
+      state.cart.splice(i, 1);
     }
   },
   actions: {
