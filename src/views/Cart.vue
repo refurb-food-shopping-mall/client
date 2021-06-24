@@ -50,17 +50,19 @@
               <span
                 class="input-group-text text-center"
                 style="cursor: pointer;  max-width: 33px; max-height: 30px"
+                @click="calculatecount(-1, i)"
                 >-</span
               >
               <input
                 type="text"
                 class="form-control text-center"
-                style="max-width: 37px; max-height: 30px; pointer-events: none;"
+                style="max-width: 37px; max-height: 30px; pointer-events: none;"               
                 :value="$store.state.cart.cart[i].productQty"
               />
               <span
                 class="input-group-text text-center"
                 style="cursor: pointer; max-width: 33px; max-height: 30px"
+                @click="calculatecount(1, i)"
                 >+</span
               >
           </div>
@@ -87,6 +89,7 @@
               <span
                 class="input-group-text text-center"
                 style="cursor: pointer; max-height: 30px"
+                @click="calculatecount(-1, i)"
                 >-</span
               >
               <input
@@ -98,6 +101,7 @@
               <span
                 class="input-group-text text-center"
                 style="cursor: pointer; max-height: 30px"
+                @click="calculatecount(1, i)"
                 >+</span
               >
             </div>
@@ -225,6 +229,23 @@ export default {
         await this.GetProductDetail();
         this.TotalPrice();
       },
+      //상품 수량에서 +, - 버튼을 눌렀을 때 실행될 함수
+      calculatecount(num, i){
+        let previousnum = this.$store.state.cart.cart[i].productQty
+        this.$store.commit('cart/CARCULATE_COUNT',{
+          num : num,
+          i : i
+        });       
+        if(previousnum > 1){
+          this.totalprice = this.totalprice + this.productdetail[i].product_price * num;
+        }
+        else if(previousnum == 2 && num == -1){
+          this.totalprice = this.totalprice + this.productdetail[i].product_price * num;
+        }
+        else if(previousnum == 1 && num == 1){
+          this.totalprice = this.totalprice + this.productdetail[i].product_price * num;
+        }
+      }
   }
 };
 </script>
