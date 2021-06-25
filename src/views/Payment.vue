@@ -17,9 +17,9 @@
       <div class="col-9 col-md-10">
         <div class="text-dark pb-3">{{product.product_name}}</div>
         <div>
-          <span class="text-dark">{{product.product_count}}개</span>
+          <span class="text-dark">{{$store.state.cart.cart[i].productQty}}개</span>
           <span class="text-dark"> / </span>
-          <span class="text-dark">{{product.product_price * product.product_count}}원</span>
+          <span class="text-dark">{{product.product_price * $store.state.cart.cart[i].productQty}}원</span>
         </div>
       </div>
     </div>
@@ -35,9 +35,13 @@
       <div class="text-dark pb-1">{{this.user.phone_number}}</div>
       <div class="text-dark pb-1">{{this.user.user_email}}</div>
     </div>
-    <div class="row pt-4 pb-4">
+    <router-link 
+      to="/userprofileupdate" 
+      class="row pt-4 pb-4" 
+      style="text-decoration: none;"
+    >
       <button type="button" class="btn btn-outline-primary">수정하기</button>
-    </div>
+    </router-link>  
     <div class="row border-top border-5">
       <div class="text-dark fw-bold fs-5 pt-4 pb-5">배송지</div>
     </div>
@@ -247,14 +251,19 @@ export default {
   data(){
     return {
       user: {},
-      productdetail: {},
+      usedpoint : 0,
+      pidarray : [],
+      productdetail: [],
       totalprice : 0,
       totaldeliveryprice : 0,
-      usedpoint : 0
+      useraddress : null,
+      orderinformation : {
+
+      }
     }    
   },
   created(){
-    this.GetUserProfile();
+    this.getuserdetailinfo();
     this.GetTotalPriceProductInfo();
   },
   methods: {
@@ -267,41 +276,48 @@ export default {
           })
           .then((res) => {
             this.user = res.data.user;
-            //console.log(this.user);
+            console.log(this.user);
           })
           .catch((err) => {
             console.log(err);
           }) 
       },
       //상품정보와 썸네일이미지를 가져오는 함수
-        async GetProductDetail(){
-            await this.$axios({
+      async GetProductDetail(){
+          await this.$axios({
               url: `${this.$domain}/product/thumnail`,
               method: 'post',
               data: {
-                productarray: [{product_id : 5, prodcut_count : 2}, {product_id : 6, prodcut_count : 3}]
+                productarray : this.pidarray
               }
-            })
-            .then((res) => {
-              //console.log(res.data);
-              this.productdetail = res.data;
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-        },
+          })
+          .then((res) => {
+            //console.log(res.data);
+            this.productdetail = res.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      },
+      //vuex의 배열로부터 productIdx만 분리하여 따로 배열에 넣어주는 함수 
+      DivideProductid(){
+        for(let i = 0 ; i < this.$store.state.cart.cart.length ; i++){
+          this.pidarray.push(this.$store.state.cart.cart[i].productIdx);
+        }
+      },
       //상품 합계 금액을 가져오는 함수
       TotalPrice(){
         for(let i = 0 ; i < this.productdetail.length ; i++){
-          this.totalprice = this.totalprice + this.productdetail[i].product_price * this.productdetail[i].product_count;
+          this.totalprice = this.totalprice + this.productdetail[i].product_price * this.$store.state.cart.cart[i].productQty;
           this.totaldeliveryprice = this.totaldeliveryprice + this.productdetail[i].delivery_price;
         }
       },
-      //GetProductDetail이후에 TotalPrice함수를 실행하기위해 동기적처리를 해주는 함수
+      //DiviedPid, GetProductDetail 함수를 동기적으로 실행시켜주는 함수
       async GetTotalPriceProductInfo(){
+        await this.DivideProductid();
         await this.GetProductDetail();
         this.TotalPrice();
-      },
+      },  
       //보유 포인트 이상의 포인트를 사용하려할 때 호출할 함수
       AlertMaxPoint(){
         alert('보유 포인트 이상 사용은 불가능 합니다.');
@@ -309,8 +325,28 @@ export default {
       },
       //포인트 전액 사용버튼 클릭시 호출할 함수
       UseMaxPoint(){
-      this.usedpoint = this.user.user_point_money
-      }
+        this.usedpoint = this.user.user_point_money
+      },
+      // 유저의 기본배송지를 가져오는 함수
+      GetDefaultAddress(){
+        this.$axios
+          .post(`${this.$domain}/address/default`, { 
+            userid : this.user.id,
+            default_address : 1
+          })
+          .then((res) => {
+            this.useraddress = res.data;
+            console.log(this.useraddress);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      },
+      // GetUserProfile -> GetUserProfile 동기적 처리함수
+      async GetUserDetailInfo(){
+        await this.GetUserProfile();
+        this.GetDefaultAddress();
+      },
 
   }
 };
