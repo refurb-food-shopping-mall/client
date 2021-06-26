@@ -48,12 +48,12 @@
                 />
               </div>
               <div class="col-9 d-none d-lg-block text-center">
-                무안 양파 5kg/10kg/15kg
+                {{this.productDetail[0].product_name}}
               </div>
             </div>
           </div>
-          <div class="col-2 d-none d-lg-block text-center">5,000원(X kg)</div>
-          <div class="col-2 d-none d-lg-block text-center">2,500원</div>
+          <div class="col-2 d-none d-lg-block text-center">{{this.productDetail[0].product_price * cnt}}원<span>(<span>{{cnt}}</span>개)</span></div>
+          <div class="col-2 d-none d-lg-block text-center">{{this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원</div>
           <div class="col-2 d-none d-lg-block text-secondary text-center">
             배송중
           </div>
@@ -153,20 +153,24 @@
           <div class="col-4">
             <div class=" d-flex justify-content-between">
               <div class="d-none d-lg-block">상품금액</div>
-              <div class="d-none d-lg-block">5,000원</div>
+              <div class="d-none d-lg-block">{{this.productDetail[0].product_price * cnt}}원</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div class="d-none d-lg-block">배송비</div>
-              <div class="d-none d-lg-block">2,500원</div>
+              <div class="d-none d-lg-block">{{this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원</div>
             </div>
           </div>
           <div class="col-4">
             <div class=" d-flex justify-content-between">
               <div class="d-none d-lg-block">카드 간편결제</div>
-              <div class="d-none d-lg-block">7,500원</div>
+              <div class="d-none d-lg-block">
+                {{this.productDetail[0].product_price + this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원
+              </div>
             </div>
           </div>
-          <div class="col-4 d-none d-lg-block text-secondary">7,500원</div>
+          <div class="col-4 d-none d-lg-block text-secondary">
+            {{this.productDetail[0].product_price*cnt + this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원
+          </div>
         </div>
         <div id="line" class="row d-none d-lg-block">
           <div
@@ -233,7 +237,7 @@
         </div>
         <div class="row">
           <div class="col-2 text-center d-none d-lg-block">수령인</div>
-          <div class="col-10 d-none d-lg-block">홍길동</div>
+          <div class="col-10 d-none d-lg-block">{{this.user.user_name}}</div>
         </div>
         <div class="row ">
           <div class="col-2 text-center d-none d-lg-block">연락처</div>
@@ -289,7 +293,46 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+      productDetail:null,
+      cnt:2,
+      user: {},
+    }
+  },
+  mounted(){
+    this.getProduct();
+    this.GetUserProfile();
+  },
+  methods: {
+    getProduct(){
+      this.$axios
+      .post(`http://localhost:3000/api/getProduct`,{
+        id:7
+      })
+      .then((res)=>{
+        this.productDetail = res.data
+        //console.log(this.productDetail)
+      })
+    },
+    //유저정보를 가져오는 함수
+    async GetUserProfile(){
+        await this.$axios({
+            url: `${this.$domain}/auth/user`,
+            method: 'get',         
+            headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+        })
+        .then((res) => {
+          this.user = res.data.user;
+          //console.log(this.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        }) 
+      },
+  },
+};
 </script>
 
 <style scoped>
