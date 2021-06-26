@@ -123,7 +123,7 @@
           class="col-md-4 mb-5"
         >
           <div class="card h-100">
-            <img src="@/assets/main_onion.jpg" class="img-fluid" />
+            <img :src="getImgUrl(product)" class="img-fluid" />
             <div class="card-body">
               <div class="my-3">
                 <h5 class="card-title" style="text-align: center">
@@ -171,6 +171,12 @@ export default {
       this.productList = res.data;
       console.log(this.productList);
     });
+  },
+  methods: {
+    getImgUrl(product) {
+      let pic = product.t_product_images[0].path.split("/")[2];
+      return require("../assets/" + pic);
+    },
   },
 };
 </script>
