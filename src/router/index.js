@@ -64,7 +64,7 @@ const routes = [
     beforeEnter: isLoggedIn
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'Product',
     component: Product
   },
