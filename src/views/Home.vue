@@ -117,133 +117,38 @@
       <!-- Content Row-->
       <div class="row gx-4 gx-lg-5">
         <!-- 카드 1 -->
-        <div class="col-md-4 mb-5">
+        <div
+          v-for="(product, idx) in productList"
+          :key="idx"
+          class="col-md-4 mb-5"
+        >
           <div class="card h-100">
             <img src="@/assets/main_onion.jpg" class="img-fluid" />
             <div class="card-body">
               <div class="my-3">
-                <h5 class="card-title" style="text-align: center">무안 양파</h5>
+                <h5 class="card-title" style="text-align: center">
+                  {{ product.product_name }}
+                </h5>
               </div>
               <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim,
-                ipsam libero velit eligendi expedita, atque aperiam provident
-                quae autem quasi fuga, quos dignissimos eius.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo,
+                adipisci
               </p>
             </div>
-            <div class="card-footer">
-              <router-link to="/product" class="btn btn-primary btn-sm"
-                >사러 가기</router-link
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- 카드 2 -->
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">
-            <img src="@/assets/main_onion.jpg" class="img-fluid" />
-            <div class="card-body">
-              <div class="my-3">
-                <h5 class="card-title" style="text-align: center">무안 양파</h5>
+            <div
+              class="
+                card-footer
+                d-flex
+                justify-content-between
+                align-items-center
+              "
+            >
+              <div>
+                <b>{{ product.product_price }}원</b>
               </div>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim,
-                ipsam libero velit eligendi expedita, atque aperiam provident
-                quae autem quasi fuga, quos dignissimos eius.
-              </p>
-            </div>
-            <div class="card-footer">
-              <router-link to="/product" class="btn btn-primary btn-sm"
-                >사러 가기</router-link
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- 카드 3 -->
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">
-            <img src="@/assets/main_onion.jpg" class="img-fluid" />
-            <div class="card-body">
-              <div class="my-3">
-                <h5 class="card-title" style="text-align: center">무안 양파</h5>
-              </div>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim,
-                ipsam libero velit eligendi expedita, atque aperiam provident
-                quae autem quasi fuga, quos dignissimos eius.
-              </p>
-            </div>
-            <div class="card-footer">
-              <router-link to="/product" class="btn btn-primary btn-sm"
-                >사러 가기</router-link
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Content Row-->
-      <div class="row gx-4 gx-lg-5">
-        <!-- 카드 1 -->
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">
-            <img src="@/assets/main_onion.jpg" class="img-fluid" />
-            <div class="card-body">
-              <div class="my-3">
-                <h5 class="card-title" style="text-align: center">무안 양파</h5>
-              </div>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim,
-                ipsam libero velit eligendi expedita, atque aperiam provident
-                quae autem quasi fuga, quos dignissimos eius.
-              </p>
-            </div>
-            <div class="card-footer">
-              <router-link to="/product" class="btn btn-primary btn-sm"
-                >사러 가기</router-link
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- 카드 2 -->
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">
-            <img src="@/assets/main_onion.jpg" class="img-fluid" />
-            <div class="card-body">
-              <div class="my-3">
-                <h5 class="card-title" style="text-align: center">무안 양파</h5>
-              </div>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim,
-                ipsam libero velit eligendi expedita, atque aperiam provident
-                quae autem quasi fuga, quos dignissimos eius.
-              </p>
-            </div>
-            <div class="card-footer">
-              <router-link to="/product" class="btn btn-primary btn-sm"
-                >사러 가기</router-link
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- 카드 3 -->
-        <div class="col-md-4 mb-5">
-          <div class="card h-100">
-            <img src="@/assets/main_onion.jpg" class="img-fluid" />
-            <div class="card-body">
-              <div class="my-3">
-                <h5 class="card-title" style="text-align: center">무안 양파</h5>
-              </div>
-              <p class="card-text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim,
-                ipsam libero velit eligendi expedita, atque aperiam provident
-                quae autem quasi fuga, quos dignissimos eius.
-              </p>
-            </div>
-            <div class="card-footer">
-              <router-link to="/product" class="btn btn-primary btn-sm"
+              <router-link
+                :to="`/product/${product.id}`"
+                class="btn btn-primary btn-sm"
                 >사러 가기</router-link
               >
             </div>
@@ -255,7 +160,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      productList: [],
+    };
+  },
+  mounted() {
+    this.$axios.get(`${this.$domain}/product`).then((res) => {
+      this.productList = res.data;
+      console.log(this.productList);
+    });
+  },
+};
 </script>
 
 <style scoped>
