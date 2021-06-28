@@ -87,14 +87,14 @@
         <div class="col-md-5 d-flex flex-column justify-content-center my-2">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title" style="text-align: center">상품명</h5>
+              <h5 class="card-title" style="text-align: center">{{this.product.product_name}}</h5>
               <h6
                 class="card-subtitle mb-2 text-muted"
                 style="text-align: right"
               >
-                상품 가격
+                {{(this.product.product_price).toLocaleString('ko-KR')}}원
               </h6>
-              <p class="card-text" style="text-align: right">배송비</p>
+              <p class="card-text" style="text-align: right">배송비 {{(this.product.delivery_price).toLocaleString('ko-KR')}}원</p>
               <div class="form-group">
                 <label
                   for="exampleSelect1"
@@ -284,11 +284,32 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      product:{
+        product_name : '',
+        product_price : null,
+        delivery_price : null,
+
+      },
       productIdx: 7, // exampleIdx
       selectedQty: 1,
     };
   },
+  mounted(){
+    this.product_info();
+    console.log(this.$router.history.current.path)
+  },
   methods: {
+    product_info(){
+      this.$axios
+      .get(`${this.$domain}/${this.$router.history.current.path}`)
+      .then((res) =>{
+        this.product.product_name = res.data.product_info.product_name,
+        this.product.product_price = res.data.product_info.product_price,
+        this.product.delivery_price = res.data.product_info.delivery_price
+        
+
+      })
+    },
     ...mapActions("cart", ["addProductToCart"]),
   },
 };
