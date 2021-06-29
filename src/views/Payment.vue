@@ -48,23 +48,25 @@
     <div class="row pb-3">
       <label class="form-check-label col-4 col-md-3">
         <input
+          @click="AlterStatusDefaultAddress()"
           type="radio"
           class="form-check-input"
-          name="optionsRadios"
-          id="optionsRadios1"
-          value="option1"
-          checked=""
+          name="selectaddress"
+          id="selectaddress"
+          value="selectaddress"
+          v-bind:checked="default_address_button"
         />
         기본배송지
       </label>
       <label class="form-check-label col-4 col-md-3">
         <input
+          @click="AlterStatusNewAddress()"
           type="radio"
           class="form-check-input"
-          name="optionsRadios"
-          id="optionsRadios1"
-          value="option1"
-          checked=""
+          name="selectaddress"
+          id="selectaddress"
+          value="defaultaddress"
+          v-bind:checked="new_address_button"
         />
         신규배송지
       </label>
@@ -74,82 +76,22 @@
         </button>
       </div>
     </div>
-    <div class="form-group pb-1">
-      <label for="exampleInputEmail1" class="form-label mt-1 text-dark"
-        >이름</label
-      >
-      <input
-        type="email"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-      />
+    <div v-if="default_address_button">
+      <DefaultAddress :default_address="this.userdefaultaddress.useraddress[0]" />
     </div>
-    <label for="exampleInputEmail1" class="form-label mt-3 text-dark"
-      >연락처</label
-    >
-    <input
-      type="email"
-      class="form-control"
-      id="exampleInputEmail1"
-      aria-describedby="emailHelp"
-      placeholder="-없이 숫자만 입력해주세요."
-    />
-    <div class="form-group">
-      <label for="exampleInputEmail1" class="form-label mt-4 text-dark"
-        >배송지명</label
-      >
-      <input
-        type="email"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-      />
+    <div v-if="new_address_state">
+      <NewAddress />
     </div>
-    <label for="exampleInputEmail1" class="form-label mt-4 pb-1 text-dark"
-      >우편번호</label
-    >
-    <div class="row form-group">
-      <div class="col-9 col-md-10">
-        <input type="text" class="form-control" id="inputDefault" />
-      </div>
-      <div class="col-3 col-md-2 d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-primary">검색하기</button>
-      </div>
+    <div v-if="selected_address_state">
+      <SelectedAddress />
     </div>
-    <div class="row">
-      <div class="form-group">
-        <label class="col-form-label mt-3 text-dark" for="inputDefault"
-          >주소</label
-        >
-        <div class="pb-2">
-          <input type="text" class="form-control" id="inputDefault" />
-        </div>
-        <div>
-          <input type="text" class="form-control" id="inputDefault" />
-        </div>
-      </div>
-    </div>
-    <div class="row pt-3 pb-2" style="padding-left: 12px">
-      <div class="form-check col-6 col-md-4">
-        <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
-        <label class="form-check-label" for="flexCheckDefault">
-          기본 배송지로 설정하기
-        </label>
-      </div>
-      <div class="form-check col-6 col-md-8">
-        <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
-        <label class="form-check-label" for="flexCheckDefault">
-          배송지목록에 추가하기
-        </label>
-      </div>
-    </div>
+    
     <div class="row pb-4 pt-2">
       <div class="form-group">
-        <label class="col-form-label text-dark pb-2" for="inputDefault"
+        <label class="col-form-label text-dark pb-2" for="deliveryrequest"
           >배송 시 요청 사항</label
         >
-        <input type="text" class="form-control" id="inputDefault" />
+        <input type="text" class="form-control" id="deliveryrequest" v-model="orderinfo.del_requirement" />
       </div>
     </div>
     <div class="row border-top border-5">
@@ -160,7 +102,7 @@
     >
     <div class="row form-group border-bottom border-2 pb-4">
       <div class="col-9 col-md-10">
-        <input type="number" class="form-control" id="inputDefault" v-model="usedpoint"/>
+        <input type="number" class="form-control" id="inputDefault" v-model="orderinfo.used_point"/>
       </div>
       <div v-if="usedpoint > this.user.user_point_money">
         {{AlertMaxPoint()}}
@@ -220,7 +162,7 @@
           name="optionsRadios"
           id="optionsRadios1"
           value="option1"
-          checked=""
+          checked="1"
         />
         신용 / 체크카드
       </label>
@@ -247,7 +189,18 @@
 </template>
 
 <script>
+
+import NewAddress from "../components/payment/NewAddress";
+import DefaultAddress from "../components/payment/DefaultAddress";
+import SelectedAddress from "../components/payment/SelectedAddress";
+
 export default {
+  components: { 
+    NewAddress,
+    DefaultAddress,
+    SelectedAddress
+  },
+  
   data(){
     return {
       user: {},
@@ -256,14 +209,36 @@ export default {
       productdetail: [],
       totalprice : 0,
       totaldeliveryprice : 0,
-      useraddress : null,
-      orderinformation : {
-
+      userdefaultaddress : null,   
+      default_address_button : false,
+      new_address_button : false,
+      new_address_state : true,
+      selected_address_state : false,
+      // savenewaddress : {
+      //   user_id : 0,
+      //   receiver : "",
+      //   phonenumber : "",
+      //   address_name : "",
+      //   post_code : "",
+      //   address : "",
+      //   detail_adress : "",
+      //   address_type : 0,
+      //   default_address : 0,
+      // },
+      orderinfo : {
+        user_id : 0,
+        product_id : 0,
+        address_id : 0,
+        product_amount : 0,
+        order_status : "입금대기",
+        del_requirement : "",
+        used_point : "",
+        payment_method : 0     
       }
     }    
   },
   created(){
-    this.getuserdetailinfo();
+    this.GetUserDetailInfo();
     this.GetTotalPriceProductInfo();
   },
   methods: {
@@ -276,12 +251,13 @@ export default {
           })
           .then((res) => {
             this.user = res.data.user;
-            console.log(this.user);
+            //console.log(this.user);
           })
           .catch((err) => {
             console.log(err);
           }) 
       },
+
       //상품정보와 썸네일이미지를 가져오는 함수
       async GetProductDetail(){
           await this.$axios({
@@ -299,12 +275,14 @@ export default {
             console.log(err);
           })
       },
+
       //vuex의 배열로부터 productIdx만 분리하여 따로 배열에 넣어주는 함수 
       DivideProductid(){
         for(let i = 0 ; i < this.$store.state.cart.cart.length ; i++){
           this.pidarray.push(this.$store.state.cart.cart[i].productIdx);
         }
       },
+     
       //상품 합계 금액을 가져오는 함수
       TotalPrice(){
         for(let i = 0 ; i < this.productdetail.length ; i++){
@@ -312,21 +290,25 @@ export default {
           this.totaldeliveryprice = this.totaldeliveryprice + this.productdetail[i].delivery_price;
         }
       },
+
       //DiviedPid, GetProductDetail 함수를 동기적으로 실행시켜주는 함수
       async GetTotalPriceProductInfo(){
         await this.DivideProductid();
         await this.GetProductDetail();
         this.TotalPrice();
       },  
+
       //보유 포인트 이상의 포인트를 사용하려할 때 호출할 함수
       AlertMaxPoint(){
         alert('보유 포인트 이상 사용은 불가능 합니다.');
         this.usedpoint = this.user.user_point_money;
       },
+
       //포인트 전액 사용버튼 클릭시 호출할 함수
       UseMaxPoint(){
         this.usedpoint = this.user.user_point_money
       },
+
       // 유저의 기본배송지를 가져오는 함수
       GetDefaultAddress(){
         this.$axios
@@ -335,18 +317,46 @@ export default {
             default_address : 1
           })
           .then((res) => {
-            this.useraddress = res.data;
-            console.log(this.useraddress);
+            this.userdefaultaddress = res.data;
+            console.log(this.userdefaultaddress);
           })
           .catch((err) => {
             console.log(err);
           })
       },
-      // GetUserProfile -> GetUserProfile 동기적 처리함수
+
+      // GetUserProfile -> GetDefaultAddress 동기적 처리함수
       async GetUserDetailInfo(){
         await this.GetUserProfile();
         this.GetDefaultAddress();
       },
+
+      // 기본배송지 radio버튼을 클릭하였을 때 실행될 함수
+      AlterStatusDefaultAddress(){
+        if(this.default_address_button == false){
+          this.default_address_button = !this.default_address_button;
+          this.new_address_button = false;
+          this.new_address_state = false;
+          this.selected_address_state = false;
+        } else if(this.default_address_button == true) {
+          this.default_address_button = !this.default_address_button;
+          this.new_address_state = true;
+        }       
+      },
+
+      // 신규배송지 radio버튼을 클릭하였을 때 실행될 함수
+      AlterStatusNewAddress(){
+        if(this.new_address_button == false){
+          this.new_address_button = !this.new_address_button;
+          this.new_address_state = true;
+          this.default_address_button = false;
+          this.selected_address_state = false;
+        } else if (this.new_address_button == true) {
+          this.new_address_button = !this.new_address_button;
+        }
+      
+      }
+
 
   }
 };
