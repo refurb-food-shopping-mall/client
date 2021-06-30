@@ -71,20 +71,102 @@
         신규배송지
       </label>
       <div class="col-4 col-md-6">
-        <button type="button" class="btn btn-outline-primary btn-sm">
+        <AddressListModal v-if="modalview" @close="GetSelectedAddress" :useraddresslist="useraddresslist">
+          <!-- <h3 slot="header">
+            알림!
+          </h3> -->
+          <!-- <div slot="body">
+            할 일을 입력하세요
+          </div> -->
+        </AddressListModal>       
+        <button type="button" class="btn btn-outline-primary btn-sm" @click="GetUserAddressList()">
           배송지 목록
         </button>
+
       </div>
     </div>
     <div v-if="default_address_button">
       <DefaultAddress :default_address="this.userdefaultaddress.useraddress[0]" />
     </div>
-    <div v-if="new_address_state">
-      <NewAddress />
-    </div>
     <div v-if="selected_address_state">
-      <SelectedAddress />
+      <SelectedAddress :address="this.selectedaddress"/>
     </div>
+    <div v-if="new_address_state">
+        <div class="form-group pb-1">
+            <label for="receiver" class="form-label mt-1 text-dark"
+            >수령인</label
+            >
+            <input
+            v-model="newaddress.receiver"
+            type="text"
+            class="form-control"
+            id="receiver"
+            aria-describedby="emailHelp"
+            />
+        </div>
+        <label for="userphonenumber" class="form-label mt-3 text-dark"
+            >연락처</label
+        >
+        <input
+            v-model="newaddress.phonenumber"
+            type="text"
+            class="form-control"
+            id="userphonenumber"
+            aria-describedby="emailHelp"
+            placeholder="-없이 숫자만 입력해주세요."
+        />
+        <div class="form-group">
+            <label for="addressname" class="form-label mt-4 text-dark"
+            >배송지명</label
+            >
+            <input
+            v-model="newaddress.address_name"
+            type="text"
+            class="form-control"
+            id="addressname"
+            aria-describedby="emailHelp"
+            />
+        </div>
+        <label for="postcode" class="form-label mt-4 pb-1 text-dark"
+            >우편번호</label
+        >
+        <div class="row form-group">
+            <div class="col-9 col-md-10">
+            <input type="text" class="form-control" id="postcode" v-model="newaddress.post_code" />
+            </div>
+            <div class="col-3 col-md-2 d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-primary">검색하기</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+            <label class="col-form-label mt-3 text-dark" for="address"
+                >주소</label
+            >
+            <div class="pb-2">
+                <input type="text" class="form-control" id="address" v-model="newaddress.address" />
+            </div>
+            <div>
+                <input type="text" class="form-control" id="detailaddress" v-model="newaddress.detail_adress" />
+            </div>
+            </div>
+        </div>
+        <div class="row pt-3 pb-2" style="padding-left: 12px">
+            <div class="form-check col-6 col-md-4">
+                <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
+                <label class="form-check-label" for="flexCheckDefault">
+                    기본 배송지로 설정하기
+                </label>
+            </div>
+            <div class="form-check col-6 col-md-8">
+                <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
+                <label class="form-check-label" for="flexCheckDefault">
+                    배송지목록에 추가하기
+                </label>
+            </div>
+        </div>
+    </div>
+    
     
     <div class="row pb-4 pt-2">
       <div class="form-group">
@@ -190,15 +272,17 @@
 
 <script>
 
-import NewAddress from "../components/payment/NewAddress";
 import DefaultAddress from "../components/payment/DefaultAddress";
 import SelectedAddress from "../components/payment/SelectedAddress";
+// import AddressModal from "../components/payment/AddressModal";
+import AddressListModal from "../components/payment/AddressListModal";
 
 export default {
   components: { 
-    NewAddress,
     DefaultAddress,
-    SelectedAddress
+    SelectedAddress,
+    // AddressModal
+    AddressListModal,
   },
   
   data(){
@@ -214,17 +298,21 @@ export default {
       new_address_button : false,
       new_address_state : true,
       selected_address_state : false,
-      // savenewaddress : {
-      //   user_id : 0,
-      //   receiver : "",
-      //   phonenumber : "",
-      //   address_name : "",
-      //   post_code : "",
-      //   address : "",
-      //   detail_adress : "",
-      //   address_type : 0,
-      //   default_address : 0,
-      // },
+      modalview : false,
+      useraddresslist : null,
+      selectedaddress : 1,
+      newaddress : {
+        user_id : 0,
+        receiver : "",
+        phonenumber : "",
+        address_name : "",
+        post_code : "",
+        address : "",
+        detail_adress : "",
+        default_address : false,
+        address_list : false,
+                
+      },
       orderinfo : {
         user_id : 0,
         product_id : 0,
@@ -318,7 +406,7 @@ export default {
           })
           .then((res) => {
             this.userdefaultaddress = res.data;
-            console.log(this.userdefaultaddress);
+            // console.log(this.userdefaultaddress);
           })
           .catch((err) => {
             console.log(err);
@@ -354,8 +442,31 @@ export default {
         } else if (this.new_address_button == true) {
           this.new_address_button = !this.new_address_button;
         }
-      
+      },
+      // 배송지 목록 버튼을 클릭하였을 때 해당 유저의 배송지 목록을 가져옴
+      GetUserAddressList(){
+        this.modalview=true;
+        this.$axios
+        .post(`${this.$domain}/address/list`,{
+          user_id : this.user.id
+        })
+        .then((res) => {
+          // console.log(res.data);
+          this.useraddresslist = res.data.useraddresslist;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      },
+      // 배송지 목록 모달에서 선택한 주소를 저장
+      GetSelectedAddress(address){
+        this.modalview=false;
+        this.selectedaddress = address;
+        this.selected_address_state = true;
+        this.default_address_button = false;
+        this.new_address_state = false;
       }
+
 
 
   }

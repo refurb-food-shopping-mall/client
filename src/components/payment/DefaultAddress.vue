@@ -74,13 +74,5 @@ export default {
             address : this.default_address
         }
     },
-    methods : {
-        hello(){
-            console.log(this.address);
-        }
-    },
-    created(){
-    
-    }
 }
 </script>
