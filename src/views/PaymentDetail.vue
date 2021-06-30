@@ -8,7 +8,7 @@
           id="profile"
           src="https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
         />
-        <div style="text-align:center">name <span>님</span></div>
+        <div style="text-align:center">{{address.receiver}}님</div>
       </div>
 
       <div id="rightside" class="col-12 col-md-9 ">
@@ -48,14 +48,16 @@
                 />
               </div>
               <div class="col-9 d-none d-lg-block text-center">
-                {{this.productDetail[0].product_name}}
+                {{product.product_name}}
               </div>
             </div>
           </div>
-          <div class="col-2 d-none d-lg-block text-center">{{this.productDetail[0].product_price * cnt}}원<span>(<span>{{cnt}}</span>개)</span></div>
-          <div class="col-2 d-none d-lg-block text-center">{{this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원</div>
+          <div class="col-2 d-none d-lg-block text-center">
+            {{product.product_price * orderinfo.product_amount}}원({{orderinfo.product_amount}}개)
+            </div>
+          <div class="col-2 d-none d-lg-block text-center">{{product.delivery_price+product.add_delivery_price}}원</div>
           <div class="col-2 d-none d-lg-block text-secondary text-center">
-            배송중
+            {{orderinfo.order_status}}
           </div>
         </div>
         <div id="line" class="row d-none d-lg-block">
@@ -94,7 +96,7 @@
                   src="@/assets/onion2.jpg"
                 />
               </div>
-              <div class="col-9 d-lg-none">무안 양파 5kg/10kg/15kg</div>
+              <div class="col-9 d-lg-none">{{product.product_name}}</div>
             </div>
           </div>
         </div>
@@ -117,9 +119,11 @@
           ></div>
         </div>
         <div class="row text-center">
-          <div class="col-4 d-lg-none">5,000원(X kg)</div>
-          <div class="col-4 d-lg-none">2,500원</div>
-          <div class="col-4 d-lg-none text-secondary">배송중</div>
+          <div class="col-4 d-lg-none">
+            {{product.product_price * orderinfo.product_amount}}원({{orderinfo.product_amount}}개)
+          </div>
+          <div class="col-4 d-lg-none">{{product.delivery_price+product.add_delivery_price}}원</div>
+          <div class="col-4 d-lg-none text-secondary">{{orderinfo.order_status}}</div>
         </div>
         <!-- mobile end -->
         <!-- 주문 상세정보 e -->
@@ -153,23 +157,23 @@
           <div class="col-4">
             <div class=" d-flex justify-content-between">
               <div class="d-none d-lg-block">상품금액</div>
-              <div class="d-none d-lg-block">{{this.productDetail[0].product_price * cnt}}원</div>
+              <div class="d-none d-lg-block">{{product.product_price * orderinfo.product_amount}}원</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div class="d-none d-lg-block">배송비</div>
-              <div class="d-none d-lg-block">{{this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원</div>
+              <div class="d-none d-lg-block">{{product.delivery_price+product.add_delivery_price}}원</div>
             </div>
           </div>
           <div class="col-4">
             <div class=" d-flex justify-content-between">
-              <div class="d-none d-lg-block">카드 간편결제</div>
+              <div class="d-none d-lg-block">{{orderinfo.payment_method}}</div>
               <div class="d-none d-lg-block">
-                {{this.productDetail[0].product_price + this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원
+                {{product.product_price * orderinfo.product_amount + product.delivery_price+product.add_delivery_price}}원
               </div>
             </div>
           </div>
           <div class="col-4 d-none d-lg-block text-secondary">
-            {{this.productDetail[0].product_price*cnt + this.productDetail[0].delivery_price + this.productDetail[0].add_delivery_price}}원
+            {{product.product_price * orderinfo.product_amount + product.delivery_price+product.add_delivery_price}}원
           </div>
         </div>
         <div id="line" class="row d-none d-lg-block">
@@ -200,21 +204,29 @@
           <div class="col-6">
             <div class=" d-flex justify-content-between">
               <div class="d-lg-none">상품금액</div>
-              <div class="d-lg-none">5,000원</div>
+              <div class="d-lg-none">
+                {{product.product_price * orderinfo.product_amount}}원
+              </div>
             </div>
             <div class=" d-flex justify-content-between">
               <div class="d-lg-none">배송비</div>
-              <div class="d-lg-none">2,500원</div>
+              <div class="d-lg-none">
+                {{product.delivery_price+product.add_delivery_price}}원
+              </div>
             </div>
           </div>
           <div class="col-6">
             <div class=" d-flex justify-content-between">
-              <div class="d-lg-none">카드 간편결제</div>
-              <div class="d-lg-none">7,500원</div>
+              <div class="d-lg-none">{{orderinfo.payment_method}}</div>
+              <div class="d-lg-none">
+                {{product.product_price * orderinfo.product_amount + product.delivery_price+product.add_delivery_price}}원
+              </div>
             </div>
             <div class=" d-flex justify-content-between">
               <div class="text-secondary d-lg-none">총 주문금액</div>
-              <div class="text-secondary d-lg-none">7,500원</div>
+              <div class="text-secondary d-lg-none">
+                {{product.product_price * orderinfo.product_amount + product.delivery_price+product.add_delivery_price}}원
+              </div>
             </div>
           </div>
         </div>
@@ -237,21 +249,21 @@
         </div>
         <div class="row">
           <div class="col-2 text-center d-none d-lg-block">수령인</div>
-          <div class="col-10 d-none d-lg-block">{{this.user.user_name}}</div>
+          <div class="col-10 d-none d-lg-block">{{address.receiver}}</div>
         </div>
         <div class="row ">
           <div class="col-2 text-center d-none d-lg-block">연락처</div>
-          <div class="col-10 d-none d-lg-block">010-1234-5678</div>
+          <div class="col-10 d-none d-lg-block">{{address.phonenumber}}</div>
         </div>
         <div class="row ">
           <div class="col-2 text-center d-none d-lg-block">배송지</div>
           <div class="col-10 d-none d-lg-block">
-            서울특별시 강남구 언주로30길 56
+            {{address.city}} {{address.road_name}} {{address.detailed_address}} ({{address.post_code}})
           </div>
         </div>
         <div class="row ">
           <div class="col-2 text-center d-none d-lg-block">배송메모</div>
-          <div class="col-10 d-none d-lg-block">X</div>
+          <div class="col-10 d-none d-lg-block">{{orderinfo.del_requirement}}</div>
         </div>
         <div id="line" class="row d-none d-lg-block">
           <div
@@ -269,21 +281,21 @@
         </div>
         <div class="row">
           <div class="col-3 text-center d-lg-none ">수령인</div>
-          <div class="col-9 d-lg-none">홍길동</div>
+          <div class="col-9 d-lg-none">{{address.receiver}}</div>
         </div>
         <div class="row ">
           <div class="col-3 text-center  d-lg-none">연락처</div>
-          <div class="col-9 d-lg-none">010-1234-5678</div>
+          <div class="col-9 d-lg-none">{{address.phonenumber}}</div>
         </div>
         <div class="row ">
           <div class="col-3 text-center  d-lg-none">배송지</div>
           <div class="col-9 d-lg-none">
-            서울특별시 강남구 언주로30길 56
+            {{address.city}} {{address.road_name}} {{address.detailed_address}} ({{address.post_code}})
           </div>
         </div>
         <div class="row">
           <div class="col-3 text-center  d-lg-none">배송메모</div>
-          <div class="col-9 d-lg-none">X</div>
+          <div class="col-9 d-lg-none">{{orderinfo.del_requirement}}</div>
         </div>
         <!-- mobile end -->
         <!-- 배송지 정보 e -->
@@ -294,44 +306,61 @@
 
 <script>
 export default {
-  data(){
-    return{
-      productDetail:null,
-      cnt:2,
-      user: {},
-    }
+  data() {
+    return {
+      product: {},
+      orderinfo:{},
+      address:{},
+    };
   },
-  mounted(){
-    this.getProduct();
-    this.GetUserProfile();
+  mounted() {
+    //this.getOrder();
+    //this.getAddress();
+    this.Get1();
+    //this.getProduct();
   },
-  methods: {
-    getProduct(){
-      this.$axios
-      .post(`http://localhost:3000/api/getProduct`,{
-        id:7
-      })
-      .then((res)=>{
-        this.productDetail = res.data
-        //console.log(this.productDetail)
-      })
-    },
-    //유저정보를 가져오는 함수
-    async GetUserProfile(){
-        await this.$axios({
-            url: `${this.$domain}/auth/user`,
-            method: 'get',         
-            headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+  methods: {    
+    //주문정보 가져오는 함수
+    async getOrder() {
+      await this.$axios
+        .post(`http://localhost:3000/api/getOrder`, {
+          id: 1,
         })
         .then((res) => {
-          this.user = res.data.user;
-          //console.log(this.user);
+          this.orderinfo = res.data.getorder[0];
+          //console.log(this.orderinfo);
+        });
+    },
+    //유저의 주소 가져오는 함수
+    getAddress() {
+      this.$axios
+        .post(`http://localhost:3000/api/getAddress`, {
+          addressid: this.orderinfo.address_id,
         })
-        .catch((err) => {
-          console.log(err);
-        }) 
-      },
-  },
+        .then((res) => {
+          this.address = res.data.getaddress[0];
+          //console.log(this.address);
+        });
+    },
+    //order->address,product
+    async Get1(){
+        await this.getOrder();
+        this.getAddress();
+        this.getProduct();
+    },
+    //상품명
+    getProduct() {
+      this.$axios
+        .post(`http://localhost:3000/api/getProduct`, {
+          productid: this.orderinfo.product_id,
+        })
+        .then((res) => {
+          this.product = res.data.getproduct[0];
+          //console.log(this.product);
+        });
+    },
+    
+  }
 };
 </script>
 
