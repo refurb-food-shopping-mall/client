@@ -36,22 +36,21 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img
-                  src="@/assets/onion2.jpg"
+                <img :src="getImgUrl(product.product_images[0])"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
               <div class="carousel-item">
                 <img
-                  src="@/assets/onion2.jpg"
+                  :src="getImgUrl(product.product_images[1])"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
               <div class="carousel-item">
                 <img
-                  src="@/assets/onion2.jpg"
+                  :src="getImgUrl(product.product_images[2])"
                   class="d-block w-100"
                   alt="..."
                 />
@@ -87,14 +86,14 @@
         <div class="col-md-5 d-flex flex-column justify-content-center my-2">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title" style="text-align: center">{{this.product.product_name}}</h5>
+              <h5 class="card-title" style="text-align: center">{{product.product_name}}</h5>
               <h6
                 class="card-subtitle mb-2 text-muted"
                 style="text-align: right"
               >
-                {{(this.product.product_price).toLocaleString('ko-KR')}}원
+                {{(product.product_price).toLocaleString('ko-KR')}}원
               </h6>
-              <p class="card-text" style="text-align: right">배송비 {{(this.product.delivery_price).toLocaleString('ko-KR')}}원</p>
+              <p class="card-text" style="text-align: right">배송비 {{(product.delivery_price).toLocaleString('ko-KR')}}원</p>
               <div class="form-group">
                 <label
                   for="exampleSelect1"
@@ -288,6 +287,7 @@ export default {
         product_name : '',
         product_price : null,
         delivery_price : null,
+        product_images : [],
 
       },
       productIdx: 7, // exampleIdx
@@ -296,21 +296,26 @@ export default {
   },
   mounted(){
     this.product_info();
-    console.log(this.$router.history.current.path)
+    // console.log(this.product.product_images[0]);
   },
   methods: {
     product_info(){
       this.$axios
-      .get(`${this.$domain}/${this.$router.history.current.path}`)
+      .get(`${this.$domain}/product/${this.$route.params.id}`)
       .then((res) =>{
         this.product.product_name = res.data.product_info.product_name,
         this.product.product_price = res.data.product_info.product_price,
-        this.product.delivery_price = res.data.product_info.delivery_price
-        
-
+        this.product.delivery_price = res.data.product_info.delivery_price,
+        this.product.product_images = res.data.product_info.t_product_images
+        console.log(this.$route.params.id)
       })
     },
+    getImgUrl(product_image) {
+      let pic = product_image.path.split("/")[2];
+      return require("../assets/" + pic)
+    },
     ...mapActions("cart", ["addProductToCart"]),
+    
   },
 };
 </script>
