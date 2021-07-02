@@ -42,20 +42,20 @@
                   alt="..."
                 />
               </div>
-              <!-- <div class="carousel-item">
+              <div class="carousel-item">
                 <img
-                  :src="getImgUrl(product.product_images[1])"
+                  src="../assets/garlic_2.jpg"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
               <div class="carousel-item">
                 <img
-                  :src="getImgUrl(product.product_images[2])"
+                  src="../assets/garlic_3.jpg"
                   class="d-block w-100"
                   alt="..."
                 />
-              </div> -->
+              </div>
             </div>
             <button
               class="carousel-control-prev"
