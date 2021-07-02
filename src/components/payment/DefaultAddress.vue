@@ -52,7 +52,7 @@
                 >주소</label
             >
             <div class="pb-2">
-                <input type="text" class="form-control text-dark" id="address" :value="address.city + address.road_name" readonly/>
+                <input type="text" class="form-control text-dark" id="address" :value="address.address" readonly/>
             </div>
             <div>
                 <input type="text" class="form-control text-dark" id="detailaddress" :value="address.detailed_address" readonly/>

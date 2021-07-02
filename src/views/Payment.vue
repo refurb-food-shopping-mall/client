@@ -153,14 +153,14 @@
         </div>
         <div class="row pt-3 pb-2" style="padding-left: 12px">
             <div class="form-check col-6 col-md-4">
-                <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" id="flexCheckDefault1" v-model="newaddress.default_address" />
+                <label class="form-check-label" for="flexCheckDefault1">
                     기본 배송지로 설정하기
                 </label>
             </div>
             <div class="form-check col-6 col-md-8">
-                <input class="form-check-input" type="checkbox" id="flexCheckDefault" />
-                <label class="form-check-label" for="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" id="flexCheckDefault2" v-model="newaddress.address_list"/>
+                <label class="form-check-label" for="flexCheckDefault2">
                     배송지목록에 추가하기
                 </label>
             </div>
@@ -186,7 +186,7 @@
       <div class="col-9 col-md-10">
         <input type="number" class="form-control" id="inputDefault" v-model="orderinfo.used_point"/>
       </div>
-      <div v-if="usedpoint > this.user.user_point_money">
+      <div v-if="orderinfo.used_point > user.user_point_money">
         {{AlertMaxPoint()}}
       </div>
       <div class="col-3 col-md-2 d-flex justify-content-end">
@@ -204,11 +204,11 @@
       </div>
       <div class="row pt-3 pb-3 border-bottom border-2">
         <div class="col-6 text-dark">총 할인 금액</div>
-        <div class="col-6 text-dark text-end fw-bolder">{{usedpoint}}원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{orderinfo.used_point}}원</div>
       </div>
       <div class="row pt-3 pb-3">
         <div class="col-6 text-dark fw-bolder align-self-center">결제 금액</div>
-        <div class="col-6 text-primary text-end fs-5 fw-bolder">{{this.totalprice + this.totaldeliveryprice - this.usedpoint}}</div>
+        <div class="col-6 text-primary text-end fs-5 fw-bolder">{{totalprice + totaldeliveryprice - orderinfo.used_point}}</div>
       </div>
     </div>
     <div class="row border-top border-5">
@@ -221,8 +221,8 @@
           class="form-check-input"
           name="optionsRadios"
           id="optionsRadios1"
-          value="option1"
-          checked=""
+          value="카카오페이"          
+          v-model="orderinfo.payment_method"         
         />
         카카오페이
       </label>
@@ -232,8 +232,8 @@
           class="form-check-input"
           name="optionsRadios"
           id="optionsRadios1"
-          value="option1"
-          checked=""
+          value="가상 계좌"
+          v-model="orderinfo.payment_method"                  
         />
         가상 계좌
       </label>
@@ -243,8 +243,8 @@
           class="form-check-input"
           name="optionsRadios"
           id="optionsRadios1"
-          value="option1"
-          checked="1"
+          v-model="orderinfo.payment_method"
+          value="신용 / 체크카드"         
         />
         신용 / 체크카드
       </label>
@@ -254,19 +254,19 @@
           class="form-check-input"
           name="optionsRadios"
           id="optionsRadios1"
-          value="option1"
-          checked=""
+          v-model="orderinfo.payment_method"
+          value="계좌 이체"         
         />
         계좌 이체
       </label>
     </div>
-    <router-link to="/paymentdetail">
+    <!-- <router-link to="/paymentdetail"> -->
       <div class="row pt-3">
-        <button type="button" class="btn btn-primary btn-lg pb-3 pt-3">
-          {{this.totalprice + this.totaldeliveryprice - this.usedpoint}} 결제하기
+        <button type="button" class="btn btn-primary btn-lg pb-3 pt-3" @click="Order()">
+          {{totalprice + totaldeliveryprice - orderinfo.used_point}} 결제하기
         </button>
       </div>
-    </router-link>
+    <!-- </router-link> -->
   </div>
 </template>
 
@@ -289,10 +289,12 @@ export default {
     return {
       user: {},
       usedpoint : 0,
+
       pidarray : [],
       productdetail: [],
       totalprice : 0,
       totaldeliveryprice : 0,
+
       userdefaultaddress : null,   
       default_address_button : false,
       new_address_button : false,
@@ -301,6 +303,8 @@ export default {
       modalview : false,
       useraddresslist : null,
       selectedaddress : 1,
+      newaddressid : null,
+
       newaddress : {
         user_id : 0,
         receiver : "",
@@ -320,8 +324,9 @@ export default {
         product_amount : 0,
         order_status : "입금대기",
         del_requirement : "",
-        used_point : "",
-        payment_method : 0     
+        used_point : 0,
+        payment_method : 0,
+        order_number : ""     
       }
     }    
   },
@@ -389,12 +394,12 @@ export default {
       //보유 포인트 이상의 포인트를 사용하려할 때 호출할 함수
       AlertMaxPoint(){
         alert('보유 포인트 이상 사용은 불가능 합니다.');
-        this.usedpoint = this.user.user_point_money;
+        this.orderinfo.used_point = this.user.user_point_money;
       },
 
       //포인트 전액 사용버튼 클릭시 호출할 함수
       UseMaxPoint(){
-        this.usedpoint = this.user.user_point_money
+        this.orderinfo.used_point = this.user.user_point_money
       },
 
       // 유저의 기본배송지를 가져오는 함수
@@ -462,10 +467,81 @@ export default {
       GetSelectedAddress(address){
         this.modalview=false;
         this.selectedaddress = address;
+        console.log(this.selectedaddress);
         this.selected_address_state = true;
         this.default_address_button = false;
         this.new_address_state = false;
+        this.new_address_button = false;
+      },
+      //주문 버튼을 실행했을 떄 실행할 함수 후에 결제 완료후에 실행시킬 함수
+      //신규배송지인지 기본배송지인지 배송지 목록에서 선택된 배송지인지에따라 바뀐다
+      async Order(){
+          if(this.orderinfo.payment_method == 0){
+            alert('결제 방법을 선택해주세요');
+            return
+          }
+          if(this.orderinfo.used_point > 0){
+            this.$axios
+              .post(`${this.$domain}/userpoint`, { used_point : this.orderinfo.used_point, user_id : this.user.id })
+              .catch((err) => {
+              console.log(err);
+            })
+          }    
+          if(this.default_address_button == true){
+            this.saveorder(this.userdefaultaddress.useraddress[0].id)
+            
+          } else if(this.selected_address_state == true){
+            this.saveorder(this.selectedaddress.id)
+          } 
+          else if(this.new_address_state == true){
+            if(this.default_address == false && this.address_list == false){
+              if(this.newaddress.receiver != "" && this.newaddress.phonenumber != "" && this.newaddress.post_code != "" && this.newaddress.detail_adress != "" && this.newaddress.address_name == ""){
+                await this.saveaddress()
+                this.saveorder(this.newaddressid)
+              } 
+            } else if(this.newaddress.receiver == "" || this.newaddress.phonenumber == "" || this.newaddress.post_code == "" || this.newaddress.detail_adress == "" || this.newaddress.address_name == ""){
+                alert("배송관련 부분을 작성해주세요")
+                return
+            } else {
+                await this.saveaddress()
+                this.saveorder(this.newaddressid)
+            }        
+          }
+      },
+      //신규 주소를 저장하는 함수
+      async saveaddress(){
+        this.newaddress.user_id = this.user.id
+        console.log(this.newaddress)
+        await this.$axios
+          .post(`${this.$domain}/address/save`, this.newaddress)
+          .then((res) => {
+            this.newaddressid = res.data.address_id;
+            console.log(this.newaddressid)
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      },
+      //주문 정보를 저장하는 함수
+      saveorder(addressid){
+          this.orderinfo.user_id = this.user.id
+          this.orderinfo.address_id = addressid
+          let today = new Date()
+          this.orderinfo.order_number = `${today.getFullYear()}` + `${today.getMonth() + 1}` + `${today.getDate()}` + `${today.getHours()}` + `${today.getMinutes()}` + `${today.getSeconds()}` + `${this.user.id}`
+          console.log(this.orderinfo.order_number)
+          for(let i = 0 ; i < this.$store.state.cart.cart.length ; i++){
+            this.orderinfo.product_id = this.$store.state.cart.cart[i].productIdx;
+            this.orderinfo.product_amount = this.$store.state.cart.cart[i].productQty;
+            this.$axios
+              .post(`${this.$domain}/order/create`, this.orderinfo)
+              .catch((err) => {
+                console.log(err);
+              })
+          }
+          this.$router.push("/shipping");
       }
+      
+      
 
 
 
