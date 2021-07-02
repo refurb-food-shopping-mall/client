@@ -329,7 +329,7 @@ export default {
         .then((res) => {
           this.orderinfo = res.data.getorder[0];
           //console.log(this.orderinfo);
-        });
+        })  
     },
     //유저의 주소 가져오는 함수
     getAddress() {
@@ -348,7 +348,7 @@ export default {
         this.getAddress();
         this.getProduct();
     },
-    //상품명
+    //상품정보
     getProduct() {
       this.$axios
         .post(`http://localhost:3000/api/getProduct`, {
