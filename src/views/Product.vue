@@ -12,52 +12,27 @@
             data-bs-ride="carousel"
             style="width: 90%"
           >
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button>
-            </div>
+            <!-- carousel-inner-images -->
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  src="../assets/garlic_1.jpg"
-                  class="d-block w-100"
-                  alt="..."
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="../assets/garlic_2.jpg"
-                  class="d-block w-100"
-                  alt="..."
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="../assets/garlic_3.jpg"
-                  class="d-block w-100"
-                  alt="..."
-                />
+              <div
+                v-for="(product_img, idx) in product.product_images"
+                :key="idx"
+              >
+                <div
+                  class="carousel-item"
+                  :class="{ active: idx == currentImgIdx }"
+                >
+                  <img
+                    :src="getImgUrl(product_img)"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
               </div>
             </div>
+            <!-- carousel-control-button -->
             <button
+              @click="getPrevImage"
               class="carousel-control-prev"
               type="button"
               data-bs-target="#carouselExampleIndicators"
@@ -70,6 +45,7 @@
               <span class="visually-hidden">Previous</span>
             </button>
             <button
+              @click="getNextImage"
               class="carousel-control-next"
               type="button"
               data-bs-target="#carouselExampleIndicators"
@@ -294,8 +270,8 @@ export default {
         delivery_price: 0,
         product_images: []
       },
-      productIdx: 7, // exampleIdx
-      selectedQty: 1
+      selectedQty: 1,
+      currentImgIdx: 0
     };
   },
   mounted() {
@@ -317,6 +293,20 @@ export default {
     getImgUrl(product_image) {
       let pic = product_image.path.split("/")[2];
       return require("../assets/" + pic);
+    },
+    getNextImage() {
+      if (this.product.product_images.length === this.currentImgIdx + 1) {
+        this.currentImgIdx = 0;
+      } else {
+        this.currentImgIdx += 1;
+      }
+    },
+    getPrevImage() {
+      if (this.currentImgIdx === 0) {
+        this.currentImgIdx = this.product.product_images.length - 1;
+      } else {
+        this.currentImgIdx -= 1;
+      }
     },
     ...mapActions("cart", ["addProductToCart"])
   }
