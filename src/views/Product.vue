@@ -36,12 +36,13 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img :src="getImgUrl(product.product_images[0])"
+                <img
+                  src="../assets/garlic_1.jpg"
                   class="d-block w-100"
                   alt="..."
                 />
               </div>
-              <div class="carousel-item">
+              <!-- <div class="carousel-item">
                 <img
                   :src="getImgUrl(product.product_images[1])"
                   class="d-block w-100"
@@ -54,7 +55,7 @@
                   class="d-block w-100"
                   alt="..."
                 />
-              </div>
+              </div> -->
             </div>
             <button
               class="carousel-control-prev"
@@ -86,14 +87,18 @@
         <div class="col-md-5 d-flex flex-column justify-content-center my-2">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title" style="text-align: center">{{product.product_name}}</h5>
+              <h5 class="card-title" style="text-align: center">
+                {{ product.product_name }}
+              </h5>
               <h6
                 class="card-subtitle mb-2 text-muted"
                 style="text-align: right"
               >
-                {{(product.product_price).toLocaleString('ko-KR')}}원
+                {{ product.product_price.toLocaleString("ko-KR") }}원
               </h6>
-              <p class="card-text" style="text-align: right">배송비 {{(product.delivery_price).toLocaleString('ko-KR')}}원</p>
+              <p class="card-text" style="text-align: right">
+                배송비 {{ product.delivery_price.toLocaleString("ko-KR") }}원
+              </p>
               <div class="form-group">
                 <label
                   for="exampleSelect1"
@@ -283,40 +288,40 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      product:{
-        product_name : '',
-        product_price : null,
-        delivery_price : null,
-        product_images : [],
-
+      product: {
+        product_name: "",
+        product_price: 0,
+        delivery_price: 0,
+        product_images: []
       },
       productIdx: 7, // exampleIdx
-      selectedQty: 1,
+      selectedQty: 1
     };
   },
-  mounted(){
+  mounted() {
     this.product_info();
     // console.log(this.product.product_images[0]);
   },
   methods: {
-    product_info(){
+    product_info() {
       this.$axios
-      .get(`${this.$domain}/product/${this.$route.params.id}`)
-      .then((res) =>{
-        this.product.product_name = res.data.product_info.product_name
-        this.product.product_price = res.data.product_info.product_price
-        this.product.delivery_price = res.data.product_info.delivery_price
-        this.product.product_images = res.data.product_info.t_product_images
-        console.log(this.$route.params.id)
-      })
+        .get(`${this.$domain}/product/${this.$route.params.id}`)
+        .then(res => {
+          (this.product.product_name = res.data.product_info.product_name),
+            (this.product.product_price = res.data.product_info.product_price),
+            (this.product.delivery_price =
+              res.data.product_info.delivery_price),
+            (this.product.product_images =
+              res.data.product_info.t_product_images);
+          console.log(this.$route.params.id);
+        });
     },
     getImgUrl(product_image) {
       let pic = product_image.path.split("/")[2];
-      return require("../assets/" + pic)
+      return require("../assets/" + pic);
     },
-    ...mapActions("cart", ["addProductToCart"]),
-    
-  },
+    ...mapActions("cart", ["addProductToCart"])
+  }
 };
 </script>
 
