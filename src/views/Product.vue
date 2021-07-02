@@ -303,9 +303,9 @@ export default {
       this.$axios
       .get(`${this.$domain}/product/${this.$route.params.id}`)
       .then((res) =>{
-        this.product.product_name = res.data.product_info.product_name,
-        this.product.product_price = res.data.product_info.product_price,
-        this.product.delivery_price = res.data.product_info.delivery_price,
+        this.product.product_name = res.data.product_info.product_name
+        this.product.product_price = res.data.product_info.product_price
+        this.product.delivery_price = res.data.product_info.delivery_price
         this.product.product_images = res.data.product_info.t_product_images
         console.log(this.$route.params.id)
       })
