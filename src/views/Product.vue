@@ -12,51 +12,27 @@
             data-bs-ride="carousel"
             style="width: 90%"
           >
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button>
-            </div>
+            <!-- carousel-inner-images -->
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img :src="getImgUrl(product.product_images[0])"
-                  class="d-block w-100"
-                  alt="..."
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  :src="getImgUrl(product.product_images[1])"
-                  class="d-block w-100"
-                  alt="..."
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  :src="getImgUrl(product.product_images[2])"
-                  class="d-block w-100"
-                  alt="..."
-                />
+              <div
+                v-for="(product_img, idx) in product.product_images"
+                :key="idx"
+              >
+                <div
+                  class="carousel-item"
+                  :class="{ active: idx == currentImgIdx }"
+                >
+                  <img
+                    :src="getImgUrl(product_img)"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
               </div>
             </div>
+            <!-- carousel-control-button -->
             <button
+              @click="getPrevImage"
               class="carousel-control-prev"
               type="button"
               data-bs-target="#carouselExampleIndicators"
@@ -69,6 +45,7 @@
               <span class="visually-hidden">Previous</span>
             </button>
             <button
+              @click="getNextImage"
               class="carousel-control-next"
               type="button"
               data-bs-target="#carouselExampleIndicators"
@@ -86,14 +63,18 @@
         <div class="col-md-5 d-flex flex-column justify-content-center my-2">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title" style="text-align: center">{{product.product_name}}</h5>
+              <h5 class="card-title" style="text-align: center">
+                {{ product.product_name }}
+              </h5>
               <h6
                 class="card-subtitle mb-2 text-muted"
                 style="text-align: right"
               >
-                {{(product.product_price).toLocaleString('ko-KR')}}원
+                {{ product.product_price.toLocaleString("ko-KR") }}원
               </h6>
-              <p class="card-text" style="text-align: right">배송비 {{(product.delivery_price).toLocaleString('ko-KR')}}원</p>
+              <p class="card-text" style="text-align: right">
+                배송비 {{ product.delivery_price.toLocaleString("ko-KR") }}원
+              </p>
               <div class="form-group">
                 <label
                   for="exampleSelect1"
@@ -271,40 +252,40 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      product:{
-        product_name : '',
-        product_price : null,
-        delivery_price : null,
-        product_images : [],
-
+      product: {
+        product_name: "",
+        product_price: 0,
+        delivery_price: 0,
+        product_images: []
       },
       review: [],
       qna: [],
       productIdx: 7, // exampleIdx
       selectedQty: 1,
+      currentImgIdx: 0
     };
   },
-  mounted(){
+  mounted() {
     this.product_info();
     // console.log(this.product.product_images[0]);
     this.loadReview();
     this.loadQna();
   },
   methods: {
-    product_info(){
+    product_info() {
       this.$axios
-      .get(`${this.$domain}/product/${this.$route.params.id}`)
-      .then((res) =>{
-        this.product.product_name = res.data.product_info.product_name,
-        this.product.product_price = res.data.product_info.product_price,
-        this.product.delivery_price = res.data.product_info.delivery_price,
-        this.product.product_images = res.data.product_info.t_product_images
-        console.log(this.$route.params.id)
-      })
+        .get(`${this.$domain}/product/${this.$route.params.id}`)
+        .then(res => {
+          this.product.product_name = res.data.product_info.product_name;
+          this.product.product_price = res.data.product_info.product_price;
+          this.product.delivery_price = res.data.product_info.delivery_price;
+          this.product.product_images = res.data.product_info.t_product_images;
+          console.log(this.$route.params.id);
+        });
     },
     getImgUrl(product_image) {
       let pic = product_image.path.split("/")[2];
-      return require("../assets/" + pic)
+      return require("../assets/" + pic);
     },
     loadReview(){
       this.$axios
@@ -341,7 +322,23 @@ export default {
     ...mapActions("cart", ["addProductToCart"]),
     
   },
-};
+    getNextImage() {
+      if (this.product.product_images.length === this.currentImgIdx + 1) {
+        this.currentImgIdx = 0;
+      } else {
+        this.currentImgIdx += 1;
+      }
+    },
+    getPrevImage() {
+      if (this.currentImgIdx === 0) {
+        this.currentImgIdx = this.product.product_images.length - 1;
+      } else {
+        this.currentImgIdx -= 1;
+      }
+    },
+    ...mapActions("cart", ["addProductToCart"])
+  }
+
 </script>
 
 <style scoped>
