@@ -193,18 +193,17 @@ export default {
     }
   },
   created(){
-    //this.producttest();
     this.GetTotalPriceProductInfo();
   },
   methods: {
     //상품정보와 썸네일이미지를 가져오는 함수
-    async GetProductDetail(){
+      async GetProductDetail(){
           await this.$axios({
-            url: `${this.$domain}/product/thumnail`,
-            method: 'post',
-            data: {
-              productarray : this.pidarray
-            }
+              url: `${this.$domain}/product/thumnail`,
+              method: 'post',
+              data: {
+                productarray : this.pidarray
+              }
           })
           .then((res) => {
             //console.log(res.data);
@@ -226,7 +225,6 @@ export default {
         for(let i = 0 ; i < this.$store.state.cart.cart.length ; i++){
           this.pidarray.push(this.$store.state.cart.cart[i].productIdx);
         }
-        console.log(this.pidarray);
       },
       //DiviedPid, GetProductDetail 함수를 동기적으로 실행시켜주는 함수
       async GetTotalPriceProductInfo(){
@@ -259,10 +257,7 @@ export default {
         this.totaldeliveryprice = 0;
         this.TotalPrice();
       },
-      // producttest(){
-      //   this.$store.commit('cart/PUSH_NEW_PRODUCT_TO_CART', {productIdx : 6, selectedQty : 3});
-      //   this.$store.commit('cart/PUSH_NEW_PRODUCT_TO_CART', {productIdx : 5, selectedQty : 2});
-      // }
+      
   }
 };
 </script>
