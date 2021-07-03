@@ -102,6 +102,7 @@
             class="form-control"
             id="receiver"
             aria-describedby="emailHelp"
+            autocomplete="off"
             />
         </div>
         <label for="userphonenumber" class="form-label mt-3 text-dark"
@@ -114,6 +115,7 @@
             id="userphonenumber"
             aria-describedby="emailHelp"
             placeholder="-없이 숫자만 입력해주세요."
+            autocomplete="off"
         />
         <div class="form-group">
             <label for="addressname" class="form-label mt-4 text-dark"
@@ -125,6 +127,7 @@
             class="form-control"
             id="addressname"
             aria-describedby="emailHelp"
+            autocomplete="off"
             />
         </div>
         <label for="postcode" class="form-label mt-4 pb-1 text-dark"
@@ -132,7 +135,7 @@
         >
         <div class="row form-group">
             <div class="col-9 col-md-10">
-            <input type="text" class="form-control" id="postcode" v-model="newaddress.post_code" />
+            <input type="text" class="form-control" id="postcode" autocomplete="off" v-model="newaddress.post_code" />
             </div>
             <div class="col-3 col-md-2 d-flex justify-content-end">
             <button type="button" class="btn btn-outline-primary">검색하기</button>
