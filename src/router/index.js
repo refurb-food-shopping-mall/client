@@ -15,6 +15,7 @@ import UserProfileUpdate from '../views/UserProfileUpdate'
 import PaymentDetail from '../views/PaymentDetail'
 import AddProduct from '../views/AddProduct'
 import WriteReview from '../views/WriteReview'
+import ProductList from '../views/ProductList' //sw
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
     name: 'Payment',
     component: Payment,
     beforeEnter: isLoggedIn
+  },
+  {
+    path: '/product',
+    name: 'ProductList',
+    component: ProductList //sw
   },
   {
     path: '/product/:id',
