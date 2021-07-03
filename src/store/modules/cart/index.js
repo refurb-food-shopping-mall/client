@@ -41,7 +41,10 @@ export default {
       }
     },
     DELETE_PRODUCT(state, i) {
-      state.cart.splice(i, 1);
+      const idx = state.cart.findIndex(productInfo => productInfo.productIdx == i)
+
+      state.cart.splice(idx, 1)
+      state.cartLength -= 1
     }
   },
   actions: {
