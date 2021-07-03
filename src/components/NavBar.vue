@@ -3,8 +3,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/">
-        <img src="@/assets/logo2_.jpg" class="rounded mx-auto d-block" height='90' width='160' alt="로고">
+          <img  
+            src="@/assets/logo2_.jpg"
+            class="rounded mx-auto d-block"
+            height="90"
+            width="160"
+            alt="로고"
+          /> <!-- 추가 -->
         </router-link>
+        <router-link class="navbar-brand" to="/product">상품 보기</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -17,19 +24,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <router-link class="navbar-brand" to="/product">상품 보기</router-link> <!-- sw -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarColor01"
-          aria-controls="navbarColor01"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button> 
-        <!-- sw -->
+
 
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto">
@@ -128,9 +123,7 @@
             <font-awesome-icon icon="shopping-cart" />
           </router-link>
 
-          <span style="color: red"
-            >({{ $store.state.cart.cartSumOfQuantity }})</span
-          >
+          <span style="color: red">({{ $store.state.cart.cartLength }})</span>
 
           <button
             v-if="$store.getters['auth/loggedIn']"
@@ -174,13 +167,13 @@ export default {
         userName: "",
         userPhoneNumber: "",
         userEmail: "",
-        userPointMoney: null,
+        userPointMoney: null
       });
       this.$store.commit("auth/SET_TOKEN", "");
       this.$store.commit("cart/CLEAR_CART");
       sessionStorage.clear();
-    },
-  },
+    }
+  }
 };
 </script>
 

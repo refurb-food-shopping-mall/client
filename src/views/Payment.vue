@@ -19,14 +19,14 @@
         <div>
           <span class="text-dark">{{$store.state.cart.cart[i].productQty}}개</span>
           <span class="text-dark"> / </span>
-          <span class="text-dark">{{product.product_price * $store.state.cart.cart[i].productQty}}원</span>
+          <span class="text-dark">{{(product.product_price * $store.state.cart.cart[i].productQty).toLocaleString("ko-KR")}}원</span>
         </div>
       </div>
     </div>
     <div class="row border-top pb-4 pt-4">
       <span class="col-6 text-dark align-self-center fw-bolder">상품 합계</span>
       <span class="col-6 text-end fs-5 fw-bolder text-primary align-self-center"
-        >{{this.totalprice}}</span
+        >{{this.totalprice.toLocaleString("ko-KR")}}원</span
       >
     </div>
     <div class="row border-top border-5">
@@ -102,6 +102,7 @@
             class="form-control"
             id="receiver"
             aria-describedby="emailHelp"
+            autocomplete="off"
             />
         </div>
         <label for="userphonenumber" class="form-label mt-3 text-dark"
@@ -114,6 +115,7 @@
             id="userphonenumber"
             aria-describedby="emailHelp"
             placeholder="-없이 숫자만 입력해주세요."
+            autocomplete="off"
         />
         <div class="form-group">
             <label for="addressname" class="form-label mt-4 text-dark"
@@ -125,6 +127,7 @@
             class="form-control"
             id="addressname"
             aria-describedby="emailHelp"
+            autocomplete="off"
             />
         </div>
         <label for="postcode" class="form-label mt-4 pb-1 text-dark"
@@ -132,7 +135,7 @@
         >
         <div class="row form-group">
             <div class="col-9 col-md-10">
-            <input type="text" class="form-control" id="postcode" v-model="newaddress.post_code" />
+            <input type="text" class="form-control" id="postcode" autocomplete="off" v-model="newaddress.post_code" />
             </div>
             <div class="col-3 col-md-2 d-flex justify-content-end">
             <button type="button" class="btn btn-outline-primary">검색하기</button>
@@ -180,7 +183,7 @@
       <div class="text-dark fw-bold fs-5 pt-4">결제 정보</div>
     </div>
     <label for="exampleInputEmail1" class="form-label mt-4 text-dark pb-1"
-      >적립금 (보유 적립금 {{this.user.user_point_money}}원)</label
+      >적립금 (보유 적립금 {{this.user.user_point_money.toLocaleString("ko-KR")}}원)</label
     >
     <div class="row form-group border-bottom border-2 pb-4">
       <div class="col-9 col-md-10">
@@ -196,19 +199,19 @@
     <div>
       <div class="row pt-3">
         <div class="col-6 text-dark">상품 합계</div>
-        <div class="col-6 text-dark text-end fw-bolder">{{this.totalprice}}원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{this.totalprice.toLocaleString("ko-KR")}}원</div>
       </div>
       <div class="row pt-3">
         <div class="col-6 text-dark">배송비</div>
-        <div class="col-6 text-dark text-end fw-bolder">{{this.totaldeliveryprice}}원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{this.totaldeliveryprice.toLocaleString("ko-KR")}}원</div>
       </div>
       <div class="row pt-3 pb-3 border-bottom border-2">
         <div class="col-6 text-dark">총 할인 금액</div>
-        <div class="col-6 text-dark text-end fw-bolder">{{orderinfo.used_point}}원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{orderinfo.used_point.toLocaleString("ko-KR")}}원</div>
       </div>
       <div class="row pt-3 pb-3">
         <div class="col-6 text-dark fw-bolder align-self-center">결제 금액</div>
-        <div class="col-6 text-primary text-end fs-5 fw-bolder">{{totalprice + totaldeliveryprice - orderinfo.used_point}}</div>
+        <div class="col-6 text-primary text-end fs-5 fw-bolder">{{(totalprice + totaldeliveryprice - orderinfo.used_point).toLocaleString("ko-KR")}}원</div>
       </div>
     </div>
     <div class="row border-top border-5">
@@ -263,7 +266,7 @@
     <!-- <router-link to="/paymentdetail"> -->
       <div class="row pt-3">
         <button type="button" class="btn btn-primary btn-lg pb-3 pt-3" @click="Order()">
-          {{totalprice + totaldeliveryprice - orderinfo.used_point}} 결제하기
+          {{(totalprice + totaldeliveryprice - orderinfo.used_point).toLocaleString("ko-KR")}}원 결제하기
         </button>
       </div>
     <!-- </router-link> -->
