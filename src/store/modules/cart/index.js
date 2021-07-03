@@ -42,9 +42,7 @@ export default {
       }
     },
     DELETE_PRODUCT(state, i) {
-      const idx = state.cart.findIndex(productInfo => productInfo.productIdx == i)
-
-      state.cart.splice(idx, 1)
+      state.cart.splice(i, 1);
       state.cartLength -= 1
     }
   },
