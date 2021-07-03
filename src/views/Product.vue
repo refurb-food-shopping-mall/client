@@ -79,7 +79,7 @@
                 <label
                   for="exampleSelect1"
                   class="form-label d-flex justify-content-end mt-4"
-                  >수량(kg) 선택</label
+                  >수량 선택</label
                 >
                 <select
                   v-model="selectedQty"
@@ -93,7 +93,7 @@
                   <option>5</option>
                 </select>
               </div>
-              <p class="card-text" style="text-align: right">배송 예정일</p>
+              <p class="card-text" style="text-align: right">배송 예정일 : 1일</p>
             </div>
           </div>
           <div class="d-flex align-items-center">
