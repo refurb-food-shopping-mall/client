@@ -72,11 +72,11 @@
         </div>
         <span
           class="col-md-2 align-self-center text-center text-dark d-none d-md-block"
-          >{{product.product_price}}</span
+          >{{product.product_price.toLocaleString("ko-KR")}}원</span
         >
         <span
           class="col-md-2 align-self-center text-center text-dark d-none d-md-block"
-          >{{product.delivery_price}}</span
+          >{{product.delivery_price.toLocaleString("ko-KR")}}원</span
         >
 
         <div class="col-8 align-self-center d-md-none">
@@ -135,19 +135,19 @@
           상품합계
         </div>
         <div class="col-md-3 text-end d-none d-md-block text-dark">
-          {{this.totalprice}}
+          {{this.totalprice.toLocaleString("ko-KR")}}원
         </div>
         <div class="mb-1 col-md-9 text-end d-none d-md-block text-dark">
           배송비
         </div>
-        <div class="col-md-3 text-end d-none d-md-block text-dark">{{this.totaldeliveryprice}}</div>
+        <div class="col-md-3 text-end d-none d-md-block text-dark">{{this.totaldeliveryprice.toLocaleString("ko-KR")}}원</div>
         <div class="d-flex justify-content-end">
           <hr class="d-none d-md-block" style="width: 50%; height: 2px" />
         </div>
         <div class="mb-4 col-6 d-md-none text-dark">상품합계</div>
-        <div class="col-6 text-end d-md-none text-dark">{{this.totalprice}}</div>
+        <div class="col-6 text-end d-md-none text-dark">{{this.totalprice.toLocaleString("ko-KR")}}원</div>
         <div class="mb-1 col-6 d-md-none text-dark">배송비</div>
-        <div class="col-6 text-end d-md-none text-dark">{{this.totaldeliveryprice}}</div>
+        <div class="col-6 text-end d-md-none text-dark">{{this.totaldeliveryprice.toLocaleString("ko-KR")}}원</div>
         <hr class="d-md-none mt-4" style="height: 2px" />
       </div>
       <div class="row pb-5">
@@ -155,11 +155,11 @@
           >합계</span
         >
         <span class="col-md-3 text-end text-dark fw-bolder d-none d-md-block"
-          >{{this.totalprice + this.totaldeliveryprice}}</span
+          >{{(this.totalprice + this.totaldeliveryprice).toLocaleString("ko-KR")}}원</span
         >
         <span class="col-6 text-dark fw-bolder d-md-none">합계</span>
         <span class="col-6 text-end text-dark fw-bolder d-md-none"
-          >{{this.totalprice + this.totaldeliveryprice}}</span
+          >{{(this.totalprice + this.totaldeliveryprice).toLocaleString("ko-KR")}}원</span
         >
       </div>
       <div class="row pb-5">
