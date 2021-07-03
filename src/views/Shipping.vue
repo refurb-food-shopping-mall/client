@@ -71,17 +71,19 @@
           <!-- cal pc start -->
           <div class="row justify-content-center mt-2">
             <div class="col-3 d-flex justify-content-end d-none d-lg-block">              
-              <input type="text" v-model="date1" @keyup.enter="searchList" placeholder="yyyy-mm-dd" style="text-align:center"/>
+              <input type="date" v-model="date1">
             </div>
-            <div class="col-1 fs-4 text-center d-none d-lg-block">~</div>
+            <div class="col-1 fs-4 d-none d-lg-block">~</div>
             <div class="col-3 d-none d-lg-block">              
-              <input type="text" v-model="date2" @keyup.enter="searchList" placeholder="yyyy-mm-dd" style="text-align:center"/>
+              <input type="date" v-model="date2">
             </div>
             <div class="col-2 d-none d-lg-block">
               <button
                 style="height:30px"
                 type="button"
-                class="btn btn-outline-primary d-flex align-items-center">
+                class="btn btn-outline-primary d-flex align-items-center"
+                @click="searchList"
+                >
                 조회
               </button>
             </div>
@@ -285,17 +287,6 @@ export default {
     //this.getget();
   },
   methods: {
-    // //orderday필요함
-    // async getDate() {
-    //   await this.$axios
-    //     .post(`http://localhost:3000/api/getDate`, {
-    //       id: 1,
-    //     })
-    //     .then((res) => {
-    //       this.oday = res.data
-    //       //console.log(this.orderinfo);
-    //     })  
-    // },
     searchList(){ 
       const params = {
         date1: this.date1,
@@ -308,8 +299,7 @@ export default {
       console.log(params);
       this.$axios
         .post(`http://localhost:3000/api/getget`, {
-          // dayarr: [this.date1,this.date2]
-          dayarr:1
+          dayarr: [this.date1,this.date2]
         })
         .then((res) => {
           this.gettest = res.data.getgett;
