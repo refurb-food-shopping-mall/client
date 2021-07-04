@@ -56,7 +56,7 @@
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
-                placeholder="Password"
+                placeholder="Enter Password"
               />
             </div>
 
@@ -78,6 +78,13 @@
 </template>
 
 <script>
+import Joi from 'joi'
+
+const schema = Joi.object({
+  userEmail: Joi.string().email({ tlds: { allow: ['com', 'net'] } }),
+  userPassword: Joi.string().trim().min(2).required(),
+})
+
 export default {
   data() {
     return {
@@ -102,29 +109,44 @@ export default {
   },
   methods: {
     submitLoginForm() {
-      // TODO validation needed
-
-      this.errorMessage = "";
-      this.loading = true;
-      this.$axios
-        .post(`${this.$domain}/auth/login`, this.user)
-        .then((res) => {
-          setTimeout(() => {
-            this.loading = false;
-            this.$store.commit('user/SET_USER_INFO', res.data.userData);
-            this.$store.commit('auth/SET_TOKEN', res.data.tokenData);
-            // localStorage.token = res.data.token;
-            this.$router.push("/");
-          }, 1000);
-        })
-        .catch((err) => {
-          setTimeout(() => {
-            this.loading = false;
-            this.errorMessage = err.response.data.message;
-            console.log(err.response.data.message);
-          }, 1000);
-        });
+      // TODO strength validation needed 
+      if (this.validForm()) {
+        this.errorMessage = "";
+        this.loading = true;
+        this.$axios
+          .post(`${this.$domain}/auth/login`, this.user)
+          .then((res) => {
+            setTimeout(() => {
+              this.loading = false;
+              this.$store.commit('user/SET_USER_INFO', res.data.userData);
+              this.$store.commit('auth/SET_TOKEN', res.data.tokenData);
+              // localStorage.token = res.data.token;
+              this.$router.push("/");
+            }, 1000);
+          })
+          .catch((err) => {
+            setTimeout(() => {
+              this.loading = false;
+              this.errorMessage = err.response.data.message;
+              console.log(err.response.data.message);
+            }, 1000);
+          });
+      }
     },
+    validForm() {
+      const result = schema.validate(this.user)
+      // console.log(result)
+      // console.log(this.user)
+      if (!result.error) {
+        return true
+      }
+      if (result.error.message.includes('userEmail')) {
+        this.errorMessage = '이메일 형식이 유효하지 않습니다.'
+      } else {
+        this.errorMessage = '패스워드 형식이 유효하지 않습니다.'
+      }
+      return false
+    }
   },
 };
 </script>
