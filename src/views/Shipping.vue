@@ -9,9 +9,9 @@
             id="profile"
             src="https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
           />
-          <div style="text-align: center">name <span>님</span></div>
+          <div style="text-align: center">name님</div>
         </div>
-        <!-- lalalalalalalalalalalalalalalalalalalalala -->
+        <!-- ------------------------------------------------------------------------------------ -->
         <div
           id="row1_statebox"
           class="col-12 col-lg-9 border-top border-bottom border-primary"
@@ -70,33 +70,20 @@
           </div>
           <!-- cal pc start -->
           <div class="row justify-content-center mt-2">
-            <div class="col-3 d-flex justify-content-end">
-              <form
-                class="d-none d-lg-block"
-                name="해당 폼의 이름"
-                action="값을 보낼 주소"
-                method="post"
-              >
-                <input type="date" name="userBirthday" value="2021-04-28" />
-              </form>
+            <div class="col-3 d-flex justify-content-end d-none d-lg-block">              
+              <input type="date" v-model="date1">
             </div>
-            <div class="col-1 fs-4 text-center d-none d-lg-block">~</div>
-            <div class="col-3">
-              <form
-                class="d-none d-lg-block"
-                name="해당 폼의 이름"
-                action="값을 보낼 주소"
-                method="post"
-              >
-                <input type="date" name="userBirthday" value="2021-05-28" />
-              </form>
+            <div class="col-1 fs-4 d-none d-lg-block">~</div>
+            <div class="col-3 d-none d-lg-block">              
+              <input type="date" v-model="date2">
             </div>
             <div class="col-2 d-none d-lg-block">
               <button
-                style="height: 30px"
+                style="height:30px"
                 type="button"
                 class="btn btn-outline-primary d-flex align-items-center"
-              >
+                @click="searchList"
+                >
                 조회
               </button>
             </div>
@@ -286,7 +273,41 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      oday:{},
+      gettest:{},
+      date1:'',
+      date2:'',
+    };
+  },
+  mounted() {
+    //this.getDate();
+    //this.getget();
+  },
+  methods: {
+    searchList(){ 
+      const params = {
+        date1: this.date1,
+        date2: this.date2,
+      }
+      this.gettest = this.getget(params);
+    },
+    //
+    getget(params) {
+      console.log(params);
+      this.$axios
+        .post(`http://localhost:3000/api/getDate`, {
+          dayarr: [this.date1,this.date2]
+        })
+        .then((res) => {
+          this.gettest = res.data.getgett;
+          console.log(this.gettest);
+        })  
+    },
+  }
+};
 </script>
 
 <style scoped>
