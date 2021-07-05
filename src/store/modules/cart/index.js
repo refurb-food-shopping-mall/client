@@ -9,59 +9,78 @@ export default {
     //   { prodcutIdx: <type: Number>, productQty: <type: Number> }
     // ]
     cart: [],
-    cartLength: 0,
     cartSumOfQuantity: 0,
+    cartErrorMessage: ''
   },
   mutations: {
-    PUSH_NEW_PRODUCT_TO_CART(state, { productIdx, selectedQty }) {
+    PUSH_NEW_PRODUCT_TO_CART(state, { productIdx, quantity }) {
       state.cart.push({
         productIdx: Number(productIdx),
-        productQty: Number(selectedQty),
+        productQty: Number(quantity),
       })
     },
-    INCREASE_CART_LENGTH(state) {
-      state.cartLength += 1
-    },
-    INCREASE_ALREADY_INCLUDED_PRODUCT_QTY(state, { alreadyIncludedProductIdx, selectedQty }) {
-      const productInfo = state.cart[alreadyIncludedProductIdx]
+    INCREASE_PRODUCT_QTY(state, { cartArrIdx, quantity }) {
+      const productInfo = state.cart[cartArrIdx]
 
-      productInfo.productQty += Number(selectedQty)
+      productInfo.productQty += Number(quantity)
+
+      state.cart.splice(cartArrIdx, 1, productInfo)
     },
-    INCREASE_SUM_OF_QTY(state, selectedQty) {
-      state.cartSumOfQuantity += Number(selectedQty)
+    DECREASE_PRODUCT_QTY(state, { cartArrIdx, quantity }) {
+      const productInfo = state.cart[cartArrIdx]
+
+      productInfo.productQty += Number(quantity)
+
+      state.cart.splice(cartArrIdx, 1, productInfo)
+    },
+    INCREASE_SUM_OF_QTY(state, quantity) {
+      state.cartSumOfQuantity += Number(quantity)
+    },
+    DECREASE_SUM_OF_QTY(state, quantity) {
+      state.cartSumOfQuantity += Number(quantity)
     },
     CLEAR_CART(state) {
       state.cart = []
-      state.cartLength = 0
       state.cartSumOfQuantity = 0
     },
-    CARCULATE_COUNT(state, payload) {
-      state.cart[payload.i].productQty = state.cart[payload.i].productQty + payload.num
-      if (state.cart[payload.i].productQty < 1) {
-        state.cart[payload.i].productQty = 1;
-      }
+    DELETE_PRODUCT_FROM_CART(state, cartArrIdx) {
+      state.cart.splice(cartArrIdx, 1);
     },
-    DELETE_PRODUCT(state, i) {
-      state.cart.splice(i, 1);
-      state.cartLength -= 1
+    CART_ERROR_MESSAGE(state, errorMessage) {
+      state.cartErrorMessage = errorMessage
     }
   },
   actions: {
-    addProductToCart({ state, commit }, { productIdx, selectedQty }) {
-      const alreadyIncludedProductIdx = state.cart.findIndex(productInfo => productInfo.productIdx == productIdx)
+    addProductToCart({ state, commit }, { productIdx, quantity }) {
+      const cartArrIdx = state.cart.findIndex(productInfo => productInfo.productIdx == productIdx)
 
-      if (alreadyIncludedProductIdx < 0) {
-        commit('PUSH_NEW_PRODUCT_TO_CART', { productIdx, selectedQty })
-        commit('INCREASE_CART_LENGTH')
+      if (cartArrIdx < 0) {
+        commit('PUSH_NEW_PRODUCT_TO_CART', { productIdx, quantity })
       } else {
-        commit('INCREASE_ALREADY_INCLUDED_PRODUCT_QTY', { alreadyIncludedProductIdx, selectedQty })
+        commit('INCREASE_PRODUCT_QTY', { cartArrIdx, quantity })
       }
-      commit('INCREASE_SUM_OF_QTY', selectedQty)
+      commit('INCREASE_SUM_OF_QTY', quantity)
+    },
+    adjustingQuantity({ state, commit }, { cartArrIdx, quantity }) {
+      if (quantity > 0) {
+        commit('INCREASE_PRODUCT_QTY', { cartArrIdx, quantity })
+        commit('INCREASE_SUM_OF_QTY', quantity)
+      } else if (quantity < 0) {
+        if (state.cart[cartArrIdx].productQty > quantity) {
+          commit('DECREASE_PRODUCT_QTY', { cartArrIdx, quantity })
+          commit('DECREASE_SUM_OF_QTY', quantity)
+        } else {
+          commit('CART_ERROR_MESSAGE', { msg: "1 개 이상의 제품을 담아야 합니다." })
+        }
+      }
     }
   },
   getters: {
     getCartQuantity(state) {
       return state.cartSumOfQuantity
-    }
+    },
+    getCartLength(state) {
+      return state.cart.length
+    },
   },
 }
