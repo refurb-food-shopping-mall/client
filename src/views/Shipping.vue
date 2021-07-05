@@ -298,7 +298,7 @@ export default {
     getget(params) {
       console.log(params);
       this.$axios
-        .post(`http://localhost:3000/api/getget`, {
+        .post(`http://localhost:3000/api/getDate`, {
           dayarr: [this.date1,this.date2]
         })
         .then((res) => {
