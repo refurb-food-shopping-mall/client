@@ -3,13 +3,14 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
         <router-link class="navbar-brand" to="/">
-          <img  
+          <img
             src="@/assets/logo2_.jpg"
             class="rounded mx-auto d-block"
             height="90"
             width="160"
             alt="로고"
-          /> <!-- 추가 -->
+          />
+          <!-- 추가 -->
         </router-link>
         <router-link class="navbar-brand" to="/product">상품 보기</router-link>
         <button
@@ -23,8 +24,6 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
-
 
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto">
@@ -123,7 +122,9 @@
             <font-awesome-icon icon="shopping-cart" />
           </router-link>
 
-          <span style="color: red">({{ $store.state.cart.cartLength }})</span>
+          <span style="color: red"
+            >({{ $store.getters["cart/getCartLength"] }})</span
+          >
 
           <button
             v-if="$store.getters['auth/loggedIn']"
