@@ -16,6 +16,7 @@ import PaymentDetail from '../views/PaymentDetail'
 import AddProduct from '../views/AddProduct'
 import WriteReview from '../views/WriteReview'
 import ProductList from '../views/ProductList' //sw
+import MyPage from '../views/MyPage'
 
 Vue.use(VueRouter)
 
@@ -109,6 +110,17 @@ const routes = [
     component: WriteReview,
     beforeEnter: isLoggedIn
   },
+  {
+    path: '/mypage/',
+    name: 'MyPage',
+    component: MyPage,
+    beforeEnter: isLoggedIn,
+    children: [
+      { path: 'profileupdate', component: UserProfileUpdate },
+      { path: 'cart', component: Cart },
+      { path: 'cancel', component: Cancel },
+    ]
+  }
 ]
 
 
