@@ -17,10 +17,10 @@
                 <img src="@/assets/onion2.jpg" class="img-fluid">
             </div>
             <div class="col-9">
-                <div class="text-dark">국산 햇양파 10kg</div>
+                <div class="text-dark">{{ProductName}}</div>
                 <div class="row pt-3">
                     <div class="col-2 text-dark">수량</div>
-                    <div class="col-10 text-dark">2개</div>
+                    <div class="col-10 text-dark">{{ProductId.product_amount}}개</div>
                 </div>
             </div>
         </div>
@@ -29,14 +29,27 @@
         </div>
         <div class="row">
             <div class="mb-4">
-                <star-rating />
+                <star-rating v-model="StarRating" />
             </div>
         </div>
-        <div class="text-dark fs-5 border-top border-3 pt-3">
-            상품 리뷰
+        <div class="form-group">
+            <label for="addressname" class="form-label mt-4 text-dark fs-5"
+            >리뷰 제목</label
+            >
+            <input
+            v-model="ReviewTitle"
+            type="text"
+            class="form-control"
+            id="addressname"
+            aria-describedby="emailHelp"
+            autocomplete="off"
+            />
+        </div>
+        <div class="text-dark fs-5 pt-3">
+            리뷰 내용
         </div>
         <div class="form-group pt-3">
-            <textarea class="form-control" id="exampleTextarea" rows="5"></textarea>
+            <textarea class="form-control" id="exampleTextarea" rows="5" v-model="ReviewDescription"></textarea>
         </div>
         <div class="row d-flex justify-content-center pt-3">
             <button type="button" class="btn btn-outline-primary pb-3 pt-3" style="max-width: 97%;">사진 첨부하기</button>
@@ -93,6 +106,61 @@ import StarRating from 'vue-star-rating'
 export default {
     components: {
         StarRating
+    },
+    data(){
+        return {
+            ProductId : {},
+            ProductName : null,
+            ThumbnailImage : null,
+            ReviewDescription : "",
+            ReviewTitle : "",
+            StarRating : 0,
+        }
+    },
+    created(){
+        this.GetProductDetail()
+    },
+    methods : {
+      //주문된 상품의 id, 수량을 가져오는 함수
+      async GetProductId(){
+          await this.$axios({
+              url: `${this.$domain}/order/productid`,
+              method: 'post',
+              data: {orderid : 1} //orderid
+          })
+          .then((res) => {
+            //console.log(res.data);
+            this.ProductId = res.data.product_id;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      },
+      // 주문된 상품의 이름을 가져오는 함수
+      async GetProductName(){
+          await this.$axios
+            .post(`${this.$domain}/product/productname`, { product_id : this.ProductId.product_id })
+            .then((res) => {
+                this.ProductName = res.data.product_name
+                // console.log(this.ProductName);
+            })
+      },
+      // 주문된 상품의 썸네일을 가져오는 함수
+      async GetProductThumnail(){
+          await this.$axios
+            .post(`${this.$domain}/productimage/thumbnail`, { product_id : this.ProductId.product_id })
+            .then((res) => {
+                this.ThumbnailImage = res.data.thumbnail
+                //console.log(this.thumbnailimage);
+            })
+      },
+      // 동기적처리를 위한 함수
+      async GetProductDetail(){
+          await this.GetProductId();
+          this.GetProductName();
+          this.GetProductThumnail();
+      },
+
     }
 };
 </script>
