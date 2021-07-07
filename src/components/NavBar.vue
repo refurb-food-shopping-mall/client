@@ -126,13 +126,15 @@
             >({{ $store.getters["cart/getCartLength"] }})</span
           >
 
-          <button
-            v-if="$store.getters['auth/loggedIn']"
-            type="button"
-            class="btn btn-light mx-1"
-          >
-            {{ $store.state.user.userName }} 님
-          </button>
+          <router-link to="/mypage">
+            <button
+              v-if="$store.getters['auth/loggedIn']"
+              type="button"
+              class="btn btn-light mx-1"
+            >
+              {{ $store.state.user.userName }} 님
+            </button>
+          </router-link>
 
           <button
             @click.prevent="userLogout"
