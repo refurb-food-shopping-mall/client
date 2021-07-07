@@ -9,13 +9,11 @@
             class="list-group-item list-group-item-action active"
             >주문 조회
           </router-link>
-          <router-link
-            to="/mypage/cart"
-            class="list-group-item list-group-item-action"
+          <router-link to="/cart" class="list-group-item list-group-item-action"
             >장바구니
           </router-link>
           <router-link
-            to="cancel"
+            to="/cancel"
             class="list-group-item list-group-item-action"
             >취소 조회
           </router-link>
