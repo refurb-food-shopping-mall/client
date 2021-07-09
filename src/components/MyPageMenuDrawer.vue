@@ -23,7 +23,7 @@ export default {
       currentSelectdMenuIdx: 0,
       menuLinks: [
         {
-          url: '#',
+          url: '/mypage',
           name: '주문 조회'
         },
         {
@@ -35,11 +35,11 @@ export default {
           name: '취소 조회'
         },
         {
-          url: '#',
+          url: '/mypage',
           name: '적립금'
         },
         {
-          url: '#',
+          url: '/mypage',
           name: '1:1 문의'
         },
         {
@@ -47,7 +47,7 @@ export default {
           name: '회원정보수정'
         },
         {
-          url: '#',
+          url: '/mypage',
           name: '회원탈퇴'
         }
       ]
