@@ -175,6 +175,7 @@ export default {
       this.$store.commit("auth/SET_TOKEN", "");
       this.$store.commit("cart/CLEAR_CART");
       sessionStorage.clear();
+      this.$router.push("/")
     }
   }
 };
