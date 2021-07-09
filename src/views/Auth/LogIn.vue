@@ -28,7 +28,7 @@
             class="alert alert-dismissible alert-light my-4"
             style=""
           >
-            <img src="../assets/loadingBar.svg" alt="loadingBar" />
+            <img src="@/assets/loadingBar.svg" alt="loadingBar" />
           </div>
 
           <form class="form-group" @submit.prevent="submitLoginForm">

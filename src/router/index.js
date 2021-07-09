@@ -6,16 +6,19 @@ import $store from '../store'
 import Home from '../views/Home'
 import Cancel from '../views/Cancel'
 import Cart from '../views/Cart'
-import LogIn from '../views/LogIn'
 import Payment from '../views/Payment'
 import Product from '../views/Product'
 import Shipping from '../views/Shipping'
-import SignUp from '../views/SignUp'
 import PaymentDetail from '../views/PaymentDetail'
 import AddProduct from '../views/AddProduct'
 import WriteReview from '../views/WriteReview'
 import ProductList from '../views/ProductList' //sw
 
+// Auth
+import LogIn from '../views/Auth/LogIn'
+import SignUp from '../views/Auth/SignUp'
+
+// MyPage
 import MyPageIndex from '../views/MyPage/_index'
 import MyPageDeleteAccount from '../views/MyPage/DeleteAccount'
 import MyPageUserProfileUpdate from '../views/MyPage/UserProfileUpdate'
