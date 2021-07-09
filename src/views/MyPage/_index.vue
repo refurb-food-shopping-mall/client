@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import MyPageMenuDrawer from '@/components/MyPageMenuDrawer'
+import MyPageMenuDrawer from '@/components/MyPageLayout/MenuDrawer'
 
 export default {
   components: { MyPageMenuDrawer },

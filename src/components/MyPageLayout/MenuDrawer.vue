@@ -47,7 +47,7 @@ export default {
           name: '회원정보수정'
         },
         {
-          url: '/mypage',
+          url: '/mypage/deleteaccount',
           name: '회원탈퇴'
         }
       ]
