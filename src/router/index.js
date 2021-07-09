@@ -11,13 +11,14 @@ import Payment from '../views/Payment'
 import Product from '../views/Product'
 import Shipping from '../views/Shipping'
 import SignUp from '../views/SignUp'
-import UserProfileUpdate from '../views/UserProfileUpdate'
 import PaymentDetail from '../views/PaymentDetail'
 import AddProduct from '../views/AddProduct'
 import WriteReview from '../views/WriteReview'
 import ProductList from '../views/ProductList' //sw
+
 import MyPageIndex from '../views/MyPage/_index'
 import MyPageDeleteAccount from '../views/MyPage/DeleteAccount'
+import MyPageUserProfileUpdate from '../views/MyPage/UserProfileUpdate'
 
 Vue.use(VueRouter)
 
@@ -89,12 +90,6 @@ const routes = [
     beforeEnter: ifAlreadyLoggedInRedirectHome
   },
   {
-    path: '/profileupdate',
-    name: 'UserProfileUpdate',
-    component: UserProfileUpdate,
-    beforeEnter: isLoggedIn
-  },
-  {
     path: '/paymentdetail',
     name: 'PaymentDetail',
     component: PaymentDetail,
@@ -117,7 +112,7 @@ const routes = [
     component: MyPageIndex,
     beforeEnter: isLoggedIn,
     children: [
-      { path: 'profileupdate', component: UserProfileUpdate },
+      { path: 'profileupdate', component: MyPageUserProfileUpdate },
       { path: 'cart', component: Cart },
       { path: 'cancel', component: Cancel },
       { path: 'deleteaccount', component: MyPageDeleteAccount },
