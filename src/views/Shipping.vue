@@ -9,7 +9,7 @@
             id="profile"
             src="https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
           />
-          <div style="text-align: center">name님</div>
+          <div style="text-align: center">{{$store.state.user.userName}}님</div>
         </div>
         <!-- ------------------------------------------------------------------------------------ -->
         <div
@@ -253,6 +253,7 @@
               </div>
             </div>
           </div>
+          <!-- Add a new item here. -->
         </div>
         <!-- LIST mobile start -->
         <div class="row mt-5 pt-5">
@@ -277,33 +278,43 @@ export default {
   data() {
     return {
       oday:{},
-      gettest:{},
+      getorders:{},
       date1:'',
       date2:'',
+      date3:'',
     };
   },
   mounted() {
-    //this.getDate();
     //this.getget();
   },
   methods: {
-    searchList(){ 
+    searchList(){
       const params = {
         date1: this.date1,
         date2: this.date2,
       }
-      this.gettest = this.getget(params);
+      let now = new Date(this.date2.split('-')[0], this.date2.split('-')[1], this.date2.split('-')[2]);
+      let tom = new Date(now.setDate(now.getDate() + 1));//다음날짜
+      //console.log(tom)
+      const dd = tom.getDate()
+      const mm = tom.getMonth()
+      const yy = tom.getFullYear()
+      this.date3 = `${yy}-${mm >= 10 ? mm : '0' + mm}-${dd >= 10 ? dd : '0' + dd}`
+      // console.log(this.date3)
+      // console.log(typeof (this.date3))
+
+      this.getorders = this.getget(params);
     },
     //
     getget(params) {
       console.log(params);
       this.$axios
         .post(`http://localhost:3000/api/getDate`, {
-          dayarr: [this.date1,this.date2]
+          dayarr: [this.date1, this.date3]
         })
         .then((res) => {
-          this.gettest = res.data.getgett;
-          console.log(this.gettest);
+          this.getorders = res.data.getgett;
+          console.log(this.getorders);
         })  
     },
   }
