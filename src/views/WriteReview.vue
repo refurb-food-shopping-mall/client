@@ -29,7 +29,7 @@
         </div>
         <div class="row">
             <div class="mb-4">
-                <star-rating v-model="StarRating" />
+                <star-rating v-model="StarGrade" />
             </div>
         </div>
         <div class="form-group">
@@ -52,34 +52,34 @@
             <textarea class="form-control" id="exampleTextarea" rows="5" v-model="ReviewDescription"></textarea>
         </div>
         <div class="row d-flex justify-content-center pt-3">
-            <button type="button" class="btn btn-outline-primary pb-3 pt-3" style="max-width: 97%;">사진 첨부하기</button>
-
+            <input 
+                class="form-control"
+                style="display: none" 
+                @change="OnImageSelected" 
+                type="file" id="formFile"
+                ref="fileInput"
+            >            
+            <button 
+                type="button" 
+                @click="$refs.fileInput.click()"
+                class="btn btn-outline-primary pb-3 pt-3" 
+                style="max-width: 97%;"
+            >
+            사진 첨부하기
+            </button>
             <div class="row mb-2 mt-3 pb-2 pt-2 border-top border-bottom border-2">
-                <div class="col-6 col-md-4">
+                <div class="col-6 col-md-4" :key="i" v-for="(preview, i) in SelectedFile">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">
                             <img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAM1BMVEX///8AAACmpqajo6OhoaHz8/PR0dH29va7u7tfX1+tra1VVVV5eXlSUlJNTU0ZGRlra2vRe4gkAAADN0lEQVR4nO2di3qqMBCEida70r7/057PLydtA0QU2dt0/heYHTMrKCHbdYQQQgghhBBCCCGEEEIIIYQQQgghhBDyZ9lfb/3pfDBSP5xP/e26F1TYXVLmKCjS5vhf/bKTUth9psJWSuMB22/1TymLl/TDRkijzeaX+kVGYp9+o72Km0pdphevlUb6EBFp8VGLX0VEbrWI6ipuBto3EZU+mVkcGky9iMxpKKNmcWQwnUR0ziMdpV7cjoXPIkKHsZDKRWO8gikJ3VUdJ6TkgzplUOyeakpM2uJERCU19S2qK2oLGqRGNzRTBsW/vzVFlXuwoBcciy82VWEzg1rhMelBTXGjHizIB8gwohnpT9g0oholGEc0Ixkj84hKl+HEoFyUHPSgbCkuerAgESc3EZUqx5nB9SPlqAcflbTcorsVXLsolwbXDKrDiGbWKszVZaJmnXA5jWhmjeJcG1wjYG57sPBugY57sPBeyJxHNPNOkSEMvhPUIAaXFxrG4NJSAxlc9o3o/jJR83q5AS4TNa9GLlREM6+VHNDga7EL1oOF58sO14OFZ6MXMqKZ50oPbPC5oIaNaGZ+fUKv4J05A+ENzoUw6GWi5pGJ4D1YaAcRIKKZlhEYg60wQvRgYcrMF84K3pmyCGVwOqgwEc3Mr2LoFbwzZzG8wTmLAAYf92LwHiy0VxFiBe+0LMIYbFkEMth1U3cyX9ZFrQn8GsL3Ifx3Kfz1EP6eBv6+FP63BfzvQ/jf+PD/08D/1wb/fyn8f97wzy3gnz3BPz+EfwYM/xx/+V6MIL0Iv58Gfk8U/L42+L2J8PtL4fcIw+/zht+rD/++xfJCg1iEf+8J/t01+PcP4d8hhX8PGP5dbvj38eHPVIA/FwP+bBP482ngzxiCPycK/qwv+PPa4M/cgz83UTZKDnoR/vxS+RgZB1XjEzYNKvxZ0FoBMguqnrCRRc3wmPQi/GwE7eCoB1W/M5QVLVpftS3gZwXhz3vCn9mFP3cNf3becP6h5qDOoUUZh/gzLOs5pNqjVutVFJoJ7GeWrMyQzr8wDxh/pnPnYS53LzqXmxBCCCGEEEIIIYQQQgghhBBCCCGEEEKc8w/YYxuI7Ao44QAAAABJRU5ErkJggg=="
                                 class="img-fluid"
                                 style="cursor: pointer; max-width: 17px; max-height: 17px;"
+                                @click="DeleteSelectedFile(i)"
                             >
                         </div>
                         <div class="col-11">
-                            <img src="https://img9.yna.co.kr/photo/cms/2018/06/11/05/C0A8CA3C00000163EDEFD06C0007252F_P2.jpeg" class="img-fluid">
-                        </div>                      
-                    </div>                 
-                </div>
-                <div class="col-6 col-md-4">
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-end">
-                            <img
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAM1BMVEX///8AAACmpqajo6OhoaHz8/PR0dH29va7u7tfX1+tra1VVVV5eXlSUlJNTU0ZGRlra2vRe4gkAAADN0lEQVR4nO2di3qqMBCEida70r7/057PLydtA0QU2dt0/heYHTMrKCHbdYQQQgghhBBCCCGEEEIIIYQQQgghhBDyZ9lfb/3pfDBSP5xP/e26F1TYXVLmKCjS5vhf/bKTUth9psJWSuMB22/1TymLl/TDRkijzeaX+kVGYp9+o72Km0pdphevlUb6EBFp8VGLX0VEbrWI6ipuBto3EZU+mVkcGky9iMxpKKNmcWQwnUR0ziMdpV7cjoXPIkKHsZDKRWO8gikJ3VUdJ6TkgzplUOyeakpM2uJERCU19S2qK2oLGqRGNzRTBsW/vzVFlXuwoBcciy82VWEzg1rhMelBTXGjHizIB8gwohnpT9g0oholGEc0Ixkj84hKl+HEoFyUHPSgbCkuerAgESc3EZUqx5nB9SPlqAcflbTcorsVXLsolwbXDKrDiGbWKszVZaJmnXA5jWhmjeJcG1wjYG57sPBugY57sPBeyJxHNPNOkSEMvhPUIAaXFxrG4NJSAxlc9o3o/jJR83q5AS4TNa9GLlREM6+VHNDga7EL1oOF58sO14OFZ6MXMqKZ50oPbPC5oIaNaGZ+fUKv4J05A+ENzoUw6GWi5pGJ4D1YaAcRIKKZlhEYg60wQvRgYcrMF84K3pmyCGVwOqgwEc3Mr2LoFbwzZzG8wTmLAAYf92LwHiy0VxFiBe+0LMIYbFkEMth1U3cyX9ZFrQn8GsL3Ifx3Kfz1EP6eBv6+FP63BfzvQ/jf+PD/08D/1wb/fyn8f97wzy3gnz3BPz+EfwYM/xx/+V6MIL0Iv58Gfk8U/L42+L2J8PtL4fcIw+/zht+rD/++xfJCg1iEf+8J/t01+PcP4d8hhX8PGP5dbvj38eHPVIA/FwP+bBP482ngzxiCPycK/qwv+PPa4M/cgz83UTZKDnoR/vxS+RgZB1XjEzYNKvxZ0FoBMguqnrCRRc3wmPQi/GwE7eCoB1W/M5QVLVpftS3gZwXhz3vCn9mFP3cNf3becP6h5qDOoUUZh/gzLOs5pNqjVutVFJoJ7GeWrMyQzr8wDxh/pnPnYS53LzqXmxBCCCGEEEIIIYQQQgghhBBCCCGEEEKc8w/YYxuI7Ao44QAAAABJRU5ErkJggg=="
-                                class="img-fluid"
-                                style="cursor: pointer; max-width: 17px; max-height: 17px;"
-                            >
-                        </div>
-                        <div class="col-11">
-                            <img src="https://img9.yna.co.kr/photo/cms/2018/06/11/05/C0A8CA3C00000163EDEFD06C0007252F_P2.jpeg" class="img-fluid">
+                            <img class="img-fluid" :src="preview.preview">
                         </div>                      
                     </div>                 
                 </div>
@@ -95,7 +95,7 @@
                 <button type="button" class="col-6 btn btn-primary btn-lg" style="max-width: 50%;">취소</button>
             </div>
             <div class="col-6">
-                <button type="button" class="col-6 btn btn-outline-primary btn-lg ml-5" style="max-width: 50%;">등록</button>
+                <button type="button" @click="SaveReview" class="col-6 btn btn-outline-primary btn-lg ml-5" style="max-width: 50%;">등록</button>
             </div>
         </div>            
     </div>
@@ -109,58 +109,162 @@ export default {
     },
     data(){
         return {
+            user : {},
             ProductId : {},
             ProductName : null,
             ThumbnailImage : null,
             ReviewDescription : "",
             ReviewTitle : "",
-            StarRating : 0,
+            StarGrade : 0,
+            SelectedFile : [],
+            ReviewId : 0,
+            reviewpath : "",
+            image : ""
         }
     },
     created(){
         this.GetProductDetail()
     },
     methods : {
-      //주문된 상품의 id, 수량을 가져오는 함수
-      async GetProductId(){
-          await this.$axios({
-              url: `${this.$domain}/order/productid`,
-              method: 'post',
-              data: {orderid : 1} //orderid
-          })
-          .then((res) => {
-            //console.log(res.data);
-            this.ProductId = res.data.product_id;
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      },
-      // 주문된 상품의 이름을 가져오는 함수
-      async GetProductName(){
-          await this.$axios
-            .post(`${this.$domain}/product/productname`, { product_id : this.ProductId.product_id })
-            .then((res) => {
-                this.ProductName = res.data.product_name
-                // console.log(this.ProductName);
+        //유저정보를 가져오는 함수
+        async GetUserProfile(){
+            await this.$axios({
+                url: `${this.$domain}/auth/user`,
+                method: 'get',         
+                headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
             })
-      },
-      // 주문된 상품의 썸네일을 가져오는 함수
-      async GetProductThumnail(){
-          await this.$axios
-            .post(`${this.$domain}/productimage/thumbnail`, { product_id : this.ProductId.product_id })
             .then((res) => {
-                this.ThumbnailImage = res.data.thumbnail
-                //console.log(this.thumbnailimage);
+                this.user = res.data.user;
+                console.log(this.user);
             })
-      },
-      // 동기적처리를 위한 함수
-      async GetProductDetail(){
-          await this.GetProductId();
-          this.GetProductName();
-          this.GetProductThumnail();
-      },
+            .catch((err) => {
+                console.log(err);
+            }) 
+        },
 
+        //주문된 상품의 id, 수량을 가져오는 함수
+        async GetProductId(){
+            await this.$axios({
+                url: `${this.$domain}/order/productid`,
+                method: 'post',
+                data: {orderid : 1} //orderid
+            })
+            .then((res) => {
+                //console.log(res.data);
+                this.ProductId = res.data.product_id;
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        },
+        // 주문된 상품의 이름을 가져오는 함수
+        async GetProductName(){
+            await this.$axios
+                .post(`${this.$domain}/product/productname`, { product_id : this.ProductId.product_id })
+                .then((res) => {
+                    this.ProductName = res.data.product_name
+                    // console.log(this.ProductName);
+                })
+        },
+        // 주문된 상품의 썸네일을 가져오는 함수
+        async GetProductThumnail(){
+            await this.$axios
+                .post(`${this.$domain}/productimage/thumbnail`, { product_id : this.ProductId.product_id })
+                .then((res) => {
+                    this.ThumbnailImage = res.data.thumbnail
+                    //console.log(this.thumbnailimage);
+                })
+        },
+        // 동기적처리를 위한 함수
+        async GetProductDetail(){
+            this.GetUserProfile();
+            await this.GetProductId();
+            this.GetProductName();
+            this.GetProductThumnail();
+
+        },    
+        //사진 첨부를 했을 때 실행할 함수      
+        OnImageSelected(event){
+            if(this.SelectedFile.length > 2){
+                alert('리뷰이미지는 최대 3개까지 업로드 가능합니다.')
+                return
+            }
+            else{
+                const file = event.target.files[0]
+                // console.log(file);
+                this.image = URL.createObjectURL(file)
+                this.SelectedFile.push({
+                file : event.target.files[0],
+                preview : this.image
+                });
+                // console.log(this.SelectedFile[0].file);
+            }
+            // console.log(this.SelectedFile);
+            //    console.log(this.SelectedFile)
+        }, 
+        //첨부된 이미지의 미리보기에서 x버튼을 클릭했을 때 실행할 함수
+        DeleteSelectedFile(i){
+            this.SelectedFile.splice(i, 1)
+        },
+        //리뷰 등록 버튼을 클릭했을 때 실행할 함수
+        ReviewPoint(point){
+            this.$axios
+                .post(`${this.$domain}/user/reviewpoint`, {
+                    user_id : this.user.id,
+                    point : point 
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        },
+        async SaveReview(){
+            if(this.ReviewTitle == "" || this.StarGrade == 0 || this.ReviewDescription == ""){
+                alert('사진업로드를 제외한 리뷰관련부분을 작성해주세요');
+                return
+            }
+            await this.$axios
+                .post(`${this.$domain}/review/save`, {
+                    product_id : this.ProductId.product_id,
+                    user_id : this.user.id,
+                    review_title : this.ReviewTitle,
+                    review_description : this.ReviewDescription,
+                    star_grade : this.StarGrade
+                })
+                .then((res) => {
+                    this.ReviewId = res.data.review_id
+                    // console.log(this.ReviewId)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+            if(this.SelectedFile.length == 0){
+                await this.ReviewPoint(100);
+                alert('리뷰작성이 완료 되었습니다.')
+                this.$router.push("/shipping");
+            }  
+            else{
+                this.ReviewPoint(200);          
+                for(let i = 0 ; i < this.SelectedFile.length ; i++){
+                    const formData = new FormData();
+                    formData.append('image', this.SelectedFile[i].file);
+                    formData.append('product_id', this.ProductId.product_id);
+                    formData.append('review_id', this.ReviewId);
+                    console.log(formData.has('image'))
+                    this.$axios
+                        .post(`${this.$domain}/reviewimage/save`, formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                        
+                }       
+                alert('리뷰 작성이 완료 되었습니다.');  
+                this.$router.push("/shipping"); 
+            } 
+        },
     }
 };
 </script>
