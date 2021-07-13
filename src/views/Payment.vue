@@ -366,6 +366,7 @@ export default {
           .then((res) => {
             //console.log(res.data);
             this.productdetail = res.data;
+            console.log(this.productdetail)
           })
           .catch((err) => {
             console.log(err);
