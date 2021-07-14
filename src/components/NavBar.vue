@@ -126,7 +126,7 @@
             >({{ $store.getters["cart/getCartLength"] }})</span
           >
 
-          <router-link to="/mypage">
+          <router-link to="/mypage/dashboard">
             <button
               v-if="$store.getters['auth/loggedIn']"
               type="button"
