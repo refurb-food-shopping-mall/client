@@ -20,6 +20,7 @@ import SignUp from '../views/Auth/SignUp'
 
 // MyPage
 import MyPageIndex from '../views/MyPage/_index'
+import MyPageDashBoard from '../views/MyPage/DashBoard'
 import MyPageDeleteAccount from '../views/MyPage/DeleteAccount'
 import MyPageUserProfileUpdate from '../views/MyPage/UserProfileUpdate'
 
@@ -115,6 +116,7 @@ const routes = [
     component: MyPageIndex,
     beforeEnter: isLoggedIn,
     children: [
+      { path: 'dashboard', component: MyPageDashBoard },
       { path: 'profileupdate', component: MyPageUserProfileUpdate },
       { path: 'cart', component: Cart },
       { path: 'cancel', component: Cancel },

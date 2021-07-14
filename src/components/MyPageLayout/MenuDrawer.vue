@@ -23,8 +23,8 @@ export default {
       currentSelectdMenuIdx: 0,
       menuLinks: [
         {
-          url: '/mypage',
-          name: '주문 조회'
+          url: '/mypage/dashboard',
+          name: '내 정보'
         },
         {
           url: '/cart',
