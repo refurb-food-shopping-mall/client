@@ -16,7 +16,7 @@
             <div class="carousel-inner">
               <div
                 v-for="(product_img, idx) in product.product_images"
-                :key="'product_img'+idx"
+                :key="'product_img' + idx"
               >
                 <div
                   class="carousel-item"
@@ -82,7 +82,7 @@
                   >수량 선택</label
                 >
                 <select
-                  v-model="selectedQty"
+                  v-model.number="quantity"
                   class="form-select"
                   id="exampleSelect1"
                 >
@@ -93,12 +93,14 @@
                   <option>5</option>
                 </select>
               </div>
-              <p class="card-text" style="text-align: right">배송 예정일 : 1일</p>
+              <p class="card-text" style="text-align: right">
+                배송 예정일 : 1일
+              </p>
             </div>
           </div>
           <div class="d-flex align-items-center">
             <button
-              @click="addProductToCart({ productIdx, selectedQty })"
+              @click="addProductToCart({ productIdx, quantity })"
               type="button"
               class="btn btn-primary mt-3"
             >
@@ -146,29 +148,39 @@
         </button>
         <button type="button" class="btn btn-secondary">리뷰 더보기</button>
       </div>
-      <div class="border-top border-2 border-primary mb-3" ></div>
+      <div class="border-top border-2 border-primary mb-3"></div>
       <div class="container" v-if="!reviews">아직 리뷰가 없습니다.</div>
-      <div class="container" v-for="(review, index) in reviews" :key="'review'+index">
+      <div
+        class="container"
+        v-for="(review, index) in reviews"
+        :key="'review' + index"
+      >
         <div class="row d-flex justify-content-start">
-          <div class="col-4 col-md-2 me-1"><span v-for="(n, i) in review.star_grade" :key="i">★</span>
-          <span v-for="(k, j) in 5-review.star_grade" :key="j">☆</span></div>
-          <div class="col-3 col-md-2 me-1" v-if='reviews'>{{review.user.user_name}}</div>
-          <div class="col-3 col-md-2 me-1">{{review.created_date.slice(0,10)}}</div>
+          <div class="col-4 col-md-2 me-1">
+            <span v-for="(n, i) in review.star_grade" :key="i">★</span>
+            <span v-for="(k, j) in 5 - review.star_grade" :key="j">☆</span>
+          </div>
+          <div class="col-3 col-md-2 me-1" v-if="reviews">
+            {{ review.user.user_name }}
+          </div>
+          <div class="col-3 col-md-2 me-1">
+            {{ review.created_date.slice(0, 10) }}
+          </div>
         </div>
         <div class="row d-flex justify-content-start">
           <div class="col-12 col-md-9 mt-3 me-2" v-if="reviews">
-            {{review.review_description}}
+            {{ review.review_description }}
           </div>
-          <img v-if="review"
+          <img
+            v-if="review"
             :src="getImgUrl(review.t_review_images[0])"
             class="img-fluid col-12 col-md-2"
             alt="..."
           />
         </div>
-      <div class="border-top border-primary my-3" v-if='index == 0'></div>
-
+        <div class="border-top border-primary my-3" v-if="index == 0"></div>
       </div>
-      
+
       <div class="border-top border-2 border-primary my-3"></div>
     </div>
 
@@ -193,15 +205,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(qna, index) in qnas" :key="'qna'+index">
+          <tr v-for="(qna, index) in qnas" :key="'qna' + index">
             <th scope="row" v-if="qna.answer_status == 1">처리 중</th>
             <th scope="row" v-else>답변 완료</th>
             <td>
-              <a href=#>{{qna.q_title}}</a>
+              <a href="#">{{ qna.q_title }}</a>
             </td>
-            <td>{{qna.user.user_name}}</td>
-            <td>{{qna.q_created.slice(0,10)}}</td>
-          </tr>          
+            <td>{{ qna.user.user_name }}</td>
+            <td>{{ qna.q_created.slice(0, 10) }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -231,7 +243,7 @@ export default {
       reviews: [],
       qnas: [],
       productIdx: this.$route.params.id,
-      selectedQty: 1,
+      quantity: 1,
       currentImgIdx: 0
     };
   },
@@ -297,5 +309,4 @@ export default {
 .img-container {
   text-align: center;
 }
-
 </style>
