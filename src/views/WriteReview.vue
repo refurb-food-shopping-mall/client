@@ -135,7 +135,7 @@ export default {
         //유저정보를 가져오는 함수
         async GetUserProfile(){
             await this.$axios({
-                url: `${this.$domain}/auth/user`,
+                url: `${this.$domain}/userinfo`,
                 method: 'get',         
                 headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
             })
@@ -209,11 +209,13 @@ export default {
             // console.log(this.SelectedFile);
             //    console.log(this.SelectedFile)
         }, 
+
         //첨부된 이미지의 미리보기에서 x버튼을 클릭했을 때 실행할 함수
         DeleteSelectedFile(i){
             this.SelectedFile.splice(i, 1)
         },
-        //리뷰 등록 버튼을 클릭했을 때 실행할 함수
+
+        //리뷰 등록시 포인트 지급
         ReviewPoint(point){
             this.$axios
                 .post(`${this.$domain}/user/reviewpoint`, {
@@ -264,10 +266,17 @@ export default {
                                     headers: {
                                         'Content-Type': 'multipart/form-data'
                                 }
+                            })
+                            .then((res) => {
+                                if(res.data.success == true){
+                                    alert('리뷰 작성이 완료 되었습니다.');  
+                                    this.$router.push("/shipping"); 
+                                }
                             })    
+                            .catch((err) => {
+                                console.log(err)
+                            })
                     }       
-                    alert('리뷰 작성이 완료 되었습니다.');  
-                    this.$router.push("/shipping"); 
                 } catch (err) {
                     console.log(err);
                 }
