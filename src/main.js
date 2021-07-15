@@ -3,14 +3,14 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import 'bootstrap/js/dist/carousel.js'
+import 'bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootswatch/dist/minty/bootstrap.min.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faShoppingCart, faUser, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faShoppingCart, faUser, faSearch, faTruck, faTags, faWonSign } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import axios from 'axios';
 
-library.add(faUserSecret, faShoppingCart, faUser, faSearch)
+library.add(faUserSecret, faShoppingCart, faUser, faSearch, faTruck, faTags, faWonSign)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

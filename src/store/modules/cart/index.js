@@ -29,9 +29,11 @@ export default {
     DECREASE_PRODUCT_QTY(state, { cartArrIdx, quantity }) {
       const productInfo = state.cart[cartArrIdx]
 
-      productInfo.productQty += Number(quantity)
-
-      state.cart.splice(cartArrIdx, 1, productInfo)
+      if(productInfo.productQty != 1){
+        productInfo.productQty += Number(quantity)
+        state.cart.splice(cartArrIdx, 1, productInfo)
+      }
+      
     },
     INCREASE_SUM_OF_QTY(state, quantity) {
       state.cartSumOfQuantity += Number(quantity)

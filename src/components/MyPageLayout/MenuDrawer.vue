@@ -23,23 +23,19 @@ export default {
       currentSelectdMenuIdx: 0,
       menuLinks: [
         {
-          url: '/mypage',
-          name: '주문 조회'
+          url: '/mypage/dashboard',
+          name: '쇼핑 대시보드'
         },
         {
           url: '/cart',
           name: '장바구니'
         },
         {
-          url: '/cancel',
-          name: '취소 조회'
+          url: '/shipping',
+          name: '주문 조회'
         },
         {
-          url: '/mypage',
-          name: '적립금'
-        },
-        {
-          url: '/mypage',
+          url: '/mypage/questions',
           name: '1:1 문의'
         },
         {

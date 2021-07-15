@@ -183,7 +183,7 @@
       <div class="text-dark fw-bold fs-5 pt-4">결제 정보</div>
     </div>
     <label for="exampleInputEmail1" class="form-label mt-4 text-dark pb-1"
-      >적립금 (보유 적립금 {{this.user.user_point_money.toLocaleString("ko-KR")}}원)</label
+      >적립금 (보유 적립금 {{Number(user.user_point_money).toLocaleString("ko-KR")}}원)</label
     >
     <div class="row form-group border-bottom border-2 pb-4">
       <div class="col-9 col-md-10">
@@ -199,11 +199,11 @@
     <div>
       <div class="row pt-3">
         <div class="col-6 text-dark">상품 합계</div>
-        <div class="col-6 text-dark text-end fw-bolder">{{this.totalprice.toLocaleString("ko-KR")}}원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{totalprice.toLocaleString("ko-KR")}}원</div>
       </div>
       <div class="row pt-3">
         <div class="col-6 text-dark">배송비</div>
-        <div class="col-6 text-dark text-end fw-bolder">{{this.totaldeliveryprice.toLocaleString("ko-KR")}}원</div>
+        <div class="col-6 text-dark text-end fw-bolder">{{totaldeliveryprice.toLocaleString("ko-KR")}}원</div>
       </div>
       <div class="row pt-3 pb-3 border-bottom border-2">
         <div class="col-6 text-dark">총 할인 금액</div>
@@ -211,7 +211,7 @@
       </div>
       <div class="row pt-3 pb-3">
         <div class="col-6 text-dark fw-bolder align-self-center">결제 금액</div>
-        <div class="col-6 text-primary text-end fs-5 fw-bolder">{{(totalprice + totaldeliveryprice - orderinfo.used_point).toLocaleString("ko-KR")}}원</div>
+        <div class="col-6 text-primary text-end fs-5 fw-bolder">{{totalprice + totaldeliveryprice - orderinfo.used_point}}원</div>
       </div>
     </div>
     <div class="row border-top border-5">
@@ -266,7 +266,7 @@
     <!-- <router-link to="/paymentdetail"> -->
       <div class="row pt-3">
         <button type="button" class="btn btn-primary btn-lg pb-3 pt-3" @click="Order()">
-          {{(totalprice + totaldeliveryprice - orderinfo.used_point).toLocaleString("ko-KR")}}원 결제하기
+          {{totalprice + totaldeliveryprice - orderinfo.used_point}}원 결제하기
         </button>
       </div>
     <!-- </router-link> -->
@@ -337,21 +337,44 @@ export default {
     this.GetUserDetailInfo();
     this.GetTotalPriceProductInfo();
   },
-  methods: {
+  methods: {  
       //유저정보를 가져오는 함수
       async GetUserProfile(){
           await this.$axios({
-              url: `${this.$domain}/auth/user`,
+              url: `${this.$domain}/userinfo`,
               method: 'get',         
               headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
           })
           .then((res) => {
             this.user = res.data.user;
-            //console.log(this.user);
+            console.log(this.user);
+            
           })
           .catch((err) => {
             console.log(err);
           }) 
+      },
+
+      // 유저의 기본배송지를 가져오는 함수
+      GetDefaultAddress(){
+        this.$axios
+          .post(`${this.$domain}/address/default`, { 
+            userid : this.user.id,
+            default_address : 1
+          })
+          .then((res) => {
+            this.userdefaultaddress = res.data;
+            // console.log(this.userdefaultaddress);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      },
+
+      // GetUserProfile -> GetDefaultAddress 동기적 처리함수
+      async GetUserDetailInfo(){
+        await this.GetUserProfile();
+        this.GetDefaultAddress();
       },
 
       //상품정보와 썸네일이미지를 가져오는 함수
@@ -366,6 +389,7 @@ export default {
           .then((res) => {
             //console.log(res.data);
             this.productdetail = res.data;
+            console.log(this.productdetail)
           })
           .catch((err) => {
             console.log(err);
@@ -405,27 +429,9 @@ export default {
         this.orderinfo.used_point = this.user.user_point_money
       },
 
-      // 유저의 기본배송지를 가져오는 함수
-      GetDefaultAddress(){
-        this.$axios
-          .post(`${this.$domain}/address/default`, { 
-            userid : this.user.id,
-            default_address : 1
-          })
-          .then((res) => {
-            this.userdefaultaddress = res.data;
-            // console.log(this.userdefaultaddress);
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      },
+      
 
-      // GetUserProfile -> GetDefaultAddress 동기적 처리함수
-      async GetUserDetailInfo(){
-        await this.GetUserProfile();
-        this.GetDefaultAddress();
-      },
+      
 
       // 기본배송지 radio버튼을 클릭하였을 때 실행될 함수
       AlterStatusDefaultAddress(){

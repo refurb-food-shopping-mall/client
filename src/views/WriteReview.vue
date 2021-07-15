@@ -57,6 +57,7 @@
                 style="display: none" 
                 @change="OnImageSelected" 
                 type="file" id="formFile"
+                accept="image/*"
                 ref="fileInput"
             >            
             <button 
@@ -97,7 +98,10 @@
             <div class="col-6">
                 <button type="button" @click="SaveReview" class="col-6 btn btn-outline-primary btn-lg ml-5" style="max-width: 50%;">등록</button>
             </div>
-        </div>            
+        </div>     
+        <!-- <div>
+            <img :src="this.imageurl">
+        </div>        -->
     </div>
 </template>
 
@@ -119,23 +123,25 @@ export default {
             SelectedFile : [],
             ReviewId : 0,
             reviewpath : "",
-            image : ""
+            image : "",
+            // imageurl : ""
         }
     },
     created(){
+        // this.getimagetest();
         this.GetProductDetail()
     },
     methods : {
         //유저정보를 가져오는 함수
         async GetUserProfile(){
             await this.$axios({
-                url: `${this.$domain}/auth/user`,
+                url: `${this.$domain}/userinfo`,
                 method: 'get',         
                 headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
             })
             .then((res) => {
                 this.user = res.data.user;
-                console.log(this.user);
+                // console.log(this.user);
             })
             .catch((err) => {
                 console.log(err);
@@ -193,6 +199,7 @@ export default {
                 const file = event.target.files[0]
                 // console.log(file);
                 this.image = URL.createObjectURL(file)
+                console.log(this.image)
                 this.SelectedFile.push({
                 file : event.target.files[0],
                 preview : this.image
@@ -202,11 +209,13 @@ export default {
             // console.log(this.SelectedFile);
             //    console.log(this.SelectedFile)
         }, 
+
         //첨부된 이미지의 미리보기에서 x버튼을 클릭했을 때 실행할 함수
         DeleteSelectedFile(i){
             this.SelectedFile.splice(i, 1)
         },
-        //리뷰 등록 버튼을 클릭했을 때 실행할 함수
+
+        //리뷰 등록시 포인트 지급
         ReviewPoint(point){
             this.$axios
                 .post(`${this.$domain}/user/reviewpoint`, {
@@ -217,6 +226,7 @@ export default {
                     console.log(err);
                 })
         },
+        //리뷰 저장 
         async SaveReview(){
             if(this.ReviewTitle == "" || this.StarGrade == 0 || this.ReviewDescription == ""){
                 alert('사진업로드를 제외한 리뷰관련부분을 작성해주세요');
@@ -243,28 +253,45 @@ export default {
                 this.$router.push("/shipping");
             }  
             else{
-                this.ReviewPoint(200);          
-                for(let i = 0 ; i < this.SelectedFile.length ; i++){
-                    const formData = new FormData();
-                    formData.append('image', this.SelectedFile[i].file);
-                    formData.append('product_id', this.ProductId.product_id);
-                    formData.append('review_id', this.ReviewId);
-                    console.log(formData.has('image'))
-                    this.$axios
-                        .post(`${this.$domain}/reviewimage/save`, formData, {
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        })
-                        
-                }       
-                alert('리뷰 작성이 완료 되었습니다.');  
-                this.$router.push("/shipping"); 
+                try {
+                    this.ReviewPoint(200);          
+                    for(let i = 0 ; i < this.SelectedFile.length ; i++){
+                        const formData = new FormData();
+                        formData.append('image', this.SelectedFile[i].file);
+                        formData.append('product_id', this.ProductId.product_id);
+                        formData.append('review_id', this.ReviewId);
+                        console.log(formData.has('image'))
+                        this.$axios
+                            .post(`${this.$domain}/reviewimage/save`, formData, {
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data'
+                                }
+                            })
+                            .then((res) => {
+                                if(res.data.success == true){
+                                    alert('리뷰 작성이 완료 되었습니다.');  
+                                    this.$router.push("/shipping"); 
+                                }
+                            })    
+                            .catch((err) => {
+                                console.log(err)
+                            })
+                    }       
+                } catch (err) {
+                    console.log(err);
+                }
+                
             } 
-        },
+        }
+
+        // getimagetest(){
+        //     this.$axios
+        //     .post(`${this.$domain}/review/image`, {review_id : 121})
+        //     .then(res => {
+        //         console.log(res.data)
+        //         this.imageurl = res.data.result
+        //     })
+        // }
     }
 };
 </script>
