@@ -8,7 +8,7 @@
           id="profile"
           src="https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
         />
-        <div style="text-align:center">{{address.receiver}}님</div>
+        <div style="text-align:center">{{this.user.user_name}}님</div>
       </div>
 
       <div id="rightside" class="col-12 col-md-9 ">
@@ -36,7 +36,7 @@
           ></div>
         </div>
         <div class="row ">
-          <div class="col-2 d-none d-lg-block text-center">20553121050</div>
+          <div class="col-2 d-none d-lg-block text-center">{{orderinfo.order_number}}</div>
           <div class="col-4">
             <div class="row">
               <div class="col-3 text-center">
@@ -85,7 +85,7 @@
           ></div>
         </div>
         <div class="row text-center">
-          <div class="col-4 d-lg-none">20553121050</div>
+          <div class="col-4 d-lg-none">{{orderinfo.order_number}}</div>
           <div class="col-8">
             <div class="row">
               <div class="col-3 d-lg-none">
@@ -311,21 +311,18 @@ export default {
       product: {},
       orderinfo:{},
       address:{},
+      user:{},
     };
   },
   mounted() {
-    //this.getOrder();
-    //this.getAddress();
     this.Get1();
-    //this.getProduct();
+    this.GetUserProfile();
   },
   methods: {    
     //주문정보 가져오는 함수
     async getOrder() {
       await this.$axios
-        .post(`http://localhost:3000/api/getOrder`, {
-          id: 1,
-        })
+        .post(`${this.$domain}/paymentdetail/${this.$route.params.id}`)
         .then((res) => {
           this.orderinfo = res.data.getorder[0];
           //console.log(this.orderinfo);
@@ -358,6 +355,21 @@ export default {
           this.product = res.data.getproduct[0];
           //console.log(this.product);
         });
+    },
+    //유저정보를 가져오는 함수
+    async GetUserProfile(){
+        await this.$axios({
+            url: `${this.$domain}/userinfo`,
+            method: 'get',         
+            headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+        })
+        .then((res) => {
+            this.user = res.data.user;
+            //console.log(this.user);
+        })
+        .catch((err) => {
+            console.log(err);
+        }) 
     },
     
   }
