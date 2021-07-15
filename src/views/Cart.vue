@@ -235,10 +235,17 @@ export default {
       //상품 수량에서 +, - 버튼을 눌렀을 때 실행될 함수
       calculatecount(num, i){
         let previousnum = this.$store.state.cart.cart[i].productQty
-        this.$store.commit('cart/CARCULATE_COUNT',{
-          num : num,
-          i : i
-        });       
+        if(num == 1){
+          this.$store.commit('cart/INCREASE_PRODUCT_QTY',{
+            quantity : num,
+            cartArrIdx : i
+          }); 
+        } else if (num == -1) {
+          this.$store.commit('cart/DECREASE_PRODUCT_QTY',{
+            quantity : num,
+            cartArrIdx : i
+          }); 
+        }
         if(previousnum > 1){
           this.totalprice = this.totalprice + this.productdetail[i].product_price * num;
         }
@@ -251,7 +258,7 @@ export default {
       },
       //삭제버튼을 클릭했을 떄 실행될 함수
       deleteproduct(i){
-        this.$store.commit('cart/DELETE_PRODUCT', i);
+        this.$store.commit('cart/DELETE_PRODUCT_FROM_CART', i);
         this.productdetail.splice(i, 1);
         this.totalprice = 0;
         this.totaldeliveryprice = 0;
