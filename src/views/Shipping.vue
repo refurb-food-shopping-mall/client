@@ -9,7 +9,7 @@
             id="profile"
             src="https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg"
           />
-          <div style="text-align: center">{{$store.state.user.userName}}님</div>
+          <div style="text-align: center">{{this.user.user_name}}님</div>
         </div>
         <!-- ------------------------------------------------------------------------------------ -->
         <div
@@ -149,6 +149,69 @@
         </div>
         <!-- LIST pc end -->
         <div id="row2_items" class="col-lg-9">
+          
+          <div :key="i" v-for="(order, i) in getorders" class="row d-flex align-items-center">
+            <div class="col-3">
+              <img
+                class="img-fluid"
+                src="@/assets/onion2.jpg"
+              />
+            </div>
+            <div class="col-6">
+              <router-link
+                :to="`/paymentdetail/${order.id}`"
+                class="logo">
+                  <div class="fs-5 text-muted" style="cursor: pointer">{{order.key.product_name}}</div>
+                </router-link>              
+              <div>{{order.ordered_day.split('T')[0]}}</div>
+              <div>{{(order.key.product_price*order.product_amount + order.key.delivery_price + order.key.add_delivery_price).toLocaleString('ko-KR')}}원</div>
+              <div class="text-secondary">{{order.order_status}}</div>
+            </div>
+            <div class="col-3 text-center">
+              <div>
+                <button type="button" class="btn btn-primary" v-if="order.order_status=='입금대기' || order.order_status=='배송준비중'">
+                  주문취소
+                </button>
+                <button type="button" class="btn btn-primary" v-else-if="order.order_status=='배송중'">
+                  배송조회
+                </button>
+                <button type="button" class="btn btn-primary" v-else-if="order.order_status=='배송완료'">
+                  교환/반품요청
+                </button>
+              </div>
+              <div class="mt-3"></div>
+              <div>
+                <!-- <router-link to="/paymentdetail"> -->
+                <router-link
+                :to="`/writereview/${order.id}`"
+                class="btn btn-primary"
+                v-if="order.order_status=='배송완료'"
+                >리뷰쓰기</router-link>
+                <router-link
+                :to="`/paymentdetail/${order.id}`"
+                class="btn btn-primary"
+                v-else
+                >결제상세</router-link>
+                  <!-- <button type="button" class="btn btn-primary" v-if="order.order_status=='배송완료'">
+                    리뷰쓰기
+                  </button>
+                  <button type="button" class="btn btn-primary" v-else>
+                    결제상세
+                  </button> -->
+                <!-- </router-link> -->
+              </div>
+            </div>
+            <div id="line" class="row">
+            <div
+              class="col-12 mt-4 mb-4"
+              style="border-bottom: 1px solid mediumaquamarine"
+            ></div>
+          </div>
+          </div>
+
+
+
+
           <div class="row d-flex align-items-center">
             <div class="col-3">
               <img
@@ -157,7 +220,7 @@
               />
             </div>
             <div class="col-6">
-              <div class="fs-5">무안 양파 5kg/10kg/15kg</div>
+              <div class="fs-5">YY무안 양파 5kg/10kg/15kg</div>
               <div>2021.05.05</div>
               <div>5,000원</div>
               <div class="text-secondary">배송중</div>
@@ -182,6 +245,7 @@
               style="border-bottom: 1px solid mediumaquamarine"
             ></div>
           </div>
+
           <!-- Add a new item here. -->
           <div class="row d-flex align-items-center">
             <div class="col-3">
@@ -191,41 +255,7 @@
               />
             </div>
             <div class="col-6">
-              <div class="fs-5">무안 양파 5kg/10kg/15kg</div>
-              <div>2021.05.06</div>
-              <div>5,000원</div>
-              <div class="text-secondary">배송중</div>
-            </div>
-            <div class="col-3 text-center">
-              <div>
-                <button type="button" class="btn btn-primary">배송조회</button>
-              </div>
-              <div class="mt-3"></div>
-              <div>
-                <router-link to="/paymentdetail">
-                  <button type="button" class="btn btn-primary">
-                    결제상세
-                  </button>
-                </router-link>
-              </div>
-            </div>
-          </div>
-          <div id="line" class="row">
-            <div
-              class="col-12 mt-4 mb-4"
-              style="border-bottom: 1px solid mediumaquamarine"
-            ></div>
-          </div>
-          <!-- Add a new item here. -->
-          <div class="row d-flex align-items-center">
-            <div class="col-3">
-              <img
-                class="img-fluid"
-                src="@/assets/onion2.jpg"
-              />
-            </div>
-            <div class="col-6">
-              <div class="fs-5">무안 양파 5kg/10kg/15kg</div>
+              <div class="fs-5">YY무안 양파 5kg/10kg/15kg</div>
               <div>2021.05.01</div>
               <div>5,000원</div>
               <div>배송완료</div>
@@ -236,13 +266,13 @@
                   교환/반품요청
                 </button>
               </div>
-              <!-- mobile -->
+              <!-- mobile s -->
               <div class="d-lg-none">
                 <button type="button" class="btn btn-primary">
                   교환/<br />반품요청
                 </button>
               </div>
-              <!-- mobile -->
+              <!-- mobile e -->
               <div class="mt-3"></div>
               <div>
                 <router-link to="/writereview">
@@ -277,15 +307,17 @@
 export default {
   data() {
     return {
-      oday:{},
-      getorders:{},
+      getorders:[],
       date1:'',
       date2:'',
       date3:'',
+      product:{},
+      user:{},
     };
   },
   mounted() {
     //this.getget();
+    this.GetUserProfile();
   },
   methods: {
     searchList(){
@@ -305,18 +337,34 @@ export default {
 
       this.getorders = this.getget(params);
     },
-    //
-    getget(params) {
+    //기간과 유저에 따른 상품정보 가져오는 함수
+    async getget(params) {
       console.log(params);
-      this.$axios
+      await this.$axios
         .post(`http://localhost:3000/api/getDate`, {
-          dayarr: [this.date1, this.date3]
+          dayarr: [this.date1, this.date3],
+          user_id: this.user.id
         })
         .then((res) => {
-          this.getorders = res.data.getgett;
+          this.getorders = res.data.arr;
           console.log(this.getorders);
-        })  
+        })
     },
+    //유저정보를 가져오는 함수
+        async GetUserProfile(){
+            await this.$axios({
+                url: `${this.$domain}/userinfo`,
+                method: 'get',         
+                headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+            })
+            .then((res) => {
+                this.user = res.data.user;
+                console.log(this.user);
+            })
+            .catch((err) => {
+                console.log(err);
+            }) 
+        },
   }
 };
 </script>
@@ -327,6 +375,10 @@ export default {
   border-color: palevioletred;
   background-color: rgb(214, 214, 214);
   text-align: center;
+  color:rgb(80, 80, 80)
   /* border border-primary */
+}
+.logo{
+text-decoration: none;
 }
 </style>
