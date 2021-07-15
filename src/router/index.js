@@ -94,7 +94,7 @@ const routes = [
     beforeEnter: ifAlreadyLoggedInRedirectHome
   },
   {
-    path: '/paymentdetail',
+    path: '/paymentdetail/:id',
     name: 'PaymentDetail',
     component: PaymentDetail,
     beforeEnter: isLoggedIn
