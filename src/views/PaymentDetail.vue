@@ -40,16 +40,25 @@
           <div class="col-4">
             <div class="row">
               <div class="col-3 text-center">
-                <img
-                  class="rounded d-none d-lg-block"
-                  width="65"
-                  height="65"
-                  src="@/assets/onion2.jpg"
-                />
-              </div>
-              <div class="col-9 d-none d-lg-block text-center">
+                <router-link
+                :to="`/product/${orderinfo.product_id}`"
+                class="logo">
+                  <img
+                    class="rounded d-none d-lg-block"
+                    width="65"
+                    height="65"
+                    :src="getImgUrl()"
+                  />
+                </router-link>
+              </div>              
+              <div class="col-9 d-none d-lg-block text-center ">
+                <router-link
+                :to="`/product/${orderinfo.product_id}`"
+                class="logo text-muted">
                 {{product.product_name}}
+                </router-link>
               </div>
+              
             </div>
           </div>
           <div class="col-2 d-none d-lg-block text-center">
@@ -356,6 +365,12 @@ export default {
           //console.log(this.product);
         });
     },
+    //상품사진
+    getImgUrl() {
+      let pic = this.product.t_product_images[0].path.split("/")[2];
+      //console.log(pic);
+      return require("../assets/" + pic);
+    },
     //유저정보를 가져오는 함수
     async GetUserProfile(){
         await this.$axios({
@@ -383,5 +398,8 @@ export default {
   background-color: rgb(214, 214, 214);
   text-align: center;
   /* border border-primary */
+}
+.logo{
+text-decoration: none;
 }
 </style>
