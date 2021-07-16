@@ -11,17 +11,33 @@
           />
           <div style="text-align: center">{{this.user.user_name}}님</div>
         </div>
-        <!-- ------------------------------------------------------------------------------------ -->
+
         <div
           id="row1_statebox"
           class="col-12 col-lg-9 border-top border-bottom border-primary"
         >
           <div class="row text-center mt-2">
+            <div class="col-4"><strong>배송준비중</strong></div>
             <div class="col-4"><strong>배송중</strong></div>
-            <div class="col-4"><strong>배송완료</strong></div>
-            <div class="col-4"><strong>교환/반품</strong></div>
+            <div class="col-4"><strong>교환/반품요청</strong></div>
           </div>
           <div class="row mt-3">
+            <div class="col-4">
+              <div class="row">
+                <div class="col-8 d-flex justify-content-end">
+                  <img
+                    class="img-fluid"
+                    src="https://image.flaticon.com/icons/png/512/814/814989.png"
+                    style="height:130px"
+                  />
+                </div>
+                <div
+                  class="col-4 d-flex align-items-center text-secondary fs-1"
+                >
+                  {{this.cntarr[0]}}
+                </div>
+              </div>
+            </div>
             <div class="col-4">
               <div class="row">
                 <div class="col-8 d-flex justify-content-end">
@@ -33,22 +49,7 @@
                 <div
                   class="col-4 d-flex align-items-center text-secondary fs-1"
                 >
-                  2
-                </div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col-8 d-flex justify-content-end">
-                  <img
-                    class="img-fluid"
-                    src="https://image.flaticon.com/icons/png/128/869/869129.png"
-                  />
-                </div>
-                <div
-                  class="col-4 d-flex align-items-center text-secondary fs-1"
-                >
-                  1
+                  {{this.cntarr[1]}}
                 </div>
               </div>
             </div>
@@ -63,7 +64,7 @@
                 <div
                   class="col-4 d-flex align-items-center text-secondary fs-1"
                 >
-                  0
+                  {{this.cntarr[2]}}
                 </div>
               </div>
             </div>
@@ -152,10 +153,11 @@
           
           <div :key="i" v-for="(order, i) in getorders" class="row d-flex align-items-center">
             <div class="col-3">
-              <img
-                class="img-fluid"
-                src="@/assets/onion2.jpg"
-              />
+              <router-link
+                :to="`/paymentdetail/${order.id}`"
+                class="logo">            
+              <img :src="getImgUrl(order)" class="img-fluid" style="cursor: pointer"/>
+              </router-link>
             </div>
             <div class="col-6">
               <router-link
@@ -169,7 +171,7 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary" v-if="order.order_status=='입금대기' || order.order_status=='배송준비중'">
+                <button type="button" class="btn btn-primary" v-if="order.order_status=='입금대기'">
                   주문취소
                 </button>
                 <button type="button" class="btn btn-primary" v-else-if="order.order_status=='배송중'">
@@ -180,25 +182,19 @@
                 </button>
               </div>
               <div class="mt-3"></div>
-              <div>
-                <!-- <router-link to="/paymentdetail"> -->
+              <div>  
                 <router-link
-                :to="`/writereview/${order.id}`"
-                class="btn btn-primary"
-                v-if="order.order_status=='배송완료'"
-                >리뷰쓰기</router-link>
+                  :to="`/writereview/${order.id}`"
+                  class="btn btn-primary"
+                  v-if="order.order_status=='배송완료'"
+                  >리뷰쓰기
+                </router-link>
                 <router-link
-                :to="`/paymentdetail/${order.id}`"
-                class="btn btn-primary"
-                v-else
-                >결제상세</router-link>
-                  <!-- <button type="button" class="btn btn-primary" v-if="order.order_status=='배송완료'">
-                    리뷰쓰기
-                  </button>
-                  <button type="button" class="btn btn-primary" v-else>
-                    결제상세
-                  </button> -->
-                <!-- </router-link> -->
+                  :to="`/paymentdetail/${order.id}`"
+                  class="btn btn-primary"
+                  v-else
+                  >결제상세
+                </router-link>                  
               </div>
             </div>
             <div id="line" class="row">
@@ -210,79 +206,67 @@
           </div>
 
 
-
-
-          <div class="row d-flex align-items-center">
+          <!-- hello -->
+          <div v-if="isStatusOn">
+          
+          <div :key="'rorder'+j" v-for="(rorder, j) in recentorderarr" class="row d-flex align-items-center">
             <div class="col-3">
-              <img
-                class="img-fluid"
-                src="@/assets/onion2.jpg"
-              />
+              <router-link
+                :to="`/paymentdetail/${rorder.id}`"
+                class="logo">            
+              <img :src="getImgUrl(rorder)" class="img-fluid" style="cursor: pointer"/>
+              </router-link>
             </div>
             <div class="col-6">
-              <div class="fs-5">YY무안 양파 5kg/10kg/15kg</div>
-              <div>2021.05.05</div>
-              <div>5,000원</div>
-              <div class="text-secondary">배송중</div>
+              <router-link
+                :to="`/paymentdetail/${rorder.id}`"
+                class="logo">
+                  <div class="fs-5 text-muted" style="cursor: pointer">{{rorder.key.product_name}}</div>
+                </router-link>              
+              <div>{{rorder.ordered_day.split('T')[0]}}</div>
+              <div>{{(rorder.key.product_price*rorder.product_amount + rorder.key.delivery_price + rorder.key.add_delivery_price).toLocaleString('ko-KR')}}원</div>
+              <div class="text-secondary">{{rorder.order_status}}</div>
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary">배송조회</button>
-              </div>
-              <div class="mt-3"></div>
-              <div>
-                <router-link to="/paymentdetail">
-                  <button type="button" class="btn btn-primary">
-                    결제상세
-                  </button>
-                </router-link>
-              </div>
-            </div>
-          </div>
-          <div id="line" class="row">
-            <div
-              class="col-12 mt-4 mb-4"
-              style="border-bottom: 1px solid mediumaquamarine"
-            ></div>
-          </div>
-
-          <!-- Add a new item here. -->
-          <div class="row d-flex align-items-center">
-            <div class="col-3">
-              <img
-                class="img-fluid"
-                src="@/assets/onion2.jpg"
-              />
-            </div>
-            <div class="col-6">
-              <div class="fs-5">YY무안 양파 5kg/10kg/15kg</div>
-              <div>2021.05.01</div>
-              <div>5,000원</div>
-              <div>배송완료</div>
-            </div>
-            <div class="col-3 text-center">
-              <div class="d-none d-lg-block">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" v-if="rorder.order_status=='입금대기'">
+                  주문취소
+                </button>
+                <button type="button" class="btn btn-primary" v-else-if="rorder.order_status=='배송중'">
+                  배송조회
+                </button>
+                <button type="button" class="btn btn-primary" v-else-if="rorder.order_status=='배송완료'">
                   교환/반품요청
                 </button>
               </div>
-              <!-- mobile s -->
-              <div class="d-lg-none">
-                <button type="button" class="btn btn-primary">
-                  교환/<br />반품요청
-                </button>
-              </div>
-              <!-- mobile e -->
               <div class="mt-3"></div>
-              <div>
-                <router-link to="/writereview">
-                  <button type="button" class="btn btn-primary">
-                    리뷰쓰기
-                  </button>
+              <div>  
+                <router-link
+                  :to="`/writereview/${rorder.id}`"
+                  class="btn btn-primary"
+                  v-if="rorder.order_status=='배송완료'"
+                  >리뷰쓰기
                 </router-link>
+                <router-link
+                  :to="`/paymentdetail/${rorder.id}`"
+                  class="btn btn-primary"
+                  v-else
+                  >결제상세
+                </router-link>                  
               </div>
             </div>
+            <div id="line" class="row">
+              <div
+                class="col-12 mt-4 mb-4"
+                style="border-bottom: 1px solid mediumaquamarine"
+              ></div>
+            </div>
+
           </div>
+
+          </div>
+
+          
           <!-- Add a new item here. -->
         </div>
         <!-- LIST mobile start -->
@@ -311,16 +295,24 @@ export default {
       date1:'',
       date2:'',
       date3:'',
-      product:{},
       user:{},
+      recentorderarr:[],
+      today:'',
+      back:'',
+      cntarr:[],
+      isStatusOn: true,
     };
   },
   mounted() {
     //this.getget();
-    this.GetUserProfile();
+    //this.GetUserProfile();
+    this.Get1();//GetUserProfile->datecal->recentOrder
+    //this.datecal();
   },
   methods: {
+    //
     searchList(){
+      this.isStatusOn = !this.isStatusOn;
       const params = {
         date1: this.date1,
         date2: this.date2,
@@ -350,21 +342,62 @@ export default {
           console.log(this.getorders);
         })
     },
-    //유저정보를 가져오는 함수
-        async GetUserProfile(){
-            await this.$axios({
-                url: `${this.$domain}/userinfo`,
-                method: 'get',         
-                headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
-            })
-            .then((res) => {
-                this.user = res.data.user;
-                console.log(this.user);
-            })
-            .catch((err) => {
-                console.log(err);
-            }) 
-        },
+  //유저정보를 가져오는 함수
+    async GetUserProfile(){
+        await this.$axios({
+            url: `${this.$domain}/userinfo`,
+            method: 'get',         
+            headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+        })
+        .then((res) => {
+            this.user = res.data.user;
+            console.log(this.user);
+        })
+        .catch((err) => {
+            console.log(err);
+        }) 
+    },
+    //상품사진
+    getImgUrl(order) {
+      let pic = order.key.t_product_images[0].path.split("/")[2];
+      //console.log(pic);
+      return require("../assets/" + pic);
+    },
+    //최근주문들불러오기
+    async recentOrder(){
+      await this.$axios
+        .post(`http://localhost:3000/api/getDate`, {
+          user_id: this.user.id,
+          dayarr: [this.back, this.today],
+        })
+        .then((res) => {
+          this.recentorderarr = res.data.arr;
+          this.cntarr = res.data.cntarr;
+          console.log(this.recentorderarr);
+        });
+    },
+    //날짜계산
+    datecal(){
+      let today = new Date();	//현재날짜
+      let dd = today.getDate() + 1
+      let mm = today.getMonth() + 1
+      let yy = today.getFullYear()
+      this.today = `${yy}-${mm >= 10 ? mm : '0' + mm}-${dd >= 10 ? dd : '0' + dd}`
+
+      let back = new Date(today.setDate(today.getDate() - 30));//30일이내
+      let ddd = back.getDate()
+      let mmm = back.getMonth() + 1
+      let yyy = back.getFullYear()
+      this.back = `${yyy}-${mmm >= 10 ? mmm : '0' + mmm}-${ddd >= 10 ? ddd : '0' + ddd}`
+      console.log(this.back, this.today);
+      this.recentorderarr = this.recentOrder();
+    },
+    //
+    async Get1(){
+        await this.GetUserProfile();
+        this.datecal();
+    },
+  
   }
 };
 </script>
