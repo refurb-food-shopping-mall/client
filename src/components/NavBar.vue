@@ -51,6 +51,16 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto"></ul>
+
+          <div>
+            <router-link class="btn bg-white" style="" to="/cart" role="button">
+              <font-awesome-icon icon="shopping-cart" color="#60be74" />
+              <span class="badge bg-danger mx-2 text-dark">{{
+                $store.getters["cart/getCartLength"]
+              }}</span>
+              <span class="text-dark">내 장바구니</span>
+            </router-link>
+          </div>
         </div>
       </div>
     </nav>
