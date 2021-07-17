@@ -274,6 +274,7 @@ export default {
       currentImgIdx: 0,
       QnaTitle: "",
       QnaDescription: "",
+      user_id: 0,
     };
   },
   mounted() {
@@ -281,6 +282,7 @@ export default {
     // console.log(this.product.product_images[0]);
     this.loadReview();
     this.loadQna();
+    this.getUserId();
   },
   methods: {
     ...mapActions("cart", ["addProductToCart"]),
@@ -328,6 +330,20 @@ export default {
       } else {
         this.currentImgIdx -= 1;
       }
+    },
+    async getUserId() {
+      console.log(this.$store.state.auth.token)
+      await this.$axios({
+        url: `${this.$domain}/dltjddn`,
+        method: 'get',
+        headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+      })
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     },
     async postQna() {
       if(this.QnaTitle == "" || this.QnaDescription ==""){
