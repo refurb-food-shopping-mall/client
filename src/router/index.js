@@ -13,6 +13,8 @@ import PaymentDetail from '../views/PaymentDetail'
 import AddProduct from '../views/AddProduct'
 import WriteReview from '../views/WriteReview'
 import ProductList from '../views/ProductList' //sw
+import AddressList from '../views/AddressList'
+
 
 // Auth
 import LogIn from '../views/Auth/LogIn'
@@ -58,6 +60,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/addresslist',
+    name: 'AddressList',
+    component: AddressList
   },
   {
     path: '/login',
