@@ -52,7 +52,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto"></ul>
 
-          <div>
+          <div v-if="isPageYOffsetBiggerThanHeaderSize">
             <router-link class="btn bg-white" style="" to="/cart" role="button">
               <font-awesome-icon icon="shopping-cart" color="#60be74" />
               <span class="badge bg-danger mx-2 text-dark">{{
@@ -69,8 +69,26 @@
 
 <script>
 export default {
-  mounted() {
-    // console.log(this.$store);
+  data () {
+    return {
+      isPageYOffsetBiggerThanHeaderSize: false
+    };
+  },
+  created () {
+    window.addEventListener('scroll', this.handleScroll, true);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll () {
+      if (window.pageYOffset > 177) {
+        this.isPageYOffsetBiggerThanHeaderSize = true
+      } else {
+        this.isPageYOffsetBiggerThanHeaderSize = false
+      }
+      // console.log(window.pageYOffset, this.isPageYOffsetBiggerThanHeaderSize)
+    }
   },
 };
 </script>
