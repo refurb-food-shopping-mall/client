@@ -188,9 +188,36 @@
       <div class="col d-flex justify-content-center my-3"><h3>Q&A</h3></div>
 
       <div class="col d-flex justify-content-end">
-        <button type="button" class="btn btn-outline-primary me-3">
+        <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           질문 하기
         </button>
+        <!-- 질문하기 Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">질문 올리기</h5>
+                <button @click='resetmodal()' type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">제목</label>
+                    <input v-model="QnaTitle" type="text" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label">내용</label>
+                    <textarea v-model="QnaDescription" class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button @click='resetmodal()' type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button @click='postQna()' type="button" class="btn btn-primary" data-bs-dismiss="modal">질문 등록</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <button type="button" class="btn btn-outline-primary">
           내 질문 보기
         </button>
@@ -198,19 +225,19 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">답변상태</th>
             <th scope="col">제목</th>
+            <th scope="col">답변 상태</th>
             <th scope="col">작성자</th>
             <th scope="col">작성일</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(qna, index) in qnas" :key="'qna' + index">
-            <th scope="row" v-if="qna.answer_status == 1">처리 중</th>
-            <th scope="row" v-else>답변 완료</th>
-            <td>
+            <th>
               <a href="#">{{ qna.q_title }}</a>
-            </td>
+            </th>
+            <td scope="row" v-if="qna.answer_status == 1">처리 중</td>
+            <td scope="row" v-else>답변 완료</td>
             <td>{{ qna.user.user_name }}</td>
             <td>{{ qna.q_created.slice(0, 10) }}</td>
           </tr>
@@ -244,7 +271,9 @@ export default {
       qnas: [],
       productIdx: this.$route.params.id,
       quantity: 1,
-      currentImgIdx: 0
+      currentImgIdx: 0,
+      QnaTitle: "",
+      QnaDescription: "",
     };
   },
   mounted() {
@@ -299,6 +328,31 @@ export default {
       } else {
         this.currentImgIdx -= 1;
       }
+    },
+    async postQna() {
+      if(this.QnaTitle == "" || this.QnaDescription ==""){
+        alert('제목과 내용을 입력해주세요');
+        return
+      }
+      await this.$axios
+        .post(`${this.$domain}/qna/save`, {
+          q_title : this.QnaTitle,
+          q_description : this.QnaDescription,
+          product_id : this.$route.params.id
+        })
+        .then((res) => {
+          this.QnaId = res.data.qna_id
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+      this.QnaTitle = ""
+      this.QnaDescription = ""
+      alert('질문이 등록되었습니다.')
+    },
+    resetmodal() {
+      this.QnaTitle = ""
+      this.QnaDescription = ""
     }
   }
 };
