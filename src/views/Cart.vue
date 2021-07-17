@@ -265,9 +265,9 @@ export default {
         this.TotalPrice();
       },
       getImgUrl(product_image) {
-      let pic = product_image.path.split("/")[2];
-      return require("../assets/" + pic);
-    },
+        let pic = product_image.path.split("/")[2];
+        return require("../assets/" + pic);
+      },
   }
 };
 </script>

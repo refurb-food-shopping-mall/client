@@ -14,7 +14,7 @@
         </div>
         <div class="row pb-4">
             <div class="col-3 d-flex justify-content-center">
-                <img src="@/assets/onion2.jpg" class="img-fluid">
+                <img :src="getImgUrl(this.ThumbnailImage)" class="img-fluid">
             </div>
             <div class="col-9">
                 <div class="text-dark">{{ProductName}}</div>
@@ -153,7 +153,7 @@ export default {
             await this.$axios({
                 url: `${this.$domain}/order/productid`,
                 method: 'post',
-                data: {orderid : 1} //orderid
+                data: {orderid : this.$route.params.id} //orderid
             })
             .then((res) => {
                 //console.log(res.data);
@@ -178,8 +178,13 @@ export default {
                 .post(`${this.$domain}/productimage/thumbnail`, { product_id : this.ProductId.product_id })
                 .then((res) => {
                     this.ThumbnailImage = res.data.thumbnail
-                    //console.log(this.thumbnailimage);
+                    console.log(this.ThumbnailImage);
                 })
+        },
+
+        getImgUrl(product_image) {
+            let pic = product_image.split("/")[2];
+            return require("../assets/" + pic);
         },
         // 동기적처리를 위한 함수
         async GetProductDetail(){
