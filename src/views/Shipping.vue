@@ -171,7 +171,7 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary" v-if="order.order_status=='입금대기'">
+                <button type="button" class="btn btn-primary" v-if="order.order_status=='입금대기' || order.order_status=='배송준비중'">
                   주문취소
                 </button>
                 <button type="button" class="btn btn-primary" v-else-if="order.order_status=='배송중'">
@@ -229,7 +229,7 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary" v-if="rorder.order_status=='입금대기'">
+                <button type="button" class="btn btn-primary" v-if="rorder.order_status=='입금대기'|| rorder.order_status=='배송준비중'">
                   주문취소
                 </button>
                 <button type="button" class="btn btn-primary" v-else-if="rorder.order_status=='배송중'">
