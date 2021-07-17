@@ -10,7 +10,7 @@
       <div class="col-3 col-md-2">
         <a class="align-self-center" style="cursor: pointer"
           ><img
-            src="@/assets/onion2.jpg"
+            :src="getImgUrl(product.t_product_images[0])"
             class="img-fluid"
         /></a>
       </div>
@@ -394,6 +394,11 @@ export default {
           .catch((err) => {
             console.log(err);
           })
+      },
+
+      getImgUrl(product_image) {
+        let pic = product_image.path.split("/")[2];
+        return require("../assets/" + pic);
       },
 
       //vuex의 배열로부터 productIdx만 분리하여 따로 배열에 넣어주는 함수 

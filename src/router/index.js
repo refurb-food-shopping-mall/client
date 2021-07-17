@@ -118,7 +118,7 @@ const routes = [
     component: AddProduct
   },
   {
-    path: '/writereview',
+    path: '/writereview/:id',
     name: 'WriteReview',
     component: WriteReview,
     beforeEnter: isLoggedIn
