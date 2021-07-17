@@ -51,41 +51,6 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto"></ul>
-          <router-link to="/cart" class="px-2 mx-1 btn">
-            <font-awesome-icon icon="shopping-cart" />
-          </router-link>
-
-          <span style="color: red"
-            >({{ $store.getters["cart/getCartLength"] }})</span
-          >
-
-          <router-link to="/mypage/dashboard">
-            <button
-              v-if="$store.getters['auth/loggedIn']"
-              type="button"
-              class="btn btn-light mx-1"
-            >
-              {{ $store.state.user.userName }} 님
-            </button>
-          </router-link>
-
-          <button
-            @click.prevent="userLogout"
-            v-if="$store.getters['auth/loggedIn']"
-            type="button"
-            class="btn btn-primary"
-          >
-            <span>Logout</span>
-          </button>
-
-          <router-link
-            v-if="!$store.getters['auth/loggedIn']"
-            to="/login"
-            class="px-2 mx-1 btn btn-secondary"
-          >
-            <font-awesome-icon icon="user" />
-            <span class="mx-2" style="font-weight: bold"> 로그인 </span>
-          </router-link>
         </div>
       </div>
     </nav>
@@ -97,20 +62,6 @@ export default {
   mounted() {
     // console.log(this.$store);
   },
-  methods: {
-    userLogout() {
-      this.$store.commit("user/SET_USER_INFO", {
-        userName: "",
-        userPhoneNumber: "",
-        userEmail: "",
-        userPointMoney: null
-      });
-      this.$store.commit("auth/SET_TOKEN", "");
-      this.$store.commit("cart/CLEAR_CART");
-      sessionStorage.clear();
-      this.$router.push("/")
-    }
-  }
 };
 </script>
 
