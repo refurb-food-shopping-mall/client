@@ -1,7 +1,7 @@
 <template>
-  <div id="home">
+  <div id="home" class="container">
     <!-- Page Content-->
-    <div class="container px-4 px-lg-5">
+    <div>
       <!-- Carousel -->
       <div class="row gx-4 gx-lg-5 align-items-center my-5">
         <div class="col-lg-5">
@@ -140,6 +140,29 @@
               >
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Brand Info Row -->
+
+      <div class="row gx-4 gx-lg-5 align-items-center my-5">
+        <div class="col-lg-6">
+          <img
+            class="img-fluid rounded mb-4 mb-lg-0"
+            src="@/assets/vegetable_2.jpeg"
+            style="height: 350px"
+          />
+        </div>
+        <div class="col-lg-6">
+          <div class="mb-5">
+            <h1 class="font-weight-light">환경을 생각하는 착한채소</h1>
+          </div>
+          <p>
+            잘 자란 농산물들의 제 가치를 찾아, 음식물 폐기는 줄이고 친환경 땅을 늘림으로써 소비자의 건강한 식탁과 미래를 위한 환경이 지속가능하게 합니다.
+          </p>
+          <router-link class="btn btn-primary" to="/product"
+            >구경하기 🎈</router-link
+          >
         </div>
       </div>
     </div>
