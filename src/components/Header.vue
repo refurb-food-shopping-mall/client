@@ -20,7 +20,14 @@
                 <div class="ms-3">
                   <router-link class="links" to="/"> 결제 </router-link>
                 </div>
-                <div class="ms-3">
+                <div
+                  v-if="$store.getters['auth/loggedIn']"
+                  @click.prevent="userLogout"
+                  class="ms-3"
+                >
+                  <router-link class="links" to="/"> 로그아웃 </router-link>
+                </div>
+                <div v-else class="ms-3">
                   <router-link class="links" to="/login">
                     로그인 & 회원가입
                   </router-link>
@@ -78,7 +85,20 @@
 
 <script>
 export default {
-
+  methods: {
+    userLogout() {
+      this.$store.commit("user/SET_USER_INFO", {
+        userName: "",
+        userPhoneNumber: "",
+        userEmail: "",
+        userPointMoney: null
+      });
+      this.$store.commit("auth/SET_TOKEN", "");
+      this.$store.commit("cart/CLEAR_CART");
+      sessionStorage.clear();
+      this.$router.push("/")
+    }
+  },
 }
 </script>
 
