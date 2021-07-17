@@ -95,7 +95,7 @@ export default {
 
 <style scoped>
 .navbar-inner {
-  background-color: #60be74;
+  background-color: rgb(90, 179, 149);
   border-radius: 10px;
 }
 #navbar {
