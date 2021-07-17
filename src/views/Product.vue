@@ -117,8 +117,8 @@
     </div>
 
     <nav
-      class="navbar navbar-light bg-light px-2 d-flex justify-content-around"
-    >
+      class="navbar sticky-top navbar-light bg-light px-2 d-flex justify-content-around" id="product_nav"
+     data-bs-offset="0">
       <ul class="nav nav-pills">
         <li class="nav-item">
           <a class="nav-link" href="#img_detail">제품 상세 정보</a>
@@ -339,6 +339,7 @@ export default {
         headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
       })
       .then((res) => {
+        this.user_id = res.data
         console.log(res.data)
       })
       .catch((err) => {
@@ -378,5 +379,8 @@ export default {
 <style scoped>
 .img-container {
   text-align: center;
+}
+#product_nav {
+  top: 45px;
 }
 </style>
