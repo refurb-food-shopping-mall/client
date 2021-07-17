@@ -64,7 +64,9 @@
           <div class="me-md-3">
             <router-link class="btn bg-white" style="" to="/cart" role="button">
               <font-awesome-icon icon="shopping-cart" color="#60be74" />
-              <span class="badge bg-danger mx-2 text-dark">8</span>
+              <span class="badge bg-danger mx-2 text-dark">{{
+                $store.getters["cart/getCartLength"]
+              }}</span>
               <span class="text-dark">내 장바구니</span>
             </router-link>
           </div>
