@@ -234,7 +234,7 @@
         <tbody>
           <tr v-for="(qna, index) in qnas" :key="'qna' + index">
             <th>
-              <a href="#">{{ qna.q_title }}</a>
+              <router-link :to="`/qna/${qna.id}`">{{ qna.q_title }}</router-link>
             </th>
             <td scope="row" v-if="qna.answer_status == 1">처리 중</td>
             <td scope="row" v-else>답변 완료</td>
@@ -332,15 +332,15 @@ export default {
       }
     },
     async getUserId() {
-      console.log(this.$store.state.auth.token)
       await this.$axios({
         url: `${this.$domain}/dltjddn`,
         method: 'get',
         headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
       })
       .then((res) => {
-        this.user_id = res.data
+        this.user_id = res.data.userInfo.id
         console.log(res.data)
+        console.log(res.data.userInfo.id)
       })
       .catch((err) => {
         console.log(err);
@@ -355,7 +355,8 @@ export default {
         .post(`${this.$domain}/qna/save`, {
           q_title : this.QnaTitle,
           q_description : this.QnaDescription,
-          product_id : this.$route.params.id
+          product_id : this.$route.params.id,
+          user_id : this.user_id,
         })
         .then((res) => {
           this.QnaId = res.data.qna_id

@@ -14,6 +14,7 @@ import AddProduct from '../views/AddProduct'
 import WriteReview from '../views/WriteReview'
 import ProductList from '../views/ProductList' //sw
 import AddressList from '../views/AddressList'
+import qna from '../views/qna'
 
 
 // Auth
@@ -51,7 +52,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/cancel',
+    path: '/cancel/:id',
     name: 'Cancel',
     component: Cancel,
     beforeEnter: isLoggedIn
@@ -87,6 +88,11 @@ const routes = [
     path: '/product/:id',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/qna/:id',
+    name: 'qna',
+    component: qna
   },
   {
     path: '/shipping',
