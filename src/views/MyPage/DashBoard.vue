@@ -13,16 +13,16 @@
         <!-- 기본 정보 -->
         <div class="col-md-8 p-5">
           <div class="card-body">
-            <h5 class="card-title">{{ $store.state.user.userName }} 님</h5>
+            <h5 class="card-title mt-4">{{ $store.state.user.userName }} 님</h5>
             <h5 class="card-title">{{ $store.state.user.userEmail }}</h5>
 
             <p class="card-text">
-              This is a wider card with supporting text below as a natural
+              <!-- This is a wider card with supporting text below as a natural
               lead-in to additional content. This content is a little bit
-              longer.
+              longer. -->
             </p>
             <p class="card-text">
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
             </p>
           </div>
         </div>
