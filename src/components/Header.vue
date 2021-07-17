@@ -32,6 +32,11 @@
                     로그인 & 회원가입
                   </router-link>
                 </div>
+                <div v-if="$store.getters['auth/loggedIn']" class="ms-3">
+                  <router-link class="links" to="/mypage/dashboard">
+                    {{ $store.state.user.userName }} 님
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
