@@ -28,7 +28,7 @@
                   <img
                     class="img-fluid"
                     src="https://image.flaticon.com/icons/png/512/814/814989.png"
-                    style="height:130px"
+                    style="height:80%"
                   />
                 </div>
                 <div
@@ -135,7 +135,7 @@
         <div class="col-lg-3 d-flex justify-content-center d-none d-lg-block">
           <div class="list-group col-9 text-center">
             <router-link
-              to="profileupdate"
+              to="mypage/profileupdate"
               href="#"
               class="list-group-item list-group-item-action"
               >회원정보 수정
