@@ -28,7 +28,7 @@
         <div class="col-2 col-xxl-1">
           <a class="align-self-center" style="cursor: pointer">
             <img
-              src="@/assets/onion2.jpg"
+              :src="getImgUrl(product.t_product_images[0])"
               class="img-fluid"
             />
           </a>
@@ -206,7 +206,7 @@ export default {
               }
           })
           .then((res) => {
-            //console.log(res.data);
+            console.log(res.data[0].t_product_images[0].path);
             this.productdetail = res.data;
           })
           .catch((err) => {
@@ -264,7 +264,10 @@ export default {
         this.totaldeliveryprice = 0;
         this.TotalPrice();
       },
-      
+      getImgUrl(product_image) {
+      let pic = product_image.path.split("/")[2];
+      return require("../assets/" + pic);
+    },
   }
 };
 </script>

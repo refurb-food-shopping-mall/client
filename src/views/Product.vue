@@ -143,9 +143,9 @@
     <div class="container my-5" id="review">
       <div class="col d-flex justify-content-center my-3"><h3>리뷰</h3></div>
       <div class="col d-flex justify-content-end my-1">
-        <button type="button" class="btn btn-secondary me-3">
+        <!-- <button type="button" class="btn btn-secondary me-3">
           리뷰 올리기
-        </button>
+        </button> -->
         <button type="button" class="btn btn-secondary">리뷰 더보기</button>
       </div>
       <div class="border-top border-2 border-primary mb-3"></div>
