@@ -45,14 +45,10 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <!-- Content -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                <i class="fas fa-gem me-3"></i>(주)푸드리퍼브
-              </h6>
-              <p>
-                잘 자란 농산물들의 제 가치를 찾아, 음식물 폐기는 줄이고 친환경
-                땅을 늘림으로써 소비자의 건강한 식탁과 미래를 위한 환경이
-                지속가능하게 합니다.
-              </p>
+              <!-- <h6 class="text-uppercase fw-bold mb-4"> -->
+                <!-- <i class="fas fa-gem me-3"></i>(주)푸드리퍼브 -->
+              <!-- </h6> -->
+              <img src="../assets/logo_market.jpg" alt="logo" width="200" height="">
             </div>
             <!-- Grid column -->
 
@@ -104,7 +100,7 @@
               </p>
               <p>
                 <i class="fas fa-envelope me-3"></i>
-                contact@foodrefurb.com
+                contact@착한채소.com
               </p>
               <p><i class="fas fa-phone me-3"></i> + 031 2323 5152</p>
               <p><i class="fas fa-print me-3"></i> + 070 2315 2554</p>
@@ -122,8 +118,8 @@
         style="background-color: rgba(0, 0, 0, 0.05)"
       >
         © 2021 Copyright:
-        <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
-          >www.foodrefurb.com</a
+        <a class="text-reset fw-bold"
+          >www.착한채소.com</a
         >
       </div>
       <!-- Copyright -->

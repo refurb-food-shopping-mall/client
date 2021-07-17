@@ -6,11 +6,11 @@ import store from './store'
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootswatch/dist/minty/bootstrap.min.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret, faShoppingCart, faUser, faSearch, faTruck, faTags, faWonSign } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faShoppingCart, faUser, faSearch, faTruck, faTags, faWonSign, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import axios from 'axios';
 
-library.add(faUserSecret, faShoppingCart, faUser, faSearch, faTruck, faTags, faWonSign)
+library.add(faUserSecret, faShoppingCart, faUser, faSearch, faTruck, faTags, faWonSign, faHeart)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
