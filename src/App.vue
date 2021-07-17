@@ -22,7 +22,7 @@ export default {
 <style>
 html,
 body {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   height: 100%;
 }
 .inner_app {
