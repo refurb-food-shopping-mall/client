@@ -21,7 +21,7 @@
                   <router-link class="links" to="/"> 결제 </router-link>
                 </div>
                 <div class="ms-3">
-                  <router-link class="links" to="/">
+                  <router-link class="links" to="/login">
                     로그인 & 회원가입
                   </router-link>
                 </div>
