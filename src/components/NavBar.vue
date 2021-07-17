@@ -1,18 +1,42 @@
 <template>
-  <div id="navbar">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div id="navbar" class="container px-3">
+    <nav class="navbar p-1 navbar-expand-lg navbar-dark navbar-inner">
       <div class="container-fluid">
-        <router-link class="navbar-brand" to="/">
-          <img
-            src="@/assets/logo2_.jpg"
-            class="rounded mx-auto d-block"
-            height="90"
-            width="160"
-            alt="로고"
-          />
-          <!-- 추가 -->
-        </router-link>
-        <router-link class="navbar-brand" to="/product">상품 보기</router-link>
+        <div class="d-flex justify-content-center px-3 border-end">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >Best Seller</router-link
+          >
+        </div>
+        <div class="d-flex justify-content-center px-3 border-end">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >후기많은상품</router-link
+          >
+        </div>
+        <div class="d-flex justify-content-center px-3 border-end">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >정기구독상품</router-link
+          >
+        </div>
+        <div class="d-flex justify-content-center px-3 border-end">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >중식전용관</router-link
+          >
+        </div>
+        <div class="d-flex justify-content-center px-3 border-end">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >신상품</router-link
+          >
+        </div>
+        <div class="d-flex justify-content-center px-3 border-end">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >한식재료set</router-link
+          >
+        </div>
+        <div class="d-flex justify-content-center px-3">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >10% off</router-link
+          >
+        </div>
         <button
           class="navbar-toggler"
           type="button"
@@ -26,98 +50,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav me-auto">
-            <!-- <li class="nav-item">
-              <a class="nav-link active" href="#"
-                >Home
-                <span class="visually-hidden">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                data-bs-toggle="dropdown"
-                href="#"
-                role="button"
-                aria-haspopup="true"
-                aria-expanded="false"
-                >Dropdown</a
-              >
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
-            </li> -->
-            <!-- <li class="nav-item">
-              <router-link class="nav-link" to="/cart">Cart</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/cancel">Cancel</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/payment">Payment</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/paymentdetail"
-                >paymentdetail</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/product">product</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/shipping"
-                >shipping</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/profileupdate"
-                >userprofileupdate</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/signup">signup</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/login">Login</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/addproduct"
-                >Addproduct</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/writereview"
-                >Review</router-link
-              >
-            </li> -->
-          </ul>
-
-          <!-- <form class="d-flex">
-            <input
-              class="form-control me-sm-2"
-              type="text"
-              placeholder="Search"
-            />
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-              search
-            </button>
-          </form> -->
-          <div class="px-2 mx-1 btn">
-            <font-awesome-icon icon="search" />
-          </div>
+          <ul class="navbar-nav me-auto"></ul>
           <router-link to="/cart" class="px-2 mx-1 btn">
             <font-awesome-icon icon="shopping-cart" />
           </router-link>
@@ -162,7 +95,7 @@
 <script>
 export default {
   mounted() {
-    console.log(this.$store);
+    // console.log(this.$store);
   },
   methods: {
     userLogout() {
@@ -181,5 +114,34 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.navbar-inner {
+  background-color: #60be74;
+  border-radius: 10px;
+}
+#navbar {
+  margin-top: -25px;
+}
+/* .navbar::before {
+  width: 0;
+  height: 0;
+  border-right: 25px solid #60be74;
+  border-top: 27px solid transparent;
+  border-bottom: 27px solid transparent;
+  content: "";
+  position: absolute;
+  margin-left: -24px;
+}
+.navbar::after {
+  width: 0;
+  height: 0;
+  border-left: 25px solid #60be74;
+  border-bottom: 27px solid transparent;
+  border-top: 27px solid transparent;
+  content: "";
+  position: absolute;
+  margin-right: -24px;
+  right: 0px;
+  margin-top: 0px;
+} */
 </style>
