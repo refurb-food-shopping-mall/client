@@ -56,7 +56,12 @@
           <ul class="navbar-nav me-auto"></ul>
 
           <div v-if="isPageYOffsetBiggerThanHeaderSize">
-            <router-link class="btn bg-white" style="" to="/cart" role="button">
+            <router-link
+              class="btn bg-white p-1 px-2"
+              style=""
+              to="/cart"
+              role="button"
+            >
               <font-awesome-icon icon="shopping-cart" color="#60be74" />
               <span class="badge bg-danger mx-2 text-dark">{{
                 $store.getters["cart/getCartLength"]
