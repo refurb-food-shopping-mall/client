@@ -6,6 +6,7 @@
       <router-view />
     </div>
     <Footer />
+    <scroll-top-button />
   </div>
 </template>
 
@@ -13,9 +14,10 @@
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import ScrollTopButton from "./components/ScrollTopButton.vue";
 
 export default {
-  components: { Header, NavBar, Footer },
+  components: { Header, NavBar, Footer, ScrollTopButton },
 };
 </script>
 
