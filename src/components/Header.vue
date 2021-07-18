@@ -14,12 +14,12 @@
             </div>
             <div class="col-sm-6">
               <div class="d-flex text-end justify-content-end">
-                <div class="ms-3">
+                <!-- <div class="ms-3">
                   <router-link class="links" to="/"> 계정 </router-link>
                 </div>
                 <div class="ms-3">
                   <router-link class="links" to="/"> 결제 </router-link>
-                </div>
+                </div> -->
                 <div
                   v-if="$store.getters['auth/loggedIn']"
                   @click.prevent="userLogout"
