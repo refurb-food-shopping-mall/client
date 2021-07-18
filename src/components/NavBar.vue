@@ -12,7 +12,7 @@
             >후기많은상품</router-link
           >
         </div> -->
-        <div class="d-flex justify-content-center px-3 border-end">
+        <div class="d-flex justify-content-center px-3">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
             >정기구독상품</router-link
           >
