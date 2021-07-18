@@ -6,7 +6,7 @@
     >
       <div class="container-fluid">
         <div class="d-flex justify-content-center px-3 border-end">
-          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/"
             >Home</router-link
           >
         </div>
