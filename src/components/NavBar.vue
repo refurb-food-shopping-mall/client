@@ -7,6 +7,11 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-center px-3 border-end">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
+            >Home</router-link
+          >
+        </div>
+        <div class="d-flex justify-content-center px-3 border-end">
+          <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
             >Best Seller</router-link
           >
         </div>
