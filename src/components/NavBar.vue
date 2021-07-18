@@ -1,6 +1,9 @@
 <template>
   <div id="navbar" class="container px-3">
-    <nav class="navbar p-1 navbar-expand-lg navbar-dark navbar-inner">
+    <nav
+      class="navbar p-1 navbar-expand-lg navbar-dark navbar-inner"
+      style="height: 50px"
+    >
       <div class="container-fluid">
         <div class="d-flex justify-content-center px-3 border-end">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
