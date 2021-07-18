@@ -55,20 +55,22 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav me-auto"></ul>
 
-          <div v-if="isPageYOffsetBiggerThanHeaderSize">
-            <router-link
-              class="btn bg-white p-1 px-2"
-              style=""
-              to="/cart"
-              role="button"
-            >
-              <font-awesome-icon icon="shopping-cart" color="#60be74" />
-              <span class="badge bg-danger mx-2 text-dark">{{
-                $store.getters["cart/getCartLength"]
-              }}</span>
-              <span class="text-dark">내 장바구니</span>
-            </router-link>
-          </div>
+          <transition name="fade">
+            <div v-if="isPageYOffsetBiggerThanHeaderSize">
+              <router-link
+                class="btn bg-white p-1 px-2"
+                style=""
+                to="/cart"
+                role="button"
+              >
+                <font-awesome-icon icon="shopping-cart" color="#60be74" />
+                <span class="badge bg-danger mx-2 text-dark">{{
+                  $store.getters["cart/getCartLength"]
+                }}</span>
+                <span class="text-dark">내 장바구니</span>
+              </router-link>
+            </div>
+          </transition>
         </div>
       </div>
     </nav>
@@ -102,6 +104,13 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 .navbar-inner {
   background-color: rgb(90, 179, 149);
   border-radius: 10px;
