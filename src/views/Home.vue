@@ -14,43 +14,58 @@
             :key="idx"
             class="col-md-3 mb-5"
           >
-            <div class="card text-black" :class="{ featured: idx == 0 }">
-              <div
-                v-if="idx == 0"
-                class="hot_tag"
-                style="position: absolute; right: 0; top: 0"
-              >
-                <span class="text-white px-2">HOT</span>
-              </div>
-              <img :src="getImgUrl(product)" class="img-fluid" />
-              <div class="card-body">
-                <div class="my-3">
-                  <h5 class="card-title" style="text-align: center">
-                    {{ product.product_name }}
-                  </h5>
+            <router-link :to="`/product/${product.id}`">
+              <div class="card text-black" :class="{ featured: idx == 0 }">
+                <div
+                  v-if="idx == 0"
+                  class="hot_tag"
+                  style="position: absolute; right: 0; top: 0"
+                >
+                  <span class="text-white px-2">HOT</span>
                 </div>
-                <p class="card-text" style="text-align: center">
-                  {{ product.harvested_date }} 수확 상품
-                </p>
-              </div>
-              <div
-                class="
-                  card-footer
-                  d-flex
-                  justify-content-between
-                  align-items-center
-                "
-              >
-                <div>
-                  <b>{{ product.product_price.toLocaleString("ko-KR") }}원</b>
+                <img :src="getImgUrl(product)" class="img-fluid" />
+
+                <div class="mt-2 ms-1" style="">
+                  <span class="harvest_tag">
+                    21.{{ product.harvested_date.split("-")[1] }}.{{
+                      product.harvested_date.split("-")[2]
+                    }}
+                    수확
+                  </span>
                 </div>
-                <router-link
+                <div class="card-body p-0">
+                  <div class="my-3">
+                    <h5 class="card-title" style="text-align: center">
+                      {{ product.product_name }}
+                    </h5>
+                  </div>
+                </div>
+                <div
+                  class="
+                    card-footer
+                    d-flex
+                    justify-content-between
+                    align-items-center
+                  "
+                >
+                  <div>
+                    <b>{{ product.product_price.toLocaleString("ko-KR") }}원</b>
+                  </div>
+                  <!-- <router-link
                   :to="`/product/${product.id}`"
                   class="btn btn-primary btn-sm"
                   >사러 가기</router-link
-                >
+                > -->
+                  <!-- <span><strong>사러 가기</strong></span> -->
+                  <div class="bnt_cart btn p-1">
+                    <font-awesome-icon
+                      icon="shopping-cart"
+                      color="rgb(61, 60, 60)"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -266,8 +281,16 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 .card {
   padding: 1px;
+  transition: 0.4s;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.card:hover {
+  transform: translate3d(7px, 7px, 0);
 }
 .text-black {
   color: rgb(61, 60, 60);
@@ -276,7 +299,16 @@ export default {
   border-bottom-left-radius: 10px;
   background-color: #f38085;
 }
+.harvest_tag {
+  background-color: #4fbacf;
+  border-radius: 20px;
+  padding: 2px 10px;
+  color: white;
+}
 .featured {
   border: 4px solid #f38085;
+}
+.btn_cart {
+  cursor: pointer;
 }
 </style>
