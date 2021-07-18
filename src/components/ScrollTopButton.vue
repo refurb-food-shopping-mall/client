@@ -1,8 +1,10 @@
 <template>
   <div>
-    <div @click="scrollTop" v-show="visible" class="scroll-btn bottom-right">
-      <font-awesome-icon icon="chevron-up" color="white" />
-    </div>
+    <transition name="fade">
+      <div @click="scrollTop" v-show="visible" class="scroll-btn bottom-right">
+        <font-awesome-icon icon="chevron-up" color="white" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -32,6 +34,14 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 .scroll-btn {
   width: 45px;
   height: 45px;
