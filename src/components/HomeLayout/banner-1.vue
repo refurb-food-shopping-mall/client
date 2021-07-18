@@ -2,7 +2,7 @@
   <section class="banner banner-1">
     <div class="container">
       <div class="row justify-content-end text-black">
-        <div class="col-md-6 ps-4">
+        <div class="col-md-6" style="padding-left: 10rem">
           <div class="fs-5 title">
             <span> <strong>여름 시즌 고객 감사제</strong> </span>
           </div>
