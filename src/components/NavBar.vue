@@ -1,23 +1,26 @@
 <template>
   <div id="navbar" class="container px-3">
-    <nav class="navbar p-1 navbar-expand-lg navbar-dark navbar-inner">
+    <nav
+      class="navbar p-1 navbar-expand-lg navbar-dark navbar-inner"
+      style="height: 55px"
+    >
       <div class="container-fluid">
         <div class="d-flex justify-content-center px-3 border-end">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
             >Best Seller</router-link
           >
         </div>
-        <div class="d-flex justify-content-center px-3 border-end">
+        <!-- <div class="d-flex justify-content-center px-3 border-end">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
             >후기많은상품</router-link
           >
-        </div>
-        <div class="d-flex justify-content-center px-3 border-end">
+        </div> -->
+        <div class="d-flex justify-content-center px-3">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
             >정기구독상품</router-link
           >
         </div>
-        <div class="d-flex justify-content-center px-3 border-end">
+        <!-- <div class="d-flex justify-content-center px-3 border-end">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
             >중식전용관</router-link
           >
@@ -36,7 +39,7 @@
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
             >10% off</router-link
           >
-        </div>
+        </div> -->
         <button
           class="navbar-toggler"
           type="button"
