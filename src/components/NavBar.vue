@@ -2,7 +2,7 @@
   <div id="navbar" class="container px-3">
     <nav
       class="navbar p-1 navbar-expand-lg navbar-dark navbar-inner"
-      style="height: 50px"
+      style="height: 55px"
     >
       <div class="container-fluid">
         <div class="d-flex justify-content-center px-3 border-end">
