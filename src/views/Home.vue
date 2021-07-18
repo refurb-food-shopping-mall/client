@@ -2,12 +2,69 @@
   <div id="home" class="">
     <!-- Page Content-->
     <div>
-      <!-- Content Row-->
+      <!-- Content Row 1 -->
       <div class="container">
         <div class="row gx-4 gx-lg-5">
+          <span class="fs-5 mb-3">
+            <span class="me-1" style="color: black">후기 많은 상품</span>🍉👌
+          </span>
           <!-- 카드 1 -->
           <div
-            v-for="(product, idx) in productList.slice(0, 10)"
+            v-for="(product, idx) in productList.slice(0, 4)"
+            :key="idx"
+            class="col-md-3 mb-5"
+          >
+            <div class="card text-black" :class="{ featured: idx == 0 }">
+              <div
+                v-if="idx == 0"
+                class="hot_tag"
+                style="position: absolute; right: 0; top: 0"
+              >
+                <span class="text-white px-2">HOT</span>
+              </div>
+              <img :src="getImgUrl(product)" class="img-fluid" />
+              <div class="card-body">
+                <div class="my-3">
+                  <h5 class="card-title" style="text-align: center">
+                    {{ product.product_name }}
+                  </h5>
+                </div>
+                <p class="card-text" style="text-align: center">
+                  {{ product.harvested_date }} 수확 상품
+                </p>
+              </div>
+              <div
+                class="
+                  card-footer
+                  d-flex
+                  justify-content-between
+                  align-items-center
+                "
+              >
+                <div>
+                  <b>{{ product.product_price.toLocaleString("ko-KR") }}원</b>
+                </div>
+                <router-link
+                  :to="`/product/${product.id}`"
+                  class="btn btn-primary btn-sm"
+                  >사러 가기</router-link
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Row 2 -->
+
+      <div class="container">
+        <div class="row gx-4 gx-lg-5">
+          <span class="fs-5 mb-3">
+            <span class="me-1" style="color: black">신상품</span>🍇😋
+          </span>
+          <!-- 카드 1 -->
+          <div
+            v-for="(product, idx) in productList.slice(4, 9)"
             :key="idx"
             class="col-md-3 mb-5"
           >
@@ -209,4 +266,17 @@ export default {
 </script>
 
 <style scoped>
+.card {
+  padding: 1px;
+}
+.text-black {
+  color: rgb(61, 60, 60);
+}
+.hot_tag {
+  border-bottom-left-radius: 10px;
+  background-color: #f38085;
+}
+.featured {
+  border: 4px solid #f38085;
+}
 </style>
