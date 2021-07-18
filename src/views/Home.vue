@@ -7,9 +7,9 @@
         <div class="row gx-4 gx-lg-5">
           <!-- 카드 1 -->
           <div
-            v-for="(product, idx) in productList.slice(0, 3)"
+            v-for="(product, idx) in productList.slice(0, 10)"
             :key="idx"
-            class="col-md-4 mb-5"
+            class="col-md-3 mb-5"
           >
             <div class="card h-100">
               <img :src="getImgUrl(product)" class="img-fluid" />
