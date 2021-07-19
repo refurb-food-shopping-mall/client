@@ -5,7 +5,7 @@
             >수령인</label
             >
             <input
-            :value="address.receiver"
+            :value="default_address.receiver"
             type="text"
             class="form-control text-dark"
             id="receiver"
@@ -17,7 +17,7 @@
             >연락처</label
         >
         <input
-            :value="address.phonenumber"
+            :value="default_address.phonenumber"
             type="text"
             class="form-control text-dark"
             id="userphonenumber"
@@ -30,7 +30,7 @@
             >배송지명</label
             >
             <input
-            :value="address.address_name"
+            :value="default_address.address_name"
             type="text"
             class="form-control text-dark"
             id="addressname"
@@ -43,7 +43,7 @@
         >
         <div class="row form-group">
             <div class="col-12">
-                <input type="text" class="form-control text-dark" id="postcode" :value="address.post_code" readonly/>
+                <input type="text" class="form-control text-dark" id="postcode" :value="default_address.post_code" readonly/>
             </div>   
         </div>
         <div class="row">
@@ -52,10 +52,10 @@
                 >주소</label
             >
             <div class="pb-2">
-                <input type="text" class="form-control text-dark" id="address" :value="address.address" readonly/>
+                <input type="text" class="form-control text-dark" id="address" :value="default_address.address" readonly/>
             </div>
             <div>
-                <input type="text" class="form-control text-dark" id="detailaddress" :value="address.detailed_address" readonly/>
+                <input type="text" class="form-control text-dark" id="detailaddress" :value="default_address.detailed_address" readonly/>
             </div>
             </div>
         </div>
@@ -71,7 +71,7 @@ export default {
     ],
     data(){
         return {
-            address : this.default_address
+            
         }
     },
 }
