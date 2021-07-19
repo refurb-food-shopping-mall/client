@@ -171,7 +171,8 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary" v-if="order.order_status=='입금대기' || order.order_status=='배송준비중'">
+                <button
+                type="button" class="btn btn-primary" v-if="order.order_status=='입금대기' || order.order_status=='배송준비중'">
                   주문취소
                 </button>
                 <button type="button" class="btn btn-primary" v-else-if="order.order_status=='배송중'">
@@ -229,7 +230,8 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button type="button" class="btn btn-primary" v-if="rorder.order_status=='입금대기'|| rorder.order_status=='배송준비중'">
+                <button @click="cancel(rorder)"
+                  type="button" class="btn btn-primary" v-if="rorder.order_status=='입금대기'|| rorder.order_status=='배송준비중'">
                   주문취소
                 </button>
                 <button type="button" class="btn btn-primary" v-else-if="rorder.order_status=='배송중'">
@@ -288,6 +290,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
   data() {
     return {
@@ -304,10 +307,7 @@ export default {
     };
   },
   mounted() {
-    //this.getget();
-    //this.GetUserProfile();
     this.Get1();//GetUserProfile->datecal->recentOrder
-    //this.datecal();
   },
   methods: {
     //
@@ -379,6 +379,7 @@ export default {
     //날짜계산
     datecal(){
       let today = new Date();	//현재날짜
+      console.log(today)
       let dd = today.getDate() + 1
       let mm = today.getMonth() + 1
       let yy = today.getFullYear()
@@ -397,6 +398,44 @@ export default {
         await this.GetUserProfile();
         this.datecal();
     },
+    //alert1
+    cancel(order){
+      //console.log(order.id)
+      Swal.fire({
+      title: '주문취소 하시겠습니까?',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#5ab395',
+      cancelButtonColor: '#F08080',
+      confirmButtonText: '예',
+      cancelButtonText: "아니오",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        //await this.cancelOrder(order);
+        await this.$axios
+          .post(`http://localhost:3000/api/cancelOrder`, {
+            id : order.id,
+          })
+          .then((res) => {
+            console.log(res.data);
+            console.log('삭제!');
+          });
+        this.cancel2();
+      }
+    })
+    },
+  //alert2
+  async cancel2(){
+    await Swal.fire({
+    title: '취소되었습니다!',
+    text: '신용/체크카드 환불은 3~4일 소요됩니다.',
+    icon: 'success',
+    confirmButtonText: '확인',
+    confirmButtonColor: '#5ab395',
+  })
+  this.$router.go(this.$router.currentRoute);
+  },
   
   }
 };
