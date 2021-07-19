@@ -232,7 +232,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(qna, index) in qnas" :key="'qna' + index">
+          <tr v-for="(qna, index) in qnas.slice().reverse()" :key="'qna' + index">
             <th>
               <router-link :to="`/qna/${qna.id}`">{{ qna.q_title }}</router-link>
             </th>
@@ -275,6 +275,7 @@ export default {
       QnaTitle: "",
       QnaDescription: "",
       user_id: 0,
+      user_name: '',
     };
   },
   mounted() {
@@ -333,14 +334,15 @@ export default {
     },
     async getUserId() {
       await this.$axios({
-        url: `${this.$domain}/dltjddn`,
+        url: `${this.$domain}/verify_user`,
         method: 'get',
         headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
       })
       .then((res) => {
         this.user_id = res.data.userInfo.id
-        console.log(res.data)
-        console.log(res.data.userInfo.id)
+        // console.log(res.data)
+        // console.log(res.data.userInfo.id)
+        this.user_name = res.data.userInfo.user_name
       })
       .catch((err) => {
         console.log(err);
@@ -359,7 +361,10 @@ export default {
           user_id : this.user_id,
         })
         .then((res) => {
-          this.QnaId = res.data.qna_id
+          // console.log(this.qnas)
+          // console.log(res.data.result)
+          this.qnas = res.data.result
+
         })
         .catch((err) => {
           console.log(err);
