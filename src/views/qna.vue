@@ -46,8 +46,8 @@ export default {
               this.q_title = res.data.qna.q_title;
               this.q_description = res.data.qna.q_description;
               this.answer_status = res.data.qna.answer_status;
-              console.log(this.q_title);
-              console.log(res.data)
+            //   console.log(this.q_title);
+            //   console.log(res.data)
           })
     }      
    
