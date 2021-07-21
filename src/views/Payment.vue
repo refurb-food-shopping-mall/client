@@ -502,16 +502,19 @@ export default {
             })
           }    
           if(this.default_address_button == true){
-            this.saveorder(this.userdefaultaddress.useraddress[0].id)
+            this.saveorder(this.userdefaultaddress.id)
+            this.$store.commit('cart/CLEAR_CART');
             
           } else if(this.selected_address_state == true){
             this.saveorder(this.selectedaddress.id)
+            this.$store.commit('cart/CLEAR_CART');
           } 
           else if(this.new_address_state == true){
             if(this.default_address == false && this.address_list == false){
               if(this.newaddress.receiver != "" && this.newaddress.phonenumber != "" && this.newaddress.post_code != "" && this.newaddress.detail_adress != "" && this.newaddress.address_name == ""){
                 await this.saveaddress()
                 this.saveorder(this.newaddressid)
+                this.$store.commit('cart/CLEAR_CART');
               } 
             } else if(this.newaddress.receiver == "" || this.newaddress.phonenumber == "" || this.newaddress.post_code == "" || this.newaddress.detail_adress == "" || this.newaddress.address_name == ""){
                 alert("배송관련 부분을 작성해주세요")
@@ -519,6 +522,7 @@ export default {
             } else {
                 await this.saveaddress()
                 this.saveorder(this.newaddressid)
+                this.$store.commit('cart/CLEAR_CART');
             }        
           }
       },
@@ -563,6 +567,7 @@ export default {
                 console.log(err);
               })
           }
+          alert('주문이 완료되었습니다.')
           this.$router.push("/shipping");
       }
       
