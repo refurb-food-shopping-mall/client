@@ -50,7 +50,7 @@
                         {{address.phonenumber}}
                     </div>
                     <div class="col-2 text-center align-self-center">  
-                        <ModifyAddress v-if="ModalView[i]" :address="UserAddressList[i]">
+                        <ModifyAddress v-if="UpdateAddressModal[i]" :address="UserAddressList[i]" @update="UpdateAddress">
                         </ModifyAddress> 
                         <button 
                             type="button" 
@@ -120,9 +120,10 @@ export default {
         return  {
             User : {},
             UserAddressList : {},
-            ModalView : [],
-            CreateAddressModal : false
+            UpdateAddressModal : [],
+            CreateAddressModal : false,
             // MobileModalView : null
+            UpdateAddressIndex : 0
         }
     },
     created(){
@@ -155,7 +156,7 @@ export default {
             .then((res) => {
             // console.log(res.data);
                 this.UserAddressList = res.data.useraddresslist
-                this.ModalView = new Array(this.UserAddressList.length)
+                this.UpdateAddressModal = new Array(this.UserAddressList.length)
                 // console.log(this.ModalView);
                 // this.MobileModalView = new Array(this.UserAddressList.length)
                 // console.log(this.UserAddressList);
@@ -170,7 +171,8 @@ export default {
             await this.GetUserAddressList()
         },
         AlterModalView(i){
-            this.$set(this.ModalView, i, !this.ModalView[i])
+            this.UpdateAddressIndex = i
+            this.$set(this.UpdateAddressModal, i, !this.UpdateAddressModal[i])
         },
         CreateNewAddress(address){
             this.CreateAddressModal = false
@@ -185,6 +187,19 @@ export default {
                 })
                 .catch(err => {
                     console.log(err)
+                })
+        },
+        UpdateAddress(address){
+            console.log(address)
+            address.user_id = this.User.id
+            this.$set(this.UpdateAddressModal, this.UpdateAddressIndex, !this.UpdateAddressModal[this.UpdateAddressIndex])
+            this.$axios
+                .post(`${this.$domain}/updateaddress`, address)
+                .then(res => {
+                    if(res.data.success == true){
+                        alert('배송지 수정이 완료 되었습니다.')
+                        this.GetUserAddressList()    
+                    }
                 })
         }
     }
