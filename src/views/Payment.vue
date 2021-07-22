@@ -530,15 +530,6 @@ export default {
       async saveaddress(){
         this.newaddress.user_id = this.user.id
         // console.log(this.newaddress)
-        if(this.newaddress.default_address){
-          console.log(this.userdefaultaddress.id)
-          this.newaddressid = this.userdefaultaddress.id;
-          await this.$axios
-            .post(`${this.$domain}/address/save`, this.newaddress)
-            .catch((err) => {
-              console.log(err);
-            })
-        } else {
           await this.$axios
             .post(`${this.$domain}/address/save`, this.newaddress)
             .then((res) => {
@@ -548,8 +539,6 @@ export default {
             .catch((err) => {
               console.log(err);
             })
-        }
-        
       },
       //주문 정보를 저장하는 함수
       saveorder(addressid){
