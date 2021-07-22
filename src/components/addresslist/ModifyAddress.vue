@@ -91,7 +91,7 @@
                                   <input type="text" class="form-control" id="address" v-model="address.address" />
                               </div>
                               <div>
-                                  <input type="text" class="form-control" id="detailaddress" v-model="address.detail_adress" />
+                                  <input type="text" class="form-control" id="detailaddress" v-model="address.detailed_address" />
                               </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                              <button type="button" class="btn btn-outline-primary">수정</button>
+                              <button type="button" class="btn btn-outline-primary" @click="UpdateAddress">수정</button>
                             </div>
                         </div>
                   <!-- <div class="row pb-3" :key="i" v-for="(address, i) in useraddresslist">
@@ -145,11 +145,15 @@ export default{
         }
     },
     created(){
-        this.hello()
     },
     methods : {
-        hello(){
-            console.log(this.address);
+        UpdateAddress(){
+          if(this.address.receiver == "" || this.address.phonenumber == "" || this.address.address_name == "" || this.address.post_code == "" || this.address.address == "" || this.address.detail_adress == ""){
+                alert('모든 항목을 입력해 주세요')
+            }
+            else{
+                this.$emit('update', this.address)
+            }
         }
     }
 }
