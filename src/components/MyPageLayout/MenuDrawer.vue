@@ -35,8 +35,8 @@ export default {
           name: '주문 조회'
         },
         {
-          url: '/mypage/questions',
-          name: '1:1 문의'
+          url: '/mypage/couponandpoint',
+          name: '쿠폰 & 포인트'
         },
         {
           url: '/mypage/profileupdate',
@@ -45,7 +45,7 @@ export default {
         {
           url: '/mypage/deleteaccount',
           name: '회원탈퇴'
-        }
+        },
       ]
     }
   },
