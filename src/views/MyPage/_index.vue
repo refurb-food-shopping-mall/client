@@ -17,12 +17,19 @@
 
 <script>
 import MyPageMenuDrawer from '@/components/MyPageLayout/MenuDrawer'
+import { mapActions } from "vuex";
 
 export default {
   components: { MyPageMenuDrawer },
   data() {
     return {
     }
+  },
+  methods: {
+    ...mapActions("page", ["updateMyPageMenuDrawerActiveRoute"]),
+  },
+  updated() {
+    this.updateMyPageMenuDrawerActiveRoute(this.$route.path)
   },
 }
 </script>
