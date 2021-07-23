@@ -41,6 +41,28 @@ export default {
   methods: {
     submitDeleteAccountForm() {
       // console.log(this.isCheck)
+      if (this.isCheck) {
+        this.$axios({
+          url: `${this.$domain}/deleteaccount`,
+          method: 'delete',         
+          headers: {'authorization': `Bearer ${this.$store.state.auth.token}`},
+        })
+        .then(() => {
+          this.$store.commit("user/SET_USER_INFO", {
+            userName: "",
+            userPhoneNumber: "",
+            userEmail: "",
+            userPointMoney: null
+          });
+          this.$store.commit("auth/SET_TOKEN", "");
+          this.$store.commit("cart/CLEAR_CART");
+          sessionStorage.clear();
+          this.$router.push("/")
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+      }
     }
   },
 }
