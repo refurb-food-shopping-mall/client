@@ -58,7 +58,7 @@
               </div>
             </div>
 
-            <div class="pt-4 text-center"><h2>2</h2></div>
+            <div class="pt-4 text-center"><h2>0</h2></div>
           </router-link>
         </div>
         <!-- 적립 포인트 영역 -->
@@ -74,7 +74,13 @@
             </div>
 
             <div class="pt-4 text-center">
-              <h2>{{ Number(4200).toLocaleString("ko-KR") }}</h2>
+              <h2>
+                {{
+                  Number($store.state.user.userPointMoney).toLocaleString(
+                    "ko-KR"
+                  )
+                }}
+              </h2>
             </div>
           </router-link>
         </div>
