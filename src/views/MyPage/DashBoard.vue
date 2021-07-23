@@ -33,16 +33,18 @@
       <div class="row p-3">
         <!-- 주문·배송 영역 -->
         <div class="col d-flex flex-column align-items-center border-right">
-          <div class="d-flex align-items-center">
-            <div>
-              <font-awesome-icon icon="truck" size="3x" color="#ba68c8" />
+          <router-link to="/shipping" style="color: #888888">
+            <div class="d-flex align-items-center">
+              <div>
+                <font-awesome-icon icon="truck" size="3x" color="#ba68c8" />
+              </div>
+              <div class="mx-3">
+                <h5 class="m-0">주문·배송</h5>
+              </div>
             </div>
-            <div class="mx-3">
-              <h5 class="m-0">주문·배송</h5>
-            </div>
-          </div>
 
-          <div class="pt-4"><h2>10</h2></div>
+            <div class="pt-4 text-center"><h2>3</h2></div>
+          </router-link>
         </div>
         <!-- 보유 쿠폰 영역 -->
         <div class="col d-flex flex-column align-items-center border-right">
@@ -91,6 +93,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 .dashboard {
   user-select: none;
 }
