@@ -2,18 +2,7 @@
         <transition name="modal">
           <div class="modal-mask">
             <div class="modal-wrapper">
-              <div class="modal-container">
-
-                <!-- <div class="modal-header">
-                  <slot name="header">
-                      <div class="row text-dark">
-                          <div class="col-12">
-                            배송지 정보
-                          </div>
-                      </div> 
-                  </slot>
-                </div> -->
-
+              <div class="modal-container" style="max-width: 350px;">
                 <div class="modal-body">
                   <slot name="body">
                           <div class="form-group row pb-1">
@@ -107,25 +96,8 @@
                                 <button type="button" class="btn btn-outline-primary" @click="UpdateAddress">수정</button>
                               </div>
                           </div>
-                    <!-- <div class="row pb-3" :key="i" v-for="(address, i) in useraddresslist">
-                        <div class="col-6 align-self-center text-dark" >
-                            {{address.address_name}}
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-outline-primary" @click="$emit('close', address)">선택하기</button>
-                        </div>
-                    </div> -->
                   </slot>
                 </div>
-
-                <!-- <div class="modal-footer">
-                  <slot name="footer">
-                    default footer
-                    <button class="modal-default-button" @click="$emit('close')">
-                      OK
-                    </button>
-                  </slot>
-                </div> -->
               </div>
             </div>
           </div>
@@ -160,7 +132,7 @@ export default{
 </script>
 
 <style>
-    .modal-mask {
+.modal-mask {
   position: fixed;
   z-index: 9998;
   top: 0;
@@ -178,7 +150,7 @@ export default{
 }
 
 .modal-container {
-  max-width: 350px;
+  
   margin: 0px auto;
   padding: 0px 5px;
   background-color: #fff;

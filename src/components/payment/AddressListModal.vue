@@ -2,7 +2,7 @@
     <transition name="modal">
         <div class="modal-mask">
           <div class="modal-wrapper">
-            <div class="modal-container">
+            <div class="modal-container" style="width: 300px;">
 
               <div class="modal-header">
                 <slot name="header">
@@ -18,8 +18,8 @@
                       <div class="col-6 align-self-center text-dark" >
                           {{address.address_name}}
                       </div>
-                      <div class="col-6">
-                          <button type="button" class="btn btn-outline-primary" @click="$emit('close', address)">선택하기</button>
+                      <div class="col-6 text-end">
+                          <button type="button" class="btn btn-outline-primary" @click="$emit('close', address)">선택</button>
                       </div>
                   </div>
                 </slot>
