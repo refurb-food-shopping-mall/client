@@ -41,7 +41,7 @@ export default {
   methods: {
     submitDeleteAccountForm() {
       // console.log(this.isCheck)
-      if (this.isCheck) {
+      if (this.isCheck && true == false) {
         this.$axios({
           url: `${this.$domain}/deleteaccount`,
           method: 'delete',         
