@@ -36,12 +36,12 @@
 
           <div class="row border-bottom border-2 pt-3 pb-3">
             <div class="col-2 col-md-2 col-lg-2 col-xl-1 p-0">
-              <a class="align-self-center" style="cursor: pointer"
+              <!-- <a class="align-self-center" style="cursor: pointer"
                 ><img 
                   v-if="image"
                   :src="getImgUrl(image)"
                   class="img-fluid"
-              /></a>
+              /></a> -->
             </div>
 
             <div class="col-4 col-lg-4 col-xl-5 align-self-center">
@@ -70,12 +70,14 @@
                 <div class="form-check">
                   <label class="form-check-label">
                     <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                    <!-- <input type="radio" v-model="picked" id="a" v-bind:value="a"> -->
                     교환
                   </label>
                 </div>
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option2">
+                    <!-- <input type="radio" v-model="picked" id="b" v-bind:value="b"> -->
                     환불
                   </label>
                 </div>
@@ -141,6 +143,7 @@ export default {
   },
   mounted() {
     this.getOrder();
+    // this.getImage();
   },
   methods: {
      getOrder() {
@@ -154,19 +157,36 @@ export default {
           // console.log(this.product)
           this.product_amount = this.detail.product_amount
         })
-        .then(
-          this.$axios
-          .post(`${this.$domain}/paymentdetail_cancel_image`, {
-            product_id: this.product_id
-          })
+        // .then(
+        //   this.$axios
+        //   .get(`${this.$domain}/paymentdetail_cancel_image`,{
+        //     params : {
+        //       product_id : this.product_id
+        //     }
+        //   })
+        //   .then(res => {
+        //     console.log(this.product_id)
+        //     console.log(res.data)
+        //     this.image = res.data.image
+        //     console.log(this.image)
+        //   })
+        // )
+    },
+    async getImage() {
+      if(this.product_id){
+        await this.$axios
+        .get(`${this.$domain}/paymentdetail_cancel_image/${this.product_id}`)
           .then(res => {
-            console.log(this.product_id)
+            // console.log(this.product_id)
             console.log(res.data)
-            this.image = res.data.image
-            console.log(this.image)
+            // this.image = res.data.image
+            // console.log(this.image)
           })
-        )
-          
+
+      }
+      else{
+        console.log('failed')
+      }
     },
     getImgUrl(product_image) {
       if(product_image != {}){
