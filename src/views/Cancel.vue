@@ -36,12 +36,12 @@
 
           <div class="row border-bottom border-2 pt-3 pb-3">
             <div class="col-2 col-md-2 col-lg-2 col-xl-1 p-0">
-              <!-- <a class="align-self-center" style="cursor: pointer"
+              <a class="align-self-center" style="cursor: pointer"
                 ><img 
                   v-if="image"
                   :src="getImgUrl(image)"
                   class="img-fluid"
-              /></a> -->
+              /></a>
             </div>
 
             <div class="col-4 col-lg-4 col-xl-5 align-self-center">
@@ -69,21 +69,38 @@
               <div class="col">
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                    <!-- <input type="radio" v-model="picked" id="a" v-bind:value="a"> -->
+                    <input 
+                    type="radio" 
+                    @click="toggle(1)" 
+                    class="form-check-input" 
+                    name="optionsRadios" 
+                    id="optionsRadios1" 
+                    value="option1" 
+                    data-bs-toggle="tooltip" data-bs-placement="right" 
+                    title="교환은 동일 상품, 동일 수량으로 진행됩니다">
                     교환
                   </label>
                 </div>
                 <div class="form-check">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option2">
-                    <!-- <input type="radio" v-model="picked" id="b" v-bind:value="b"> -->
+                    <input @click="toggle(0)" type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
                     환불
                   </label>
                 </div>
               </div>
           </div>
-          <div class="row border-bottom border-2 pt-3 pb-3">
+          <div v-if="togg" class="row border-bottom border-2 pt-3 pb-3">
+            <div class="col-md-2">교환 사유</div>
+            <div class="col">
+              <div class="form-group">
+                <select class="form-select" id="exampleSelect1">
+                  <option>품질 저하</option>
+                  <option>낮은 신선도</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div v-else class="row border-bottom border-2 pt-3 pb-3">
             <div class="col-md-2">환불 사유</div>
             <div class="col">
               <div class="form-group">
@@ -112,9 +129,12 @@
         </div>
 
         <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-primary m-2">이전 페이지</button>
-          <button type="button" class="btn btn-secondary my-2">
-            취소요청하기
+          <router-link :to="`/shipping`" class="btn btn-primary m-2">이전 페이지</router-link>
+          <button v-if="togg" type="button" class="btn btn-secondary my-2">
+            교환 요청하기
+          </button>
+          <button v-else type="button" class="btn btn-secondary my-2">
+            환불 요청하기
           </button>
         </div>
       </div>
@@ -128,7 +148,7 @@
 export default {
   data() {
     return {
-      detail: {},
+      togg : 1,
       image: {},
       product: {
         product_name : "",
@@ -143,50 +163,16 @@ export default {
   },
   mounted() {
     this.getOrder();
-    // this.getImage();
   },
   methods: {
      getOrder() {
       this.$axios
         .get(`${this.$domain}/paymentdetail_cancel/${this.$route.params.id}`)
         .then((res) => {
-          this.detail = res.data.detail
-          this.product_id = res.data.detail.product_id 
-          console.log(this.product_id)
-          this.product = this.detail.product
-          // console.log(this.product)
-          this.product_amount = this.detail.product_amount
+          this.product = res.data.pd_info.product
+          this.image = res.data.pd_image
+          this.product_amount = res.data.pd_info.product_amount
         })
-        // .then(
-        //   this.$axios
-        //   .get(`${this.$domain}/paymentdetail_cancel_image`,{
-        //     params : {
-        //       product_id : this.product_id
-        //     }
-        //   })
-        //   .then(res => {
-        //     console.log(this.product_id)
-        //     console.log(res.data)
-        //     this.image = res.data.image
-        //     console.log(this.image)
-        //   })
-        // )
-    },
-    async getImage() {
-      if(this.product_id){
-        await this.$axios
-        .get(`${this.$domain}/paymentdetail_cancel_image/${this.product_id}`)
-          .then(res => {
-            // console.log(this.product_id)
-            console.log(res.data)
-            // this.image = res.data.image
-            // console.log(this.image)
-          })
-
-      }
-      else{
-        console.log('failed')
-      }
     },
     getImgUrl(product_image) {
       if(product_image != {}){
@@ -194,6 +180,9 @@ export default {
       return require("../assets/" + pic);
       }
     },
+    toggle(number) {
+      this.togg = number;
+    }
   }
 };
 </script>
