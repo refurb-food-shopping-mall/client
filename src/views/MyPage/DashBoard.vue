@@ -48,31 +48,35 @@
         </div>
         <!-- 보유 쿠폰 영역 -->
         <div class="col d-flex flex-column align-items-center border-right">
-          <div class="d-flex align-items-center">
-            <div>
-              <font-awesome-icon icon="tags" size="3x" color="#64b5f6" />
+          <router-link to="/couponandpoint" style="color: #888888">
+            <div class="d-flex align-items-center">
+              <div>
+                <font-awesome-icon icon="tags" size="3x" color="#64b5f6" />
+              </div>
+              <div class="mx-3">
+                <h5 class="m-0">보유 쿠폰</h5>
+              </div>
             </div>
-            <div class="mx-3">
-              <h5 class="m-0">보유 쿠폰</h5>
-            </div>
-          </div>
 
-          <div class="pt-4"><h2>2</h2></div>
+            <div class="pt-4 text-center"><h2>2</h2></div>
+          </router-link>
         </div>
         <!-- 적립 포인트 영역 -->
         <div class="col d-flex flex-column align-items-center">
-          <div class="d-flex align-items-center">
-            <div>
-              <font-awesome-icon icon="won-sign" size="3x" color="#81c784" />
+          <router-link to="/couponandpoint" style="color: #888888">
+            <div class="d-flex align-items-center">
+              <div>
+                <font-awesome-icon icon="won-sign" size="3x" color="#81c784" />
+              </div>
+              <div class="mx-3">
+                <h5 class="m-0">적립 포인트</h5>
+              </div>
             </div>
-            <div class="mx-3">
-              <h5 class="m-0">적립 포인트</h5>
-            </div>
-          </div>
 
-          <div class="pt-4">
-            <h2>{{ Number(4200).toLocaleString("ko-KR") }}</h2>
-          </div>
+            <div class="pt-4 text-center">
+              <h2>{{ Number(4200).toLocaleString("ko-KR") }}</h2>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -95,6 +99,11 @@ export default {
 <style scoped>
 a {
   text-decoration: none;
+  padding-bottom: 3px;
+}
+a:hover {
+  padding-bottom: 0;
+  border-bottom: 3px solid #5ab395;
 }
 .dashboard {
   user-select: none;
