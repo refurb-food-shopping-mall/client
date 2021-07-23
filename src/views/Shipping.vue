@@ -19,7 +19,7 @@
           <div class="row text-center mt-2">
             <div class="col-4"><strong>배송준비중</strong></div>
             <div class="col-4"><strong>배송중</strong></div>
-            <div class="col-4"><strong>교환/반품요청</strong></div>
+            <div class="col-4"><strong>교환/환불요청</strong></div>
           </div>
           <div class="row mt-3">
             <div class="col-4">
@@ -179,7 +179,10 @@
                   배송조회
                 </button>
                 <button type="button" class="btn btn-primary" v-else-if="order.order_status=='배송완료'">
-                  교환/반품요청
+                  <router-link
+                    :to="`/cancel/${order.id}`"
+                    class="logo" style="color:white">
+                  교환/환불요청</router-link>
                 </button>
               </div>
               <div class="mt-3"></div>
@@ -236,9 +239,12 @@
                 </button>
                 <button type="button" class="btn btn-primary" v-else-if="rorder.order_status=='배송중'">
                   배송조회
-                </button>
+                </button>                
                 <button type="button" class="btn btn-primary" v-else-if="rorder.order_status=='배송완료'">
-                  교환/반품요청
+                  <router-link
+                    :to="`/cancel/${rorder.id}`"
+                    class="logo" style="color:white">
+                    교환/환불요청</router-link>
                 </button>
               </div>
               <div class="mt-3"></div>
@@ -431,7 +437,7 @@ export default {
   async cancel2(){
     await Swal.fire({
     title: '취소되었습니다!',
-    text: '신용/체크카드 환불은 3~4일 소요됩니다.',
+    //text: '신용/체크카드 환불은 3~4일 소요됩니다.',
     icon: 'success',
     confirmButtonText: '확인',
     confirmButtonColor: '#5ab395',
