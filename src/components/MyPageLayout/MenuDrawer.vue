@@ -2,14 +2,16 @@
   <div>
     <div
       class="menu__block"
-      v-for="(menuLink, idx) in menuLinks"
+      v-for="(menuLink, idx) in $store.state.page.MyPageMenuLinks"
       :key="idx"
-      @click.prevent="currentSelectdMenuIdx = idx"
+      @click.prevent="
+        $store.commit('page/CHANGE_MYPAGE_MENU_DRAWER_ACTIVE_IDX', idx)
+      "
     >
       <router-link
         :to="menuLink.url"
         class="list-group-item list-group-item-action"
-        :class="{ active: idx == currentSelectdMenuIdx }"
+        :class="{ active: idx == $store.state.page.MyPageMenuDrawerActiveIdx }"
         >{{ menuLink.name }}
       </router-link>
     </div>
@@ -18,37 +20,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      currentSelectdMenuIdx: 0,
-      menuLinks: [
-        {
-          url: '/mypage/dashboard',
-          name: '쇼핑 대시보드'
-        },
-        {
-          url: '/cart',
-          name: '장바구니'
-        },
-        {
-          url: '/shipping',
-          name: '주문 조회'
-        },
-        {
-          url: '/mypage/couponandpoint',
-          name: '쿠폰 & 포인트'
-        },
-        {
-          url: '/mypage/profileupdate',
-          name: '회원정보수정'
-        },
-        {
-          url: '/mypage/deleteaccount',
-          name: '회원탈퇴'
-        },
-      ]
-    }
-  },
 }
 </script>
 
