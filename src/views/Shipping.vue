@@ -140,8 +140,8 @@
               class="list-group-item list-group-item-action"
               >회원정보 수정
             </router-link>
-            <a href="#" class="list-group-item list-group-item-action"
-              >배송지 관리</a
+            <router-link to="/addresslist" href="#" class="list-group-item list-group-item-action"
+              >배송지 관리</router-link
             >
             <a href="#" class="list-group-item list-group-item-action"
               >카드/계좌 관리</a
@@ -171,7 +171,7 @@
             </div>
             <div class="col-3 text-center">
               <div>
-                <button
+                <button @click="cancel(order)"
                 type="button" class="btn btn-primary" v-if="order.order_status=='입금대기' || order.order_status=='배송준비중'">
                   주문취소
                 </button>
@@ -304,6 +304,7 @@ export default {
       back:'',
       cntarr:[],
       isStatusOn: true,
+      num:0,
     };
   },
   mounted() {
@@ -312,7 +313,10 @@ export default {
   methods: {
     //
     searchList(){
-      this.isStatusOn = !this.isStatusOn;
+      if(this.num==0){
+        this.isStatusOn = !this.isStatusOn;
+        this.num += 1;
+        }
       const params = {
         date1: this.date1,
         date2: this.date2,
@@ -379,7 +383,7 @@ export default {
     //날짜계산
     datecal(){
       let today = new Date();	//현재날짜
-      console.log(today)
+      //console.log(today)
       let dd = today.getDate() + 1
       let mm = today.getMonth() + 1
       let yy = today.getFullYear()
@@ -390,7 +394,7 @@ export default {
       let mmm = back.getMonth() + 1
       let yyy = back.getFullYear()
       this.back = `${yyy}-${mmm >= 10 ? mmm : '0' + mmm}-${ddd >= 10 ? ddd : '0' + ddd}`
-      console.log(this.back, this.today);
+      //console.log(this.back, this.today);
       this.recentorderarr = this.recentOrder();
     },
     //
@@ -412,14 +416,12 @@ export default {
       cancelButtonText: "아니오",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        //await this.cancelOrder(order);
         await this.$axios
           .post(`http://localhost:3000/api/cancelOrder`, {
             id : order.id,
           })
           .then((res) => {
             console.log(res.data);
-            console.log('삭제!');
           });
         this.cancel2();
       }
