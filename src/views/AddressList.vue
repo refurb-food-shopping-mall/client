@@ -60,7 +60,9 @@
                         >
                             수정
                         </button>
-                        <button type="button" class="btn btn-outline-primary">삭제</button>                           
+                        <button type="button" class="btn btn-outline-primary" @click="DeleteModalView(i)">삭제</button>    
+                        <DeleteAddress v-if="DeleteAddressModal[i]" @cancel="CancelDeleteAddress" @agree="AgreeDeleteAddress">
+                        </DeleteAddress>                       
                     </div>
                 </div>
             </div>
@@ -110,11 +112,14 @@
 
 import ModifyAddress from "../components/addresslist/ModifyAddress";
 import CreateAddress from "../components/addresslist/CreateAddress";
+import DeleteAddress from "../components/addresslist/DeleteAddress";
+
 
 export default {
     components: { 
         ModifyAddress,
-        CreateAddress
+        CreateAddress,
+        DeleteAddress
     },
     data(){
         return  {
@@ -122,8 +127,10 @@ export default {
             UserAddressList : {},
             UpdateAddressModal : [],
             CreateAddressModal : false,
+            DeleteAddressModal : [],
             // MobileModalView : null
-            UpdateAddressIndex : 0
+            UpdateAddressIndex : 0,
+            DeleteAddressIndex : 0
         }
     },
     created(){
@@ -157,6 +164,7 @@ export default {
             // console.log(res.data);
                 this.UserAddressList = res.data.useraddresslist
                 this.UpdateAddressModal = new Array(this.UserAddressList.length)
+                this.DeleteAddressModal = new Array(this.UserAddressList.length)
                 // console.log(this.ModalView);
                 // this.MobileModalView = new Array(this.UserAddressList.length)
                 // console.log(this.UserAddressList);
@@ -174,6 +182,10 @@ export default {
             this.UpdateAddressIndex = i
             this.$set(this.UpdateAddressModal, i, !this.UpdateAddressModal[i])
         },
+        DeleteModalView(i){
+            this.DeleteAddressIndex = i
+            this.$set(this.DeleteAddressModal, i, !this.DeleteAddressModal[i])
+        },
         CreateNewAddress(address){
             this.CreateAddressModal = false
             address.user_id = this.User.id
@@ -190,8 +202,6 @@ export default {
                 })
         },
         UpdateAddress(address){
-            console.log(address)
-            address.user_id = this.User.id
             this.$set(this.UpdateAddressModal, this.UpdateAddressIndex, !this.UpdateAddressModal[this.UpdateAddressIndex])
             this.$axios
                 .post(`${this.$domain}/updateaddress`, address)
@@ -200,6 +210,26 @@ export default {
                         alert('배송지 수정이 완료 되었습니다.')
                         this.GetUserAddressList()    
                     }
+                })
+        },
+        CancelDeleteAddress(){
+            this.$set(this.DeleteAddressModal, this.DeleteAddressIndex, !this.DeleteAddressModal[this.DeleteAddressIndex])
+        },
+        AgreeDeleteAddress(){
+            this.$set(this.DeleteAddressModal, this.DeleteAddressIndex, !this.DeleteAddressModal[this.DeleteAddressIndex])
+            this.$axios
+                .post(`${this.$domain}/deleteaddress`, {
+                    id : this.UserAddressList[this.DeleteAddressIndex].id,
+                    user_id : this.UserAddressList[this.DeleteAddressIndex].user_id
+                })
+                .then(res => {
+                    if(res.data.success == true){
+                        alert('삭제가 완료 되었습니다.')
+                        this.GetUserAddressList() 
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
                 })
         }
     }
