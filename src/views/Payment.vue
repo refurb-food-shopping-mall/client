@@ -86,7 +86,7 @@
       </div>
     </div>
     <div v-if="default_address_button">
-      <DefaultAddress :default_address="this.userdefaultaddress.useraddress[0]" />
+      <DefaultAddress :default_address="this.userdefaultaddress" />
     </div>
     <div v-if="selected_address_state">
       <SelectedAddress :address="this.selectedaddress"/>
@@ -347,7 +347,7 @@ export default {
           })
           .then((res) => {
             this.user = res.data.user;
-            console.log(this.user);
+            // console.log(this.user);
             
           })
           .catch((err) => {
@@ -363,8 +363,8 @@ export default {
             default_address : 1
           })
           .then((res) => {
-            this.userdefaultaddress = res.data;
-            // console.log(this.userdefaultaddress);
+            this.userdefaultaddress = res.data.useraddress;
+            console.log(this.userdefaultaddress);
           })
           .catch((err) => {
             console.log(err);
@@ -389,7 +389,7 @@ export default {
           .then((res) => {
             //console.log(res.data);
             this.productdetail = res.data;
-            console.log(this.productdetail)
+            // console.log(this.productdetail)
           })
           .catch((err) => {
             console.log(err);
@@ -502,16 +502,19 @@ export default {
             })
           }    
           if(this.default_address_button == true){
-            this.saveorder(this.userdefaultaddress.useraddress[0].id)
+            this.saveorder(this.userdefaultaddress.id)
+            this.$store.commit('cart/CLEAR_CART');
             
           } else if(this.selected_address_state == true){
             this.saveorder(this.selectedaddress.id)
+            this.$store.commit('cart/CLEAR_CART');
           } 
           else if(this.new_address_state == true){
             if(this.default_address == false && this.address_list == false){
               if(this.newaddress.receiver != "" && this.newaddress.phonenumber != "" && this.newaddress.post_code != "" && this.newaddress.detail_adress != "" && this.newaddress.address_name == ""){
                 await this.saveaddress()
                 this.saveorder(this.newaddressid)
+                this.$store.commit('cart/CLEAR_CART');
               } 
             } else if(this.newaddress.receiver == "" || this.newaddress.phonenumber == "" || this.newaddress.post_code == "" || this.newaddress.detail_adress == "" || this.newaddress.address_name == ""){
                 alert("배송관련 부분을 작성해주세요")
@@ -519,22 +522,23 @@ export default {
             } else {
                 await this.saveaddress()
                 this.saveorder(this.newaddressid)
+                this.$store.commit('cart/CLEAR_CART');
             }        
           }
       },
       //신규 주소를 저장하는 함수
       async saveaddress(){
         this.newaddress.user_id = this.user.id
-        console.log(this.newaddress)
-        await this.$axios
-          .post(`${this.$domain}/address/save`, this.newaddress)
-          .then((res) => {
-            this.newaddressid = res.data.address_id;
-            console.log(this.newaddressid)
-          })
-          .catch((err) => {
-            console.log(err);
-          })
+        // console.log(this.newaddress)
+          await this.$axios
+            .post(`${this.$domain}/address/save`, this.newaddress)
+            .then((res) => {
+              this.newaddressid = res.data.address_id;
+              // console.log(this.newaddressid)
+            })
+            .catch((err) => {
+              console.log(err);
+            })
       },
       //주문 정보를 저장하는 함수
       saveorder(addressid){
@@ -542,7 +546,7 @@ export default {
           this.orderinfo.address_id = addressid
           let today = new Date()
           this.orderinfo.order_number = `${today.getFullYear()}` + `${today.getMonth() + 1}` + `${today.getDate()}` + `${today.getHours()}` + `${today.getMinutes()}` + `${today.getSeconds()}` + `${this.user.id}`
-          console.log(this.orderinfo.order_number)
+          // console.log(this.orderinfo.order_number)
           for(let i = 0 ; i < this.$store.state.cart.cart.length ; i++){
             this.orderinfo.product_id = this.$store.state.cart.cart[i].productIdx;
             this.orderinfo.product_amount = this.$store.state.cart.cart[i].productQty;
@@ -552,6 +556,7 @@ export default {
                 console.log(err);
               })
           }
+          alert('주문이 완료되었습니다.')
           this.$router.push("/shipping");
       }
       

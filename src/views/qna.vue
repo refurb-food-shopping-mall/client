@@ -15,9 +15,10 @@
         </div>
         <div class="card border-secondary mb-3" style="max-width: 50rem;">
         <!-- <div class="card-header">Header</div> -->
+        <div class="card-header"><strong>답변</strong></div>
         <div class="card-body">
             <h6 class="card-title" v-if="answer_status ==1">답변 준비 중</h6>
-            <h4 class="card-title" v-else>답변 내용</h4>
+            <h6 class="card-title" v-else>{{answer_description}}</h6>
 
             <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
         </div>
@@ -33,6 +34,7 @@ export default {
         q_title : "",
         q_description: "",
         answer_status: 0,
+        answer_description: "",
     };
   },
   mounted() {
@@ -46,6 +48,7 @@ export default {
               this.q_title = res.data.qna.q_title;
               this.q_description = res.data.qna.q_description;
               this.answer_status = res.data.qna.answer_status;
+              this.answer_description = res.data.qna.answer_description;
             //   console.log(this.q_title);
             //   console.log(res.data)
           })

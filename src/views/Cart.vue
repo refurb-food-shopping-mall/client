@@ -170,12 +170,10 @@
             </button>
           </router-link>
         </span>
-        <span class="col-6 col-md-6">
-          <router-link to="/payment">
-            <button type="button" class="btn btn-primary fw-bolder p-3">
+        <span class="col-6 col-md-6">       
+            <button type="button" class="btn btn-primary fw-bolder p-3" @click="ToPayment">
               주문하기
             </button>
-          </router-link>
         </span>
       </div>
     </div>
@@ -189,7 +187,8 @@ export default {
       totalprice : 0,
       totaldeliveryprice : 0,
       pidarray : [],
-      productdetail : []
+      productdetail : [],
+      GoPayment : false
     }
   },
   created(){
@@ -268,6 +267,13 @@ export default {
         let pic = product_image.path.split("/")[2];
         return require("../assets/" + pic);
       },
+      ToPayment(){
+        if(this.$store.state.cart.cart.length > 0){
+          this.$router.push({path:'/payment'}); 
+        } else {
+          alert('장바구니가 비었습니다.')
+        }
+      }
   }
 };
 </script>

@@ -12,8 +12,10 @@
                     배송지를 최대 15개까지 관리 할 수 있습니다.<br>
                     자주 쓰는 배송지를 관리하세요.
                 </div>
+                <CreateAddress v-if="CreateAddressModal" @create="CreateNewAddress">
+                </CreateAddress>
                 <div class="col-4 d-flex justify-content-end">
-                    <button type="button" class="btn btn-outline-success ">배송지등록</button>
+                    <button type="button" class="btn btn-outline-success" @click="CreateAddressModal=true">배송지등록</button>
                 </div>
             </div>
 
@@ -48,14 +50,25 @@
                         {{address.phonenumber}}
                     </div>
                     <div class="col-2 text-center align-self-center">  
-                        <button type="button" style="margin-right:2px" class="btn btn-outline-primary">수정</button>
-                        <button type="button" class="btn btn-outline-primary">삭제</button>                           
+                        <ModifyAddress v-if="UpdateAddressModal[i]" :address="UserAddressList[i]" @update="UpdateAddress">
+                        </ModifyAddress> 
+                        <button 
+                            type="button" 
+                            style="margin-right:2px" 
+                            class="btn btn-outline-primary"
+                            @click="AlterModalView(i)"
+                        >
+                            수정
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" @click="DeleteModalView(i)">삭제</button>    
+                        <DeleteAddress v-if="DeleteAddressModal[i]" @cancel="CancelDeleteAddress" @agree="AgreeDeleteAddress">
+                        </DeleteAddress>                       
                     </div>
                 </div>
             </div>
 
             <!-- 모바일 ui -->
-            <div class="row mt-4 pt-3 pb-3 border-top border-bottom border-2 d-lg-none">
+            <!-- <div class="row mt-4 pt-3 pb-3 border-top border-bottom border-2 d-lg-none">
                 <div class="col-3 text-dark">
                     배송지명
                 </div>
@@ -77,11 +90,19 @@
                         {{m_address.detailed_address}}
                     </div>
                     <div class="col-4 text-center text-dark align-self-center">  
-                        <button type="button" style="margin-right:2px" class="btn btn-outline-primary">수정</button>
+                        <ModifyAddress v-if="MobileModalView[i]" :address="m_address">
+                        </ModifyAddress> 
+                        <button 
+                            type="button"  
+                            style="margin-right:2px" 
+                            class="btn btn-outline-primary"
+                            @click="MobileModalView[i]=true"
+                        >수정
+                        </button>
                         <button type="button" class="btn btn-outline-primary">삭제</button>                           
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- 모바일 ui -->
         </div>
     </main>    
@@ -89,11 +110,27 @@
 
 <script>
 
+import ModifyAddress from "../components/addresslist/ModifyAddress";
+import CreateAddress from "../components/addresslist/CreateAddress";
+import DeleteAddress from "../components/addresslist/DeleteAddress";
+
+
 export default {
+    components: { 
+        ModifyAddress,
+        CreateAddress,
+        DeleteAddress
+    },
     data(){
         return  {
             User : {},
-            UserAddressList : {}
+            UserAddressList : {},
+            UpdateAddressModal : [],
+            CreateAddressModal : false,
+            DeleteAddressModal : [],
+            // MobileModalView : null
+            UpdateAddressIndex : 0,
+            DeleteAddressIndex : 0
         }
     },
     created(){
@@ -110,7 +147,7 @@ export default {
             })
             .then((res) => {
             this.User = res.data.user;
-            console.log(this.User);
+            // console.log(this.User);
             
             })
             .catch((err) => {
@@ -119,15 +156,18 @@ export default {
         },
         // 유저 배송지 목록
         async GetUserAddressList(){
-            this.modalview=true;
             await this.$axios
             .post(`${this.$domain}/address/list`,{
                 user_id : this.User.id
             })
             .then((res) => {
             // console.log(res.data);
-                this.UserAddressList = res.data.useraddresslist;
-                console.log(this.UserAddressList);
+                this.UserAddressList = res.data.useraddresslist
+                this.UpdateAddressModal = new Array(this.UserAddressList.length)
+                this.DeleteAddressModal = new Array(this.UserAddressList.length)
+                // console.log(this.ModalView);
+                // this.MobileModalView = new Array(this.UserAddressList.length)
+                // console.log(this.UserAddressList);
             })
             .catch((err) => {
                 console.log(err);
@@ -137,6 +177,60 @@ export default {
         async GetUserAddressInfo(){
             await this.GetUserProfile()
             await this.GetUserAddressList()
+        },
+        AlterModalView(i){
+            this.UpdateAddressIndex = i
+            this.$set(this.UpdateAddressModal, i, !this.UpdateAddressModal[i])
+        },
+        DeleteModalView(i){
+            this.DeleteAddressIndex = i
+            this.$set(this.DeleteAddressModal, i, !this.DeleteAddressModal[i])
+        },
+        CreateNewAddress(address){
+            this.CreateAddressModal = false
+            address.user_id = this.User.id
+            this.$axios
+                .post(`${this.$domain}/addresslist/save`, address)
+                .then(res => {
+                    if(res.data.success == true){
+                        alert('배송지 등록이 완료 되었습니다.')
+                        this.GetUserAddressList()    
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        UpdateAddress(address){
+            this.$set(this.UpdateAddressModal, this.UpdateAddressIndex, !this.UpdateAddressModal[this.UpdateAddressIndex])
+            this.$axios
+                .post(`${this.$domain}/updateaddress`, address)
+                .then(res => {
+                    if(res.data.success == true){
+                        alert('배송지 수정이 완료 되었습니다.')
+                        this.GetUserAddressList()    
+                    }
+                })
+        },
+        CancelDeleteAddress(){
+            this.$set(this.DeleteAddressModal, this.DeleteAddressIndex, !this.DeleteAddressModal[this.DeleteAddressIndex])
+        },
+        AgreeDeleteAddress(){
+            this.$set(this.DeleteAddressModal, this.DeleteAddressIndex, !this.DeleteAddressModal[this.DeleteAddressIndex])
+            this.$axios
+                .post(`${this.$domain}/deleteaddress`, {
+                    id : this.UserAddressList[this.DeleteAddressIndex].id,
+                    user_id : this.UserAddressList[this.DeleteAddressIndex].user_id
+                })
+                .then(res => {
+                    if(res.data.success == true){
+                        alert('삭제가 완료 되었습니다.')
+                        this.GetUserAddressList() 
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
     }
     
