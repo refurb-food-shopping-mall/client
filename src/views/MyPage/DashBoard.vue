@@ -48,7 +48,7 @@
         </div>
         <!-- 보유 쿠폰 영역 -->
         <div class="col d-flex flex-column align-items-center border-right">
-          <router-link to="/couponandpoint" style="color: #888888">
+          <router-link to="/mypage/couponandpoint" style="color: #888888">
             <div class="d-flex align-items-center">
               <div>
                 <font-awesome-icon icon="tags" size="3x" color="#64b5f6" />
@@ -63,7 +63,7 @@
         </div>
         <!-- 적립 포인트 영역 -->
         <div class="col d-flex flex-column align-items-center">
-          <router-link to="/couponandpoint" style="color: #888888">
+          <router-link to="/mypage/couponandpoint" style="color: #888888">
             <div class="d-flex align-items-center">
               <div>
                 <font-awesome-icon icon="won-sign" size="3x" color="#81c784" />
