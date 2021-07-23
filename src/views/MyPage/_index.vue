@@ -25,6 +25,9 @@ export default {
     return {
     }
   },
+  mounted() {
+    this.updateMyPageMenuDrawerActiveRoute(this.$route.path)
+  },
   methods: {
     ...mapActions("page", ["updateMyPageMenuDrawerActiveRoute"]),
   },
