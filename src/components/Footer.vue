@@ -46,9 +46,14 @@
             <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               <!-- Content -->
               <!-- <h6 class="text-uppercase fw-bold mb-4"> -->
-                <!-- <i class="fas fa-gem me-3"></i>(주)푸드리퍼브 -->
+              <!-- <i class="fas fa-gem me-3"></i>(주)푸드리퍼브 -->
               <!-- </h6> -->
-              <img src="../assets/logo_market.jpg" alt="logo" width="200" height="">
+              <img
+                src="../assets/logo_market.jpg"
+                alt="logo"
+                width="200"
+                height=""
+              />
             </div>
             <!-- Grid column -->
 
@@ -57,16 +62,16 @@
               <!-- Links -->
               <h6 class="text-uppercase fw-bold mb-4">제품군</h6>
               <p>
-                <a href="#!" class="text-reset">못난이 양파</a>
+                <a href="#!" class="text-reset">무안 양파</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">못난이 사과</a>
+                <a href="#!" class="text-reset">예천 토마토</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">못난이 배</a>
+                <a href="#!" class="text-reset">의성 마늘</a>
               </p>
               <p>
-                <a href="#!" class="text-reset">못난이 감자</a>
+                <a href="#!" class="text-reset">화순 파프리카</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -94,16 +99,13 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
               <!-- Links -->
               <h6 class="text-uppercase fw-bold mb-4">문의</h6>
+              <p><i class="fas fa-home"></i> 경기도 화성시 만년로 25번길 39</p>
               <p>
-                <i class="fas fa-home me-3"></i> 경기도 화성시 만년로 915번길
-                39-2323
-              </p>
-              <p>
-                <i class="fas fa-envelope me-3"></i>
+                <i class="fas fa-envelope"></i>
                 contact@착한채소.com
               </p>
-              <p><i class="fas fa-phone me-3"></i> + 031 2323 5152</p>
-              <p><i class="fas fa-print me-3"></i> + 070 2315 2554</p>
+              <p><i class="fas fa-phone"></i> + 031 2323 5152</p>
+              <p><i class="fas fa-print"></i> + 070 2315 2554</p>
             </div>
             <!-- Grid column -->
           </div>
@@ -118,9 +120,7 @@
         style="background-color: rgba(0, 0, 0, 0.05)"
       >
         © 2021 Copyright:
-        <a class="text-reset fw-bold"
-          >www.착한채소.com</a
-        >
+        <a class="text-reset fw-bold">www.착한채소.com</a>
       </div>
       <!-- Copyright -->
     </footer>
@@ -133,6 +133,9 @@ export default {};
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
 #footer {
   left: 0;
   bottom: 0;
