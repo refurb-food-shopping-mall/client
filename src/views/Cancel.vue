@@ -185,17 +185,6 @@ export default {
     toggle(number) {
       this.togg = number;
     },
-    // exchange() {
-    //   this.$axios
-    //   .post(`${this.$domain}/exchange`, {
-    //     id: this.$route.params.id
-    //   })
-    //   .then(res => {
-    //     console.log(res.data)
-    //     alert('교환 요청되었습니다')
-    //   })
-    //   this.$router.push("/shipping")
-    // },
     exchange() {
       Swal.fire({
       title: '교환 요청 하시겠습니까?',
