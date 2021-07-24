@@ -79,7 +79,7 @@
               <span class="badge bg-danger mx-2 text-dark">{{
                 $store.getters["cart/getCartLength"]
               }}</span>
-              <span class="text-dark">내 장바구니</span>
+              <span class="text-dark"><b>내 장바구니</b></span>
             </router-link>
           </div>
         </div>
