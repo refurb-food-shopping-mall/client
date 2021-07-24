@@ -1,5 +1,5 @@
 <template>
-  <section class="banner banner-1">
+  <section class="my-3 banner banner-1">
     <div class="container">
       <div class="row justify-content-end text-black">
         <div class="col-md-6" style="padding-left: 10rem">
