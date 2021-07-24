@@ -2,6 +2,84 @@
   <div id="home" class="">
     <!-- Page Content-->
     <div>
+      <!-- Carousel -->
+      <div class="container">
+        <div class="row gx-4 gx-lg-5 align-items-center my-3">
+          <div class="col-md-6">
+            <div class="mb-5">
+              <h2 class="text-black">
+                <b
+                  ><span style="color: #f1747b">신선</span>하고
+                  <span style="color: #f1747b">맛</span>있는 못난이들을
+                  여러분에게 전해드립니다</b
+                >
+              </h2>
+            </div>
+            <p class="text-black" style="font-weight: 550; line-height: 2em">
+              못난이 농산물을 아시나요? <br />
+              생김새가 이상하다는 이유로 버려지는 신선한 농작물들! <br />
+              이제는 저희가 조금 못생겼지만, 신선하고 맛있는🤩 못난이들을
+              <br />저렴한 가격으로 여러분에게 전해드립니다.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div
+              id="carouselExampleControlsNoTouching"
+              class="carousel slide"
+              data-bs-touch="false"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="@/assets/main_vegetables.jpg"
+                    class="d-block w-100"
+                    alt=""
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="@/assets/main_farmer_2.jpg"
+                    class="d-block w-100"
+                    alt=""
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="@/assets/main_vege.jpg"
+                    class="d-block w-100"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleControlsNoTouching"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleControlsNoTouching"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Content Row 1 -->
       <div class="container">
         <div class="row gx-4 gx-lg-5">
@@ -65,7 +143,6 @@
       </div>
 
       <!-- Content Row 2 -->
-
       <div class="container">
         <div class="row gx-4 gx-lg-5">
           <span class="fs-5 mb-3">
@@ -128,89 +205,14 @@
         </div>
       </div>
 
-      <!-- Carousel -->
-      <div class="container">
-        <div class="row gx-4 gx-lg-5 align-items-center my-5">
-          <div class="col-lg-5">
-            <div class="mb-5">
-              <h1 class="font-weight-light">신선하고 맛있는</h1>
-            </div>
-            <p>
-              못난이 농산물을 아시나요? <br />
-              생김새가 이상하다는 이유로 버려지는 신선한 농작물들! 이제는 저희가
-              조금 못생겼지만, 신선하고 맛있는 못난이들을 저렴한 가격으로
-              여러분에게 전해드립니다.
-            </p>
-          </div>
-          <div class="col-lg-7">
-            <div
-              id="carouselExampleControlsNoTouching"
-              class="carousel slide"
-              data-bs-touch="false"
-            >
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img
-                    src="@/assets/main_vegetables.jpg"
-                    class="d-block w-100"
-                    alt=""
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="@/assets/main_farmer_2.jpg"
-                    class="d-block w-100"
-                    alt=""
-                  />
-                </div>
-                <div class="carousel-item">
-                  <img
-                    src="@/assets/main_vege.jpg"
-                    class="d-block w-100"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleControlsNoTouching"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleControlsNoTouching"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- banner-1 -->
-      <banner-1 />
-
       <!-- Heading Row-->
       <div class="container">
         <div class="row gx-4 gx-lg-5 align-items-center my-5">
           <div class="col-lg-6">
             <img
               class="img-fluid rounded mb-4 mb-lg-0"
-              src="@/assets/main_farmer.jpg"
-              style="height: 350px"
+              src="@/assets/cooking3.jpg"
+              style=""
             />
           </div>
           <div class="col-lg-6">
@@ -229,12 +231,8 @@
         </div>
       </div>
 
-      <!-- Call to Action-->
-      <div class="card text-white bg-secondary my-5 py-4 text-center">
-        <div class="card-body">
-          <p class="text-white m-0">지금, 가장 인기있는 농산물 Best 3 !</p>
-        </div>
-      </div>
+      <!-- banner-1 -->
+      <banner-1 />
 
       <!-- Brand Info Row -->
 
@@ -318,6 +316,7 @@ a {
 }
 .featured {
   border: 4px solid #f38085;
+  /* color: #f1747b */
 }
 .btn_cart {
   cursor: pointer;
