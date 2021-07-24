@@ -181,6 +181,9 @@
 </template>
 
 <script>
+
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -195,7 +198,8 @@ export default {
     this.GetTotalPriceProductInfo();
   },
   methods: {
-    //상품정보와 썸네일이미지를 가져오는 함수
+      ...mapActions("cart", ["adjustingQuantity"]),
+      //상품정보와 썸네일이미지를 가져오는 함수
       async GetProductDetail(){
           await this.$axios({
               url: `${this.$domain}/product/thumnail`,
@@ -234,17 +238,11 @@ export default {
       //상품 수량에서 +, - 버튼을 눌렀을 때 실행될 함수
       calculatecount(num, i){
         let previousnum = this.$store.state.cart.cart[i].productQty
-        if(num == 1){
-          this.$store.commit('cart/INCREASE_PRODUCT_QTY',{
-            quantity : num,
-            cartArrIdx : i
-          }); 
-        } else if (num == -1) {
-          this.$store.commit('cart/DECREASE_PRODUCT_QTY',{
-            quantity : num,
-            cartArrIdx : i
-          }); 
-        }
+        this.adjustingQuantity({
+          quantity : num,
+          cartArrIdx : i
+        })
+        // console.log(this.$store.state.cart.cartSumOfQuantity)
         if(previousnum > 1){
           this.totalprice = this.totalprice + this.productdetail[i].product_price * num;
         }
