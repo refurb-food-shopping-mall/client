@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="d-flex justify-content-center px-3 border-end">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/"
-            >Home</router-link
+            ><b>Home</b></router-link
           >
         </div>
         <div class="d-flex justify-content-center px-3 border-end">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
-            >Best Seller</router-link
+            ><b>Best Seller</b></router-link
           >
         </div>
         <!-- <div class="d-flex justify-content-center px-3 border-end">
@@ -22,7 +22,7 @@
         </div> -->
         <div class="d-flex justify-content-center px-3">
           <router-link class="fs-6 navbar-brand m-0 py-0" to="/product"
-            >정기구독상품</router-link
+            ><b>정기구독상품</b></router-link
           >
         </div>
         <!-- <div class="d-flex justify-content-center px-3 border-end">
@@ -72,7 +72,7 @@
                 <span class="badge bg-danger mx-2 text-dark">{{
                   $store.getters["cart/getCartLength"]
                 }}</span>
-                <span class="text-dark">내 장바구니</span>
+                <span class="text-dark"><b>내 장바구니</b></span>
               </router-link>
             </div>
           </transition>
