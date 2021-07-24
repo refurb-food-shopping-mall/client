@@ -11,12 +11,16 @@
           class="col-md-4 mb-5"
         >
           <div class="card h-100">
+            <router-link :to="`/product/${product.id}`">
             <img :src="getImgUrl(product)" class="img-fluid" />
+            </router-link>
             <div class="card-body">
               <div class="my-3">
-                <h5 class="card-title" style="text-align: center">
+                <router-link :to="`/product/${product.id}`" class="card-title">
+                <h5 style="text-align: center">
                   {{ product.product_name }}
                 </h5>
+                </router-link>
               </div>
               <p class="card-text" style="text-align: center">
                 {{product.harvested_date}} 수확 상품

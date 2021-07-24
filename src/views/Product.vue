@@ -155,6 +155,8 @@
         v-for="(review, index) in reviews"
         :key="'review' + index"
       >
+        <div class="border-top border-primary my-3" v-if="index !== 0"></div>
+
         <div class="row d-flex justify-content-start">
           <div class="col-4 col-md-2 me-1">
             <span v-for="(n, i) in review.star_grade" :key="i">★</span>
@@ -178,7 +180,6 @@
             alt="..."
           />
         </div>
-        <div class="border-top border-primary my-3" v-if="index == 0"></div>
       </div>
 
       <div class="border-top border-2 border-primary my-3"></div>
