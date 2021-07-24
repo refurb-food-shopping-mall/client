@@ -236,6 +236,46 @@
       <!-- banner-1 -->
       <banner-1 />
 
+      <div class="container">
+        <div class="row my-5 p-5">
+          <div class="col-md-6 p-4">
+            <img
+              class="img-fluid rounded"
+              src="@/assets/harvest_basket.jpg"
+              alt=""
+              srcset=""
+            />
+          </div>
+          <div class="col-md-6 py-4 pt-5 ps-5">
+            <div class="mb-5">
+              <h2 class="text-black">
+                <b
+                  >갓! 수확한 못난이 형제들을
+                  <span style="color: #f1747b">정기 구독</span>으로
+                  만나보세요</b
+                >
+              </h2>
+            </div>
+
+            <h4 class="text-black">
+              <span>매주, 정해진 요일에, 가게 앞으로 찾아가는 서비스!</span>
+            </h4>
+
+            <p
+              class="text-black"
+              style="font-weight: 550; line-height: 2em"
+            ></p>
+
+            <router-link
+              class="btn btn-primary my-3"
+              style="border-width: 2px"
+              to="/product"
+              >🎁 <b>어글리 구독 멤버쉽</b> 🎁</router-link
+            >
+          </div>
+        </div>
+      </div>
+
       <!-- Heading Row-->
       <div class="mt-5">
         <div class="container">
