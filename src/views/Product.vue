@@ -173,7 +173,7 @@
           </div>
           <img
             v-if="review"
-            :src="getImgUrl(review.t_review_images[0])"
+            :src="getReviewImage(review.t_review_images[0])"
             class="img-fluid col-12 col-md-2"
             alt="..."
           />
@@ -308,7 +308,11 @@ export default {
         .then(res => {
           this.reviews = res.data.review;
           console.log(this.reviews);
-        });
+        })
+    },
+    getReviewImage(image) {
+      let img = image.path;
+      return "http://localhost:3000/" + img
     },
     loadQna() {
       this.$axios
