@@ -1,5 +1,5 @@
 <template>
-  <div id="navbar" class="container px-3">
+  <div id="navbar" class="container">
     <nav
       class="navbar p-1 navbar-expand-lg navbar-dark navbar-inner"
       style="height: 55px"
